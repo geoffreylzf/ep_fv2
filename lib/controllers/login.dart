@@ -10,7 +10,7 @@ class LoginController extends GetxController {
   final tecPassword = TextEditingController();
 
   @override
-  Future<void> onClose() async {
+  void onClose() {
     tecUsername.dispose();
     tecPassword.dispose();
   }

@@ -28,4 +28,13 @@ class BroFa2FoSelectionDao extends DatabaseAccessor<Db>
   Future<List<BroFa2FoSelection>> getAll() {
     return select(broFa2FoSelectionTb).get();
   }
+
+  Future<List<BroFa2FoSelection>> getAllByFoId(int foId) {
+    return ((select(broFa2FoSelectionTb)
+          ..where(
+            (tbl) => tbl.broFa2FoId.equals(foId),
+          ))
+          ..orderBy([(t) => OrderingTerm.asc(t.order)]))
+        .get();
+  }
 }

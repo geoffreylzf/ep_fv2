@@ -28,6 +28,10 @@ class BroFa2FoDao extends DatabaseAccessor<Db> implements DaoSetupBasic<BroFa2Fo
   }
 
   Future<List<BroFa2Fo>> getAll() {
-    return select(broFa2FoTb).get();
+    return (select(broFa2FoTb)..orderBy([(t) => OrderingTerm.asc(t.order)])).get();
+  }
+
+  Future<BroFa2Fo> getById(int id) {
+    return (select(broFa2FoTb)..where((tbl) => tbl.id.equals(id))).getSingle();
   }
 }

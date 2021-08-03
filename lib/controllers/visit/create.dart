@@ -1,8 +1,9 @@
 import 'package:ep_fv2/db/db.dart';
 import 'package:ep_fv2/utils/xanx.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Value;
 import 'package:intl/intl.dart';
+import 'package:moor/moor.dart';
 
 class VisitCreateController extends GetxController {
   final db = XanX.db();
@@ -64,7 +65,7 @@ class VisitCreateController extends GetxController {
   }
 
   @override
-  Future<void> onClose() async {
+  void onClose() {
     tecFilterLocation.dispose();
     fnFilterLocation.dispose();
     tecVisitDate.dispose();
@@ -108,12 +109,12 @@ class VisitCreateController extends GetxController {
 
   void onAdditionalHouseEnter() {
     final h = int.tryParse(tecHouseNo.text) ?? null;
-    if(h == null){
+    if (h == null) {
       XanX.showErrorDialog(message: "Please enter valid house # (number only)");
       return;
     }
 
-    if(rxLocHouseList.value.map((e) => e.houseNo).contains(h)){
+    if (rxLocHouseList.value.map((e) => e.houseNo).contains(h)) {
       XanX.showErrorDialog(message: "This house # already exist in selection");
       return;
     }
@@ -122,20 +123,20 @@ class VisitCreateController extends GetxController {
   }
 
   void onHouseNoContinue() {
-    if(rxSelectedHouseNoList.value.length == 0){
+    if (rxSelectedHouseNoList.value.length == 0) {
       XanX.showErrorDialog(message: "Please select at least 1 house");
       return;
     }
-    rxCurrentStep.value = 4;
+    rxCurrentStep.value = 3;
     FocusScope.of(Get.context!).requestFocus(new FocusNode());
   }
 
   void onVisitDateContinue() {
-    rxCurrentStep.value = 3;
+    rxCurrentStep.value = 4;
     FocusScope.of(Get.context!).requestFocus(fnAge);
   }
 
-  void onCreateButtonClick() {
+  void onCreateButtonClick() async {
     if (rxSelectedCompany.value == null) {
       XanX.showErrorDialog(message: "Please choose company");
       return;
@@ -143,6 +144,11 @@ class VisitCreateController extends GetxController {
 
     if (rxSelectedLocation.value == null) {
       XanX.showErrorDialog(message: "Please choose location");
+      return;
+    }
+
+    if (rxSelectedHouseNoList.value.length == 0) {
+      XanX.showErrorDialog(message: "Please select at least 1 house");
       return;
     }
 
@@ -156,5 +162,41 @@ class VisitCreateController extends GetxController {
       XanX.showErrorDialog(message: "Please enter age");
       return;
     }
+
+    XanX.showConfirmDialog(
+      title: "Confirm to create this visit?",
+      message: "Are you sure?",
+      btnPositiveText: "Visit",
+      vcb: () async {
+        final visit = BroFa2VisitTbCompanion(
+          companyId: Value(rxSelectedCompany.value!.id),
+          locationId: Value(rxSelectedLocation.value!.id),
+          visitDate: Value(rxSelectedVisitDate.value!),
+          age: Value(age),
+        );
+
+        try {
+          XanX.showLoadingDialog();
+          await Future.delayed(Duration(milliseconds: 500));
+
+          final visitId = await db.broFa2VisitDao.insert(visit);
+
+          await Future.forEach(rxSelectedHouseNoList.value, (hse) async {
+            final hseNo = int.parse(hse.toString());
+            final vh = BroFa2VisitHouseTbCompanion(
+              broFa2VisitId: Value(visitId),
+              houseNo: Value(hseNo),
+            );
+
+            await db.broFa2VisitHouseDao.insert(vh);
+          });
+          XanX.dismissLoadingDialog();
+          Get.offNamed("/visits/$visitId");
+        } catch (e) {
+          XanX.dismissLoadingDialog();
+          XanX.handleErrorMessage(e);
+        }
+      },
+    );
   }
 }

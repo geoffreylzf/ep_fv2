@@ -8,6 +8,6 @@ class DbController extends GetxController {
 
   @override
   Future<void> onClose() async {
-    db.close();
+    await db.close();
   }
 }

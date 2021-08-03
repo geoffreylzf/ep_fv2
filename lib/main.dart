@@ -6,6 +6,9 @@ import 'package:ep_fv2/pages/login.dart';
 import 'package:ep_fv2/pages/setup.dart';
 import 'package:ep_fv2/pages/splash.dart';
 import 'package:ep_fv2/pages/update_app_ver.dart';
+import 'package:ep_fv2/pages/visits/_id/fo/_id.dart';
+import 'package:ep_fv2/pages/visits/_id/fo/index.dart';
+import 'package:ep_fv2/pages/visits/_id/index.dart';
 import 'package:ep_fv2/pages/visits/create.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/updateAppVer', page: () => UpdateAppVerPage()),
         GetPage(name: '/setup', page: () => SetupPage()),
         GetPage(name: '/visits/create/', page: () => VisitCreatePage()),
+        GetPage(name: '/visits/:id', page: () => VisitIdIndexPage()),
+        GetPage(name: '/visits/:id/fo', page: () => VisitIdFoIndexPage()),
+        GetPage(name: '/visits/:id/fo/:id2', page: () => VisitIdFoIdPage()),
       ],
     );
   }

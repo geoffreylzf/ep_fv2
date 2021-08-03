@@ -23,4 +23,7 @@ class BroFa2VisitHouseDao extends DatabaseAccessor<Db> {
     return (select(broFa2VisitHouseTb)
       ..where((tbl) => tbl.broFa2VisitId.equals(broFa2VisitId))).get();
   }
+
+
 }
+

@@ -3855,6 +3855,8 @@ abstract class _$Db extends GeneratedDatabase {
   late final BroFa2VisitHouseDao broFa2VisitHouseDao =
       BroFa2VisitHouseDao(this as Db);
   late final BroFa2VisitFoDao broFa2VisitFoDao = BroFa2VisitFoDao(this as Db);
+  late final BroFa2VisitFoImgDao broFa2VisitFoImgDao =
+      BroFa2VisitFoImgDao(this as Db);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override

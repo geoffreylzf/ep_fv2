@@ -1,5 +1,4 @@
-import 'package:ep_fv2/controllers/visit/_id/fo/_id.dart';
-import 'package:ep_fv2/controllers/visit/_id/fo/index.dart';
+import 'package:ep_fv2/controllers/visit/_id/fo_id.dart';
 import 'package:ep_fv2/widgets/form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,10 +17,11 @@ class VisitIdFoIdPage extends StatelessWidget {
         child: Obx(
           () {
             List<Widget> wgAnswer = [];
-            if (ctrl.rxFo.value != null) {
-              final isFormula = ctrl.rxFo.value!.isFormula;
-              final isSelection = ctrl.rxFo.value!.isSelection;
-              final isNumber = ctrl.rxFo.value!.isNumber;
+            final fo = ctrl.rxFo.value;
+            if (fo != null) {
+              final isFormula = fo.isFormula;
+              final isSelection = fo.isSelection;
+              final isNumber = fo.isNumber;
               if (!isFormula) {
                 if (isSelection) {
                   wgAnswer = [
@@ -70,11 +70,44 @@ class VisitIdFoIdPage extends StatelessWidget {
                     ),
                   ];
                 }
+              } else {
+                if (fo.formula == "te+rh") {
+                  wgAnswer = [
+                    Text(
+                      "Temperature Environment 'C + Relative Humidity %",
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ];
+                }
               }
             }
             return ListView(
               children: [
                 ...wgAnswer,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Visibility(
+                        visible: fo?.isAllowPhoto ?? false,
+                        child: ElevatedButton.icon(
+                          icon: Icon(Icons.image_outlined),
+                          label: Text("IMAGE (" + ctrl.rxImgCount.value.toString() + ")"),
+                          onPressed: () => ctrl.onImgButtonClick(),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 8,
+                    ),
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        icon: Icon(Icons.save),
+                        label: Text("SAVE"),
+                        onPressed: () => ctrl.onSaveButtonClick(),
+                      ),
+                    ),
+                  ],
+                ).paddingOnly(top: 8),
                 Container(height: 8),
                 TextField(
                   controller: ctrl.tecComment,
@@ -114,14 +147,6 @@ class VisitIdFoIdPage extends StatelessWidget {
                     contentPadding: EdgeInsets.all(16),
                   ),
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    icon: Icon(Icons.save),
-                    label: Text("Save"),
-                    onPressed: () => ctrl.onSaveButtonClick(),
-                  ),
-                ).paddingOnly(top: 20)
               ],
             );
           },

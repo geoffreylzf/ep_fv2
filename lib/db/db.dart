@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ep_fv2/db/dao/bro_fa2_visit.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_fo.dart';
+import 'package:ep_fv2/db/dao/bro_fa2_visit_fo_img.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_house.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_do.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_fo.dart';
@@ -71,6 +72,7 @@ LazyDatabase _openConnection() {
     BroFa2VisitDao,
     BroFa2VisitHouseDao,
     BroFa2VisitFoDao,
+    BroFa2VisitFoImgDao,
   ],
 )
 class Db extends _$Db {

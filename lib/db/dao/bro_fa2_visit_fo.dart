@@ -6,6 +6,8 @@ class BroFa2VisitFoDao extends DatabaseAccessor<Db> {
 
   $BroFa2VisitFoTbTable get broFa2VisitFoTb => attachedDatabase.broFa2VisitFoTb;
 
+  $BroFa2VisitFoImgTbTable get broFa2VisitFoImgTb => attachedDatabase.broFa2VisitFoImgTb;
+
   Future<int> insert(BroFa2VisitFoTbCompanion entry) {
     return into(broFa2VisitFoTb).insert(entry);
   }
@@ -25,18 +27,23 @@ class BroFa2VisitFoDao extends DatabaseAccessor<Db> {
       """
       SELECT 
         bro_fa2_visit_fo.*,
-        bro_fa2_fo_selection.name AS selection_name
+        bro_fa2_fo_selection.name AS selection_name,
+        COUNT(bro_fa2_visit_fo_img.id) AS imgCount
       FROM bro_fa2_visit_fo
       LEFT JOIN bro_fa2_fo_selection 
         ON bro_fa2_fo_selection.id = bro_fa2_visit_fo.bro_fa2_fo_selection_id
+      LEFT JOIN bro_fa2_visit_fo_img
+        ON bro_fa2_visit_fo_img.bro_fa2_visit_fo_id = bro_fa2_visit_fo.id
       WHERE bro_fa2_visit_fo.bro_fa2_visit_id = $visitId
+      GROUP BY bro_fa2_visit_fo.id
       """,
-      readsFrom: {broFa2VisitFoTb},
+      readsFrom: {broFa2VisitFoTb, broFa2VisitFoImgTb},
     ).watch().map((r) {
       return r
           .map((r2) => BroFa2VisitFoWithData(
                 broFa2VisitFo: BroFa2VisitFo.fromData(r2.data, this.attachedDatabase),
-                selectionName: r2.read("selection_name"),
+                selectionName: r2.read("selection_name") ?? '',
+                imgCount: r2.read("imgCount"),
               ))
           .toList();
     });
@@ -45,10 +52,12 @@ class BroFa2VisitFoDao extends DatabaseAccessor<Db> {
 
 class BroFa2VisitFoWithData {
   final BroFa2VisitFo broFa2VisitFo;
-  final String? selectionName;
+  final String selectionName;
+  final int imgCount;
 
   BroFa2VisitFoWithData({
     required this.broFa2VisitFo,
     required this.selectionName,
+    required this.imgCount,
   });
 }

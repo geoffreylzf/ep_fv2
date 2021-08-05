@@ -11,6 +11,10 @@ import 'package:ep_fv2/pages/visits/_id/fo_id_images.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_id_images_id.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_index.dart';
 import 'package:ep_fv2/pages/visits/_id/index.dart';
+import 'package:ep_fv2/pages/visits/_id/pm_id.dart';
+import 'package:ep_fv2/pages/visits/_id/pm_id_images.dart';
+import 'package:ep_fv2/pages/visits/_id/pm_id_images_id.dart';
+import 'package:ep_fv2/pages/visits/_id/pm_index.dart';
 import 'package:ep_fv2/pages/visits/create.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,6 +59,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/visits/:id/fo/:id2', page: () => VisitIdFoIdPage()),
         GetPage(name: '/visits/:id/fo/:id2/images', page: () => VisitIdFoIdImagesPage()),
         GetPage(name: '/visits/:id/fo/:id2/images/:id3', page: () => VisitIdFoIdImagesIdPage()),
+        GetPage(name: '/visits/:id/pm', page: () => VisitIdPmIndexPage()),
+        GetPage(name: '/visits/:id/pm/:id2', page: () => VisitIdPmIdPage()),
+        GetPage(name: '/visits/:id/pm/:id2/images', page: () => VisitIdPmIdImagesPage()),
+        GetPage(name: '/visits/:id/pm/:id2/images/:id3', page: () => VisitIdPmIdImagesIdPage()),
       ],
     );
   }

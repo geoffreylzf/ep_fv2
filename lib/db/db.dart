@@ -4,6 +4,8 @@ import 'package:ep_fv2/db/dao/bro_fa2_visit.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_fo.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_fo_img.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_house.dart';
+import 'package:ep_fv2/db/dao/bro_fa2_visit_pm.dart';
+import 'package:ep_fv2/db/dao/bro_fa2_visit_pm_img.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_do.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_fo.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_fo_selection.dart';
@@ -17,6 +19,8 @@ import 'package:ep_fv2/db/table/bro_fa2_visit.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_fo.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_fo_img.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_house.dart';
+import 'package:ep_fv2/db/table/bro_fa2_visit_pm.dart';
+import 'package:ep_fv2/db/table/bro_fa2_visit_pm_img.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_do.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_fo.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_fo_selection.dart';
@@ -58,6 +62,8 @@ LazyDatabase _openConnection() {
     BroFa2VisitHouseTb,
     BroFa2VisitFoTb,
     BroFa2VisitFoImgTb,
+    BroFa2VisitPmTb,
+    BroFa2VisitPmImgTb,
   ],
   daos: [
     CompanyDao,
@@ -73,6 +79,8 @@ LazyDatabase _openConnection() {
     BroFa2VisitHouseDao,
     BroFa2VisitFoDao,
     BroFa2VisitFoImgDao,
+    BroFa2VisitPmDao,
+    BroFa2VisitPmImgDao,
   ],
 )
 class Db extends _$Db {

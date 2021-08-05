@@ -121,7 +121,7 @@ class VisitIdFoIndexPage extends StatelessWidget {
                                 Row(
                                   children: [
                                     Icon(Icons.image_outlined).paddingOnly(right: 4),
-                                    Text(vf!.imgCount.toString()),
+                                    Text(vf?.imgCount.toString() ?? "0"),
                                   ],
                                 ),
                             ],

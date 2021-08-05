@@ -109,7 +109,7 @@ class VisitIdFoIdController extends GetxController {
       if (!isUpdated) {
         XanX.showErrorDialog(message: "Data is not updated");
       } else {
-        Fluttertoast.showToast(msg: "Save done");
+        Fluttertoast.showToast(msg: "Saved");
         Get.back();
       }
     } else {

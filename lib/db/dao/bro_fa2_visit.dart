@@ -12,6 +12,14 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
     return into(broFa2VisitTb).insert(visit);
   }
 
+  Future<bool> updateByPk(BroFa2Visit entry) {
+    return update(broFa2VisitTb).replace(entry);
+  }
+
+  Future<BroFa2Visit?> getById(int id) {
+    return (select(broFa2VisitTb)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
+  }
+
   Stream<BroFa2VisitWithData> watchById(int id) {
     return customSelect(
       """

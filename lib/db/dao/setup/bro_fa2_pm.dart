@@ -26,4 +26,8 @@ class BroFa2PmDao extends DatabaseAccessor<Db> implements DaoSetupBasic<BroFa2Pm
   Future<List<BroFa2Pm>> getAll() {
     return select(broFa2PmTb).get();
   }
+
+  Future<BroFa2Pm> getById(int id) {
+    return (select(broFa2PmTb)..where((tbl) => tbl.id.equals(id))).getSingle();
+  }
 }

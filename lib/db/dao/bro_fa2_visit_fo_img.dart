@@ -29,5 +29,4 @@ class BroFa2VisitFoImgDao extends DatabaseAccessor<Db> {
   Stream<List<BroFa2VisitFoImg>> watchAllByVisitFoId(int vfId) {
     return (select(broFa2VisitFoImgTb)..where((tbl) => tbl.broFa2VisitFoId.equals(vfId))).watch();
   }
-
 }

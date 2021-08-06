@@ -689,7 +689,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
   final String stdValue;
   final bool isFormula;
   final String? formula;
-  final bool isPasgar;
   final int order;
   BroFa2Do(
       {required this.id,
@@ -697,7 +696,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       required this.stdValue,
       required this.isFormula,
       this.formula,
-      required this.isPasgar,
       required this.order});
   factory BroFa2Do.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String? prefix}) {
@@ -713,8 +711,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           .mapFromDatabaseResponse(data['${effectivePrefix}is_formula'])!,
       formula: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}formula']),
-      isPasgar: const BoolType()
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_pasgar'])!,
       order: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}order'])!,
     );
@@ -729,7 +725,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
     if (!nullToAbsent || formula != null) {
       map['formula'] = Variable<String?>(formula);
     }
-    map['is_pasgar'] = Variable<bool>(isPasgar);
     map['order'] = Variable<int>(order);
     return map;
   }
@@ -743,7 +738,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       formula: formula == null && nullToAbsent
           ? const Value.absent()
           : Value(formula),
-      isPasgar: Value(isPasgar),
       order: Value(order),
     );
   }
@@ -757,7 +751,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       stdValue: serializer.fromJson<String>(json['std_value']),
       isFormula: serializer.fromJson<bool>(json['is_formula']),
       formula: serializer.fromJson<String?>(json['formula']),
-      isPasgar: serializer.fromJson<bool>(json['is_pasgar']),
       order: serializer.fromJson<int>(json['order']),
     );
   }
@@ -770,7 +763,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       'std_value': serializer.toJson<String>(stdValue),
       'is_formula': serializer.toJson<bool>(isFormula),
       'formula': serializer.toJson<String?>(formula),
-      'is_pasgar': serializer.toJson<bool>(isPasgar),
       'order': serializer.toJson<int>(order),
     };
   }
@@ -781,7 +773,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           String? stdValue,
           bool? isFormula,
           String? formula,
-          bool? isPasgar,
           int? order}) =>
       BroFa2Do(
         id: id ?? this.id,
@@ -789,7 +780,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
         stdValue: stdValue ?? this.stdValue,
         isFormula: isFormula ?? this.isFormula,
         formula: formula ?? this.formula,
-        isPasgar: isPasgar ?? this.isPasgar,
         order: order ?? this.order,
       );
   @override
@@ -800,7 +790,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           ..write('stdValue: $stdValue, ')
           ..write('isFormula: $isFormula, ')
           ..write('formula: $formula, ')
-          ..write('isPasgar: $isPasgar, ')
           ..write('order: $order')
           ..write(')'))
         .toString();
@@ -813,10 +802,8 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           name.hashCode,
           $mrjc(
               stdValue.hashCode,
-              $mrjc(
-                  isFormula.hashCode,
-                  $mrjc(formula.hashCode,
-                      $mrjc(isPasgar.hashCode, order.hashCode)))))));
+              $mrjc(isFormula.hashCode,
+                  $mrjc(formula.hashCode, order.hashCode))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -826,7 +813,6 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           other.stdValue == this.stdValue &&
           other.isFormula == this.isFormula &&
           other.formula == this.formula &&
-          other.isPasgar == this.isPasgar &&
           other.order == this.order);
 }
 
@@ -836,7 +822,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
   final Value<String> stdValue;
   final Value<bool> isFormula;
   final Value<String?> formula;
-  final Value<bool> isPasgar;
   final Value<int> order;
   const BroFa2DoTbCompanion({
     this.id = const Value.absent(),
@@ -844,7 +829,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     this.stdValue = const Value.absent(),
     this.isFormula = const Value.absent(),
     this.formula = const Value.absent(),
-    this.isPasgar = const Value.absent(),
     this.order = const Value.absent(),
   });
   BroFa2DoTbCompanion.insert({
@@ -853,12 +837,10 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     required String stdValue,
     required bool isFormula,
     this.formula = const Value.absent(),
-    required bool isPasgar,
     required int order,
   })  : name = Value(name),
         stdValue = Value(stdValue),
         isFormula = Value(isFormula),
-        isPasgar = Value(isPasgar),
         order = Value(order);
   static Insertable<BroFa2Do> custom({
     Expression<int>? id,
@@ -866,7 +848,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     Expression<String>? stdValue,
     Expression<bool>? isFormula,
     Expression<String?>? formula,
-    Expression<bool>? isPasgar,
     Expression<int>? order,
   }) {
     return RawValuesInsertable({
@@ -875,7 +856,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
       if (stdValue != null) 'std_value': stdValue,
       if (isFormula != null) 'is_formula': isFormula,
       if (formula != null) 'formula': formula,
-      if (isPasgar != null) 'is_pasgar': isPasgar,
       if (order != null) 'order': order,
     });
   }
@@ -886,7 +866,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
       Value<String>? stdValue,
       Value<bool>? isFormula,
       Value<String?>? formula,
-      Value<bool>? isPasgar,
       Value<int>? order}) {
     return BroFa2DoTbCompanion(
       id: id ?? this.id,
@@ -894,7 +873,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
       stdValue: stdValue ?? this.stdValue,
       isFormula: isFormula ?? this.isFormula,
       formula: formula ?? this.formula,
-      isPasgar: isPasgar ?? this.isPasgar,
       order: order ?? this.order,
     );
   }
@@ -917,9 +895,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     if (formula.present) {
       map['formula'] = Variable<String?>(formula.value);
     }
-    if (isPasgar.present) {
-      map['is_pasgar'] = Variable<bool>(isPasgar.value);
-    }
     if (order.present) {
       map['order'] = Variable<int>(order.value);
     }
@@ -934,7 +909,6 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
           ..write('stdValue: $stdValue, ')
           ..write('isFormula: $isFormula, ')
           ..write('formula: $formula, ')
-          ..write('isPasgar: $isPasgar, ')
           ..write('order: $order')
           ..write(')'))
         .toString();
@@ -970,19 +944,13 @@ class $BroFa2DoTbTable extends BroFa2DoTb
   late final GeneratedColumn<String?> formula = GeneratedColumn<String?>(
       'formula', aliasedName, true,
       typeName: 'TEXT', requiredDuringInsert: false);
-  final VerificationMeta _isPasgarMeta = const VerificationMeta('isPasgar');
-  late final GeneratedColumn<bool?> isPasgar = GeneratedColumn<bool?>(
-      'is_pasgar', aliasedName, false,
-      typeName: 'INTEGER',
-      requiredDuringInsert: true,
-      defaultConstraints: 'CHECK (is_pasgar IN (0, 1))');
   final VerificationMeta _orderMeta = const VerificationMeta('order');
   late final GeneratedColumn<int?> order = GeneratedColumn<int?>(
       'order', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, stdValue, isFormula, formula, isPasgar, order];
+      [id, name, stdValue, isFormula, formula, order];
   @override
   String get aliasedName => _alias ?? 'bro_fa2_do';
   @override
@@ -1016,12 +984,6 @@ class $BroFa2DoTbTable extends BroFa2DoTb
     if (data.containsKey('formula')) {
       context.handle(_formulaMeta,
           formula.isAcceptableOrUnknown(data['formula']!, _formulaMeta));
-    }
-    if (data.containsKey('is_pasgar')) {
-      context.handle(_isPasgarMeta,
-          isPasgar.isAcceptableOrUnknown(data['is_pasgar']!, _isPasgarMeta));
-    } else if (isInserting) {
-      context.missing(_isPasgarMeta);
     }
     if (data.containsKey('order')) {
       context.handle(
@@ -4404,6 +4366,788 @@ class $BroFa2VisitPmImgTbTable extends BroFa2VisitPmImgTb
   }
 }
 
+class BroFa2VisitDo extends DataClass implements Insertable<BroFa2VisitDo> {
+  final int id;
+  final int broFa2VisitId;
+  final int broFa2DoId;
+  final String answer;
+  final String comment;
+  final String action;
+  final String remark;
+  BroFa2VisitDo(
+      {required this.id,
+      required this.broFa2VisitId,
+      required this.broFa2DoId,
+      required this.answer,
+      required this.comment,
+      required this.action,
+      required this.remark});
+  factory BroFa2VisitDo.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return BroFa2VisitDo(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      broFa2VisitId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bro_fa2_visit_id'])!,
+      broFa2DoId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bro_fa2_do_id'])!,
+      answer: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}answer'])!,
+      comment: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}comment'])!,
+      action: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}action'])!,
+      remark: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}remark'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId);
+    map['bro_fa2_do_id'] = Variable<int>(broFa2DoId);
+    map['answer'] = Variable<String>(answer);
+    map['comment'] = Variable<String>(comment);
+    map['action'] = Variable<String>(action);
+    map['remark'] = Variable<String>(remark);
+    return map;
+  }
+
+  BroFa2VisitDoTbCompanion toCompanion(bool nullToAbsent) {
+    return BroFa2VisitDoTbCompanion(
+      id: Value(id),
+      broFa2VisitId: Value(broFa2VisitId),
+      broFa2DoId: Value(broFa2DoId),
+      answer: Value(answer),
+      comment: Value(comment),
+      action: Value(action),
+      remark: Value(remark),
+    );
+  }
+
+  factory BroFa2VisitDo.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return BroFa2VisitDo(
+      id: serializer.fromJson<int>(json['id']),
+      broFa2VisitId: serializer.fromJson<int>(json['bro_fa2_visit']),
+      broFa2DoId: serializer.fromJson<int>(json['bro_fa2_do']),
+      answer: serializer.fromJson<String>(json['answer']),
+      comment: serializer.fromJson<String>(json['comment']),
+      action: serializer.fromJson<String>(json['action']),
+      remark: serializer.fromJson<String>(json['remark']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'bro_fa2_visit': serializer.toJson<int>(broFa2VisitId),
+      'bro_fa2_do': serializer.toJson<int>(broFa2DoId),
+      'answer': serializer.toJson<String>(answer),
+      'comment': serializer.toJson<String>(comment),
+      'action': serializer.toJson<String>(action),
+      'remark': serializer.toJson<String>(remark),
+    };
+  }
+
+  BroFa2VisitDo copyWith(
+          {int? id,
+          int? broFa2VisitId,
+          int? broFa2DoId,
+          String? answer,
+          String? comment,
+          String? action,
+          String? remark}) =>
+      BroFa2VisitDo(
+        id: id ?? this.id,
+        broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+        broFa2DoId: broFa2DoId ?? this.broFa2DoId,
+        answer: answer ?? this.answer,
+        comment: comment ?? this.comment,
+        action: action ?? this.action,
+        remark: remark ?? this.remark,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitDo(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('broFa2DoId: $broFa2DoId, ')
+          ..write('answer: $answer, ')
+          ..write('comment: $comment, ')
+          ..write('action: $action, ')
+          ..write('remark: $remark')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      id.hashCode,
+      $mrjc(
+          broFa2VisitId.hashCode,
+          $mrjc(
+              broFa2DoId.hashCode,
+              $mrjc(
+                  answer.hashCode,
+                  $mrjc(comment.hashCode,
+                      $mrjc(action.hashCode, remark.hashCode)))))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BroFa2VisitDo &&
+          other.id == this.id &&
+          other.broFa2VisitId == this.broFa2VisitId &&
+          other.broFa2DoId == this.broFa2DoId &&
+          other.answer == this.answer &&
+          other.comment == this.comment &&
+          other.action == this.action &&
+          other.remark == this.remark);
+}
+
+class BroFa2VisitDoTbCompanion extends UpdateCompanion<BroFa2VisitDo> {
+  final Value<int> id;
+  final Value<int> broFa2VisitId;
+  final Value<int> broFa2DoId;
+  final Value<String> answer;
+  final Value<String> comment;
+  final Value<String> action;
+  final Value<String> remark;
+  const BroFa2VisitDoTbCompanion({
+    this.id = const Value.absent(),
+    this.broFa2VisitId = const Value.absent(),
+    this.broFa2DoId = const Value.absent(),
+    this.answer = const Value.absent(),
+    this.comment = const Value.absent(),
+    this.action = const Value.absent(),
+    this.remark = const Value.absent(),
+  });
+  BroFa2VisitDoTbCompanion.insert({
+    this.id = const Value.absent(),
+    required int broFa2VisitId,
+    required int broFa2DoId,
+    required String answer,
+    required String comment,
+    required String action,
+    required String remark,
+  })  : broFa2VisitId = Value(broFa2VisitId),
+        broFa2DoId = Value(broFa2DoId),
+        answer = Value(answer),
+        comment = Value(comment),
+        action = Value(action),
+        remark = Value(remark);
+  static Insertable<BroFa2VisitDo> custom({
+    Expression<int>? id,
+    Expression<int>? broFa2VisitId,
+    Expression<int>? broFa2DoId,
+    Expression<String>? answer,
+    Expression<String>? comment,
+    Expression<String>? action,
+    Expression<String>? remark,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (broFa2VisitId != null) 'bro_fa2_visit_id': broFa2VisitId,
+      if (broFa2DoId != null) 'bro_fa2_do_id': broFa2DoId,
+      if (answer != null) 'answer': answer,
+      if (comment != null) 'comment': comment,
+      if (action != null) 'action': action,
+      if (remark != null) 'remark': remark,
+    });
+  }
+
+  BroFa2VisitDoTbCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? broFa2VisitId,
+      Value<int>? broFa2DoId,
+      Value<String>? answer,
+      Value<String>? comment,
+      Value<String>? action,
+      Value<String>? remark}) {
+    return BroFa2VisitDoTbCompanion(
+      id: id ?? this.id,
+      broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+      broFa2DoId: broFa2DoId ?? this.broFa2DoId,
+      answer: answer ?? this.answer,
+      comment: comment ?? this.comment,
+      action: action ?? this.action,
+      remark: remark ?? this.remark,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (broFa2VisitId.present) {
+      map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId.value);
+    }
+    if (broFa2DoId.present) {
+      map['bro_fa2_do_id'] = Variable<int>(broFa2DoId.value);
+    }
+    if (answer.present) {
+      map['answer'] = Variable<String>(answer.value);
+    }
+    if (comment.present) {
+      map['comment'] = Variable<String>(comment.value);
+    }
+    if (action.present) {
+      map['action'] = Variable<String>(action.value);
+    }
+    if (remark.present) {
+      map['remark'] = Variable<String>(remark.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitDoTbCompanion(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('broFa2DoId: $broFa2DoId, ')
+          ..write('answer: $answer, ')
+          ..write('comment: $comment, ')
+          ..write('action: $action, ')
+          ..write('remark: $remark')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BroFa2VisitDoTbTable extends BroFa2VisitDoTb
+    with TableInfo<$BroFa2VisitDoTbTable, BroFa2VisitDo> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $BroFa2VisitDoTbTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _broFa2VisitIdMeta =
+      const VerificationMeta('broFa2VisitId');
+  late final GeneratedColumn<int?> broFa2VisitId = GeneratedColumn<int?>(
+      'bro_fa2_visit_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _broFa2DoIdMeta = const VerificationMeta('broFa2DoId');
+  late final GeneratedColumn<int?> broFa2DoId = GeneratedColumn<int?>(
+      'bro_fa2_do_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _answerMeta = const VerificationMeta('answer');
+  late final GeneratedColumn<String?> answer = GeneratedColumn<String?>(
+      'answer', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _commentMeta = const VerificationMeta('comment');
+  late final GeneratedColumn<String?> comment = GeneratedColumn<String?>(
+      'comment', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _actionMeta = const VerificationMeta('action');
+  late final GeneratedColumn<String?> action = GeneratedColumn<String?>(
+      'action', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _remarkMeta = const VerificationMeta('remark');
+  late final GeneratedColumn<String?> remark = GeneratedColumn<String?>(
+      'remark', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, broFa2VisitId, broFa2DoId, answer, comment, action, remark];
+  @override
+  String get aliasedName => _alias ?? 'bro_fa2_visit_do';
+  @override
+  String get actualTableName => 'bro_fa2_visit_do';
+  @override
+  VerificationContext validateIntegrity(Insertable<BroFa2VisitDo> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('bro_fa2_visit_id')) {
+      context.handle(
+          _broFa2VisitIdMeta,
+          broFa2VisitId.isAcceptableOrUnknown(
+              data['bro_fa2_visit_id']!, _broFa2VisitIdMeta));
+    } else if (isInserting) {
+      context.missing(_broFa2VisitIdMeta);
+    }
+    if (data.containsKey('bro_fa2_do_id')) {
+      context.handle(
+          _broFa2DoIdMeta,
+          broFa2DoId.isAcceptableOrUnknown(
+              data['bro_fa2_do_id']!, _broFa2DoIdMeta));
+    } else if (isInserting) {
+      context.missing(_broFa2DoIdMeta);
+    }
+    if (data.containsKey('answer')) {
+      context.handle(_answerMeta,
+          answer.isAcceptableOrUnknown(data['answer']!, _answerMeta));
+    } else if (isInserting) {
+      context.missing(_answerMeta);
+    }
+    if (data.containsKey('comment')) {
+      context.handle(_commentMeta,
+          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
+    } else if (isInserting) {
+      context.missing(_commentMeta);
+    }
+    if (data.containsKey('action')) {
+      context.handle(_actionMeta,
+          action.isAcceptableOrUnknown(data['action']!, _actionMeta));
+    } else if (isInserting) {
+      context.missing(_actionMeta);
+    }
+    if (data.containsKey('remark')) {
+      context.handle(_remarkMeta,
+          remark.isAcceptableOrUnknown(data['remark']!, _remarkMeta));
+    } else if (isInserting) {
+      context.missing(_remarkMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BroFa2VisitDo map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return BroFa2VisitDo.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $BroFa2VisitDoTbTable createAlias(String alias) {
+    return $BroFa2VisitDoTbTable(_db, alias);
+  }
+}
+
+class BroFa2VisitPasgar extends DataClass
+    implements Insertable<BroFa2VisitPasgar> {
+  final int id;
+  final int broFa2VisitId;
+  final int order;
+  final bool isChkReflex;
+  final bool isChkNavel;
+  final bool isChkLegs;
+  final bool isChkBeak;
+  final bool isChkBelly;
+  BroFa2VisitPasgar(
+      {required this.id,
+      required this.broFa2VisitId,
+      required this.order,
+      required this.isChkReflex,
+      required this.isChkNavel,
+      required this.isChkLegs,
+      required this.isChkBeak,
+      required this.isChkBelly});
+  factory BroFa2VisitPasgar.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return BroFa2VisitPasgar(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      broFa2VisitId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bro_fa2_visit_id'])!,
+      order: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}order'])!,
+      isChkReflex: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_chk_reflex'])!,
+      isChkNavel: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_chk_navel'])!,
+      isChkLegs: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_chk_legs'])!,
+      isChkBeak: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_chk_beak'])!,
+      isChkBelly: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_chk_belly'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId);
+    map['order'] = Variable<int>(order);
+    map['is_chk_reflex'] = Variable<bool>(isChkReflex);
+    map['is_chk_navel'] = Variable<bool>(isChkNavel);
+    map['is_chk_legs'] = Variable<bool>(isChkLegs);
+    map['is_chk_beak'] = Variable<bool>(isChkBeak);
+    map['is_chk_belly'] = Variable<bool>(isChkBelly);
+    return map;
+  }
+
+  BroFa2VisitPasgarTbCompanion toCompanion(bool nullToAbsent) {
+    return BroFa2VisitPasgarTbCompanion(
+      id: Value(id),
+      broFa2VisitId: Value(broFa2VisitId),
+      order: Value(order),
+      isChkReflex: Value(isChkReflex),
+      isChkNavel: Value(isChkNavel),
+      isChkLegs: Value(isChkLegs),
+      isChkBeak: Value(isChkBeak),
+      isChkBelly: Value(isChkBelly),
+    );
+  }
+
+  factory BroFa2VisitPasgar.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return BroFa2VisitPasgar(
+      id: serializer.fromJson<int>(json['id']),
+      broFa2VisitId: serializer.fromJson<int>(json['bro_fa2_visit']),
+      order: serializer.fromJson<int>(json['order']),
+      isChkReflex: serializer.fromJson<bool>(json['is_chk_reflex']),
+      isChkNavel: serializer.fromJson<bool>(json['is_chk_navel']),
+      isChkLegs: serializer.fromJson<bool>(json['is_chk_legs']),
+      isChkBeak: serializer.fromJson<bool>(json['is_chk_beak']),
+      isChkBelly: serializer.fromJson<bool>(json['is_chk_belly']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'bro_fa2_visit': serializer.toJson<int>(broFa2VisitId),
+      'order': serializer.toJson<int>(order),
+      'is_chk_reflex': serializer.toJson<bool>(isChkReflex),
+      'is_chk_navel': serializer.toJson<bool>(isChkNavel),
+      'is_chk_legs': serializer.toJson<bool>(isChkLegs),
+      'is_chk_beak': serializer.toJson<bool>(isChkBeak),
+      'is_chk_belly': serializer.toJson<bool>(isChkBelly),
+    };
+  }
+
+  BroFa2VisitPasgar copyWith(
+          {int? id,
+          int? broFa2VisitId,
+          int? order,
+          bool? isChkReflex,
+          bool? isChkNavel,
+          bool? isChkLegs,
+          bool? isChkBeak,
+          bool? isChkBelly}) =>
+      BroFa2VisitPasgar(
+        id: id ?? this.id,
+        broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+        order: order ?? this.order,
+        isChkReflex: isChkReflex ?? this.isChkReflex,
+        isChkNavel: isChkNavel ?? this.isChkNavel,
+        isChkLegs: isChkLegs ?? this.isChkLegs,
+        isChkBeak: isChkBeak ?? this.isChkBeak,
+        isChkBelly: isChkBelly ?? this.isChkBelly,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitPasgar(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('order: $order, ')
+          ..write('isChkReflex: $isChkReflex, ')
+          ..write('isChkNavel: $isChkNavel, ')
+          ..write('isChkLegs: $isChkLegs, ')
+          ..write('isChkBeak: $isChkBeak, ')
+          ..write('isChkBelly: $isChkBelly')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      id.hashCode,
+      $mrjc(
+          broFa2VisitId.hashCode,
+          $mrjc(
+              order.hashCode,
+              $mrjc(
+                  isChkReflex.hashCode,
+                  $mrjc(
+                      isChkNavel.hashCode,
+                      $mrjc(isChkLegs.hashCode,
+                          $mrjc(isChkBeak.hashCode, isChkBelly.hashCode))))))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BroFa2VisitPasgar &&
+          other.id == this.id &&
+          other.broFa2VisitId == this.broFa2VisitId &&
+          other.order == this.order &&
+          other.isChkReflex == this.isChkReflex &&
+          other.isChkNavel == this.isChkNavel &&
+          other.isChkLegs == this.isChkLegs &&
+          other.isChkBeak == this.isChkBeak &&
+          other.isChkBelly == this.isChkBelly);
+}
+
+class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
+  final Value<int> id;
+  final Value<int> broFa2VisitId;
+  final Value<int> order;
+  final Value<bool> isChkReflex;
+  final Value<bool> isChkNavel;
+  final Value<bool> isChkLegs;
+  final Value<bool> isChkBeak;
+  final Value<bool> isChkBelly;
+  const BroFa2VisitPasgarTbCompanion({
+    this.id = const Value.absent(),
+    this.broFa2VisitId = const Value.absent(),
+    this.order = const Value.absent(),
+    this.isChkReflex = const Value.absent(),
+    this.isChkNavel = const Value.absent(),
+    this.isChkLegs = const Value.absent(),
+    this.isChkBeak = const Value.absent(),
+    this.isChkBelly = const Value.absent(),
+  });
+  BroFa2VisitPasgarTbCompanion.insert({
+    this.id = const Value.absent(),
+    required int broFa2VisitId,
+    required int order,
+    this.isChkReflex = const Value.absent(),
+    this.isChkNavel = const Value.absent(),
+    this.isChkLegs = const Value.absent(),
+    this.isChkBeak = const Value.absent(),
+    this.isChkBelly = const Value.absent(),
+  })  : broFa2VisitId = Value(broFa2VisitId),
+        order = Value(order);
+  static Insertable<BroFa2VisitPasgar> custom({
+    Expression<int>? id,
+    Expression<int>? broFa2VisitId,
+    Expression<int>? order,
+    Expression<bool>? isChkReflex,
+    Expression<bool>? isChkNavel,
+    Expression<bool>? isChkLegs,
+    Expression<bool>? isChkBeak,
+    Expression<bool>? isChkBelly,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (broFa2VisitId != null) 'bro_fa2_visit_id': broFa2VisitId,
+      if (order != null) 'order': order,
+      if (isChkReflex != null) 'is_chk_reflex': isChkReflex,
+      if (isChkNavel != null) 'is_chk_navel': isChkNavel,
+      if (isChkLegs != null) 'is_chk_legs': isChkLegs,
+      if (isChkBeak != null) 'is_chk_beak': isChkBeak,
+      if (isChkBelly != null) 'is_chk_belly': isChkBelly,
+    });
+  }
+
+  BroFa2VisitPasgarTbCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? broFa2VisitId,
+      Value<int>? order,
+      Value<bool>? isChkReflex,
+      Value<bool>? isChkNavel,
+      Value<bool>? isChkLegs,
+      Value<bool>? isChkBeak,
+      Value<bool>? isChkBelly}) {
+    return BroFa2VisitPasgarTbCompanion(
+      id: id ?? this.id,
+      broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+      order: order ?? this.order,
+      isChkReflex: isChkReflex ?? this.isChkReflex,
+      isChkNavel: isChkNavel ?? this.isChkNavel,
+      isChkLegs: isChkLegs ?? this.isChkLegs,
+      isChkBeak: isChkBeak ?? this.isChkBeak,
+      isChkBelly: isChkBelly ?? this.isChkBelly,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (broFa2VisitId.present) {
+      map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId.value);
+    }
+    if (order.present) {
+      map['order'] = Variable<int>(order.value);
+    }
+    if (isChkReflex.present) {
+      map['is_chk_reflex'] = Variable<bool>(isChkReflex.value);
+    }
+    if (isChkNavel.present) {
+      map['is_chk_navel'] = Variable<bool>(isChkNavel.value);
+    }
+    if (isChkLegs.present) {
+      map['is_chk_legs'] = Variable<bool>(isChkLegs.value);
+    }
+    if (isChkBeak.present) {
+      map['is_chk_beak'] = Variable<bool>(isChkBeak.value);
+    }
+    if (isChkBelly.present) {
+      map['is_chk_belly'] = Variable<bool>(isChkBelly.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitPasgarTbCompanion(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('order: $order, ')
+          ..write('isChkReflex: $isChkReflex, ')
+          ..write('isChkNavel: $isChkNavel, ')
+          ..write('isChkLegs: $isChkLegs, ')
+          ..write('isChkBeak: $isChkBeak, ')
+          ..write('isChkBelly: $isChkBelly')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BroFa2VisitPasgarTbTable extends BroFa2VisitPasgarTb
+    with TableInfo<$BroFa2VisitPasgarTbTable, BroFa2VisitPasgar> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $BroFa2VisitPasgarTbTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _broFa2VisitIdMeta =
+      const VerificationMeta('broFa2VisitId');
+  late final GeneratedColumn<int?> broFa2VisitId = GeneratedColumn<int?>(
+      'bro_fa2_visit_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _orderMeta = const VerificationMeta('order');
+  late final GeneratedColumn<int?> order = GeneratedColumn<int?>(
+      'order', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _isChkReflexMeta =
+      const VerificationMeta('isChkReflex');
+  late final GeneratedColumn<bool?> isChkReflex = GeneratedColumn<bool?>(
+      'is_chk_reflex', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'CHECK (is_chk_reflex IN (0, 1))',
+      defaultValue: const Constant(false));
+  final VerificationMeta _isChkNavelMeta = const VerificationMeta('isChkNavel');
+  late final GeneratedColumn<bool?> isChkNavel = GeneratedColumn<bool?>(
+      'is_chk_navel', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'CHECK (is_chk_navel IN (0, 1))',
+      defaultValue: const Constant(false));
+  final VerificationMeta _isChkLegsMeta = const VerificationMeta('isChkLegs');
+  late final GeneratedColumn<bool?> isChkLegs = GeneratedColumn<bool?>(
+      'is_chk_legs', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'CHECK (is_chk_legs IN (0, 1))',
+      defaultValue: const Constant(false));
+  final VerificationMeta _isChkBeakMeta = const VerificationMeta('isChkBeak');
+  late final GeneratedColumn<bool?> isChkBeak = GeneratedColumn<bool?>(
+      'is_chk_beak', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'CHECK (is_chk_beak IN (0, 1))',
+      defaultValue: const Constant(false));
+  final VerificationMeta _isChkBellyMeta = const VerificationMeta('isChkBelly');
+  late final GeneratedColumn<bool?> isChkBelly = GeneratedColumn<bool?>(
+      'is_chk_belly', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'CHECK (is_chk_belly IN (0, 1))',
+      defaultValue: const Constant(false));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        broFa2VisitId,
+        order,
+        isChkReflex,
+        isChkNavel,
+        isChkLegs,
+        isChkBeak,
+        isChkBelly
+      ];
+  @override
+  String get aliasedName => _alias ?? 'bro_fa2_visit_pasgar';
+  @override
+  String get actualTableName => 'bro_fa2_visit_pasgar';
+  @override
+  VerificationContext validateIntegrity(Insertable<BroFa2VisitPasgar> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('bro_fa2_visit_id')) {
+      context.handle(
+          _broFa2VisitIdMeta,
+          broFa2VisitId.isAcceptableOrUnknown(
+              data['bro_fa2_visit_id']!, _broFa2VisitIdMeta));
+    } else if (isInserting) {
+      context.missing(_broFa2VisitIdMeta);
+    }
+    if (data.containsKey('order')) {
+      context.handle(
+          _orderMeta, order.isAcceptableOrUnknown(data['order']!, _orderMeta));
+    } else if (isInserting) {
+      context.missing(_orderMeta);
+    }
+    if (data.containsKey('is_chk_reflex')) {
+      context.handle(
+          _isChkReflexMeta,
+          isChkReflex.isAcceptableOrUnknown(
+              data['is_chk_reflex']!, _isChkReflexMeta));
+    }
+    if (data.containsKey('is_chk_navel')) {
+      context.handle(
+          _isChkNavelMeta,
+          isChkNavel.isAcceptableOrUnknown(
+              data['is_chk_navel']!, _isChkNavelMeta));
+    }
+    if (data.containsKey('is_chk_legs')) {
+      context.handle(
+          _isChkLegsMeta,
+          isChkLegs.isAcceptableOrUnknown(
+              data['is_chk_legs']!, _isChkLegsMeta));
+    }
+    if (data.containsKey('is_chk_beak')) {
+      context.handle(
+          _isChkBeakMeta,
+          isChkBeak.isAcceptableOrUnknown(
+              data['is_chk_beak']!, _isChkBeakMeta));
+    }
+    if (data.containsKey('is_chk_belly')) {
+      context.handle(
+          _isChkBellyMeta,
+          isChkBelly.isAcceptableOrUnknown(
+              data['is_chk_belly']!, _isChkBellyMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BroFa2VisitPasgar map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return BroFa2VisitPasgar.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $BroFa2VisitPasgarTbTable createAlias(String alias) {
+    return $BroFa2VisitPasgarTbTable(_db, alias);
+  }
+}
+
 abstract class _$Db extends GeneratedDatabase {
   _$Db(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $CompanyTbTable companyTb = $CompanyTbTable(this);
@@ -4428,6 +5172,10 @@ abstract class _$Db extends GeneratedDatabase {
       $BroFa2VisitPmTbTable(this);
   late final $BroFa2VisitPmImgTbTable broFa2VisitPmImgTb =
       $BroFa2VisitPmImgTbTable(this);
+  late final $BroFa2VisitDoTbTable broFa2VisitDoTb =
+      $BroFa2VisitDoTbTable(this);
+  late final $BroFa2VisitPasgarTbTable broFa2VisitPasgarTb =
+      $BroFa2VisitPasgarTbTable(this);
   late final CompanyDao companyDao = CompanyDao(this as Db);
   late final LocationDao locationDao = LocationDao(this as Db);
   late final LocHouseDao locHouseDao = LocHouseDao(this as Db);
@@ -4447,6 +5195,9 @@ abstract class _$Db extends GeneratedDatabase {
   late final BroFa2VisitPmDao broFa2VisitPmDao = BroFa2VisitPmDao(this as Db);
   late final BroFa2VisitPmImgDao broFa2VisitPmImgDao =
       BroFa2VisitPmImgDao(this as Db);
+  late final BroFa2VisitDoDao broFa2VisitDoDao = BroFa2VisitDoDao(this as Db);
+  late final BroFa2VisitPasgarDao broFa2VisitPasgarDao =
+      BroFa2VisitPasgarDao(this as Db);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -4465,6 +5216,8 @@ abstract class _$Db extends GeneratedDatabase {
         broFa2VisitFoTb,
         broFa2VisitFoImgTb,
         broFa2VisitPmTb,
-        broFa2VisitPmImgTb
+        broFa2VisitPmImgTb,
+        broFa2VisitDoTb,
+        broFa2VisitPasgarTb
       ];
 }

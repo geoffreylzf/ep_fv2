@@ -22,7 +22,7 @@ class BroFa2VisitFoDao extends DatabaseAccessor<Db> {
         .getSingleOrNull();
   }
 
-  Stream<List<BroFa2VisitFoWithData>> watchListByVisitId(int visitId) {
+  Stream<List<BroFa2VisitFoWithData>> watchAllByVisitId(int visitId) {
     return customSelect(
       """
       SELECT 

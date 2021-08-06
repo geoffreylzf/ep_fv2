@@ -15,7 +15,7 @@ class VisitIdFoIndexController extends GetxController {
     super.onInit();
     rxFoList.value = await db.broFa2FoDao.getAll();
 
-    db.broFa2VisitFoDao.watchListByVisitId(visitId).listen((vfList) {
+    db.broFa2VisitFoDao.watchAllByVisitId(visitId).listen((vfList) {
       rxVisitFoList.value = vfList;
     });
   }

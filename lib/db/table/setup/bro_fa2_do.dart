@@ -16,8 +16,5 @@ class BroFa2DoTb extends Table {
 
   TextColumn get formula => text().nullable()();
 
-  @JsonKey('is_pasgar')
-  BoolColumn get isPasgar => boolean()();
-
   IntColumn get order => integer()();
 }

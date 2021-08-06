@@ -19,7 +19,7 @@ class VisitIdPmIndexController extends GetxController {
     super.onInit();
     rxPmList.value = await db.broFa2PmDao.getAll();
 
-    db.broFa2VisitPmDao.watchListByVisitId(visitId).listen((vpList) {
+    db.broFa2VisitPmDao.watchAllByVisitId(visitId).listen((vpList) {
       rxVisitPmList.value = vpList;
     });
 

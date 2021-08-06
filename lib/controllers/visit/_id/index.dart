@@ -29,6 +29,10 @@ class VisitIdIndexController extends GetxController {
     Get.toNamed("/visits/$id/do");
   }
 
+  void openPasgar() {
+    Get.toNamed("/visits/$id/pasgar");
+  }
+
   void openManagementAudit() {
     Get.toNamed("/visits/$id/ma");
   }

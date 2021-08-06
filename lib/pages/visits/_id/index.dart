@@ -157,6 +157,7 @@ class ModuleBtnList extends StatelessWidget {
           "Flock Observation": () => ctrl.openFlockObservation(),
           "Post Mortem": () => ctrl.openPostMortem(),
           "DOC Objective": () => ctrl.openDocObservation(),
+          "Pasgar Score": () => ctrl.openPasgar(),
           "Management Audit": () => ctrl.openManagementAudit(),
           "Weight": () => ctrl.openWeight(),
         };
@@ -175,8 +176,8 @@ class ModuleBtnList extends StatelessWidget {
           crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 24,
-          crossAxisSpacing: 24,
+          mainAxisSpacing: 16,
+          crossAxisSpacing: 16,
           children: btnList,
         );
       },

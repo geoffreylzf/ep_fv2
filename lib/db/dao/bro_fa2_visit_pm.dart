@@ -22,7 +22,7 @@ class BroFa2VisitPmDao extends DatabaseAccessor<Db> {
         .getSingleOrNull();
   }
 
-  Stream<List<BroFa2VisitPmWithData>> watchListByVisitId(int visitId) {
+  Stream<List<BroFa2VisitPmWithData>> watchAllByVisitId(int visitId) {
     return customSelect(
       """
       SELECT 

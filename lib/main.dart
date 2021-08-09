@@ -14,6 +14,7 @@ import 'package:ep_fv2/pages/visits/_id/fo_id_images_id.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_index.dart';
 import 'package:ep_fv2/pages/visits/_id/index.dart';
 import 'package:ep_fv2/pages/visits/_id/pasgar_index.dart';
+import 'package:ep_fv2/pages/visits/_id/pasgar_order.dart';
 import 'package:ep_fv2/pages/visits/_id/pm_id.dart';
 import 'package:ep_fv2/pages/visits/_id/pm_id_images.dart';
 import 'package:ep_fv2/pages/visits/_id/pm_id_images_id.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/visits/:id/do', page: () => VisitIdDoIndexPage()),
         GetPage(name: '/visits/:id/do/:id2', page: () => VisitIdDoIdPage()),
         GetPage(name: '/visits/:id/pasgar', page: () => VisitIdPasgarIndexPage()),
+        GetPage(name: '/visits/:id/pasgar/:order', page: () => VisitIdPasgarOrderPage()),
       ],
     );
   }

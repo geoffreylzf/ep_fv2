@@ -7,6 +7,7 @@ class VisitIdPasgarIndexController extends GetxController {
   final visitId = int.parse(Get.parameters['id']!);
 
   final rxVisitPasgarList = Rx<List<BroFa2VisitPasgar>>([]);
+  final rxPasgarAvgScore = 0.0.obs;
 
   @override
   void onInit() async {
@@ -14,6 +15,30 @@ class VisitIdPasgarIndexController extends GetxController {
 
     db.broFa2VisitPasgarDao.watchAllByVisitId(visitId).listen((vpgList) {
       rxVisitPasgarList.value = vpgList;
+      if (vpgList.length == 0) {
+        rxPasgarAvgScore.value = 0.0;
+      } else {
+        double ttl = 0.0;
+        vpgList.forEach((vpg) {
+          ttl += 10;
+          if (vpg.isChkReflex) {
+            ttl -= 1;
+          }
+          if (vpg.isChkNavel) {
+            ttl -= 1;
+          }
+          if (vpg.isChkLegs) {
+            ttl -= 1;
+          }
+          if (vpg.isChkBeak) {
+            ttl -= 1;
+          }
+          if (vpg.isChkBelly) {
+            ttl -= 1;
+          }
+        });
+        rxPasgarAvgScore.value = ttl / vpgList.length;
+      }
     });
   }
 

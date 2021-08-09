@@ -5,9 +5,12 @@ import 'package:ep_fv2/db/dao/bro_fa2_visit_do.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_fo.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_fo_img.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_house.dart';
+import 'package:ep_fv2/db/dao/bro_fa2_visit_ma.dart';
+import 'package:ep_fv2/db/dao/bro_fa2_visit_ma_img.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_pasgar.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_pm.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_pm_img.dart';
+import 'package:ep_fv2/db/dao/bro_fa2_visit_weight.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_do.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_fo.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_fo_selection.dart';
@@ -19,12 +22,15 @@ import 'package:ep_fv2/db/dao/setup/loc_house.dart';
 import 'package:ep_fv2/db/dao/setup/location.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_do.dart';
+import 'package:ep_fv2/db/table/bro_fa2_visit_ma.dart';
+import 'package:ep_fv2/db/table/bro_fa2_visit_ma_img.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_pasgar.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_fo.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_fo_img.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_house.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_pm.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_pm_img.dart';
+import 'package:ep_fv2/db/table/bro_fa2_visit_weight.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_do.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_fo.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_fo_selection.dart';
@@ -70,6 +76,9 @@ LazyDatabase _openConnection() {
     BroFa2VisitPmImgTb,
     BroFa2VisitDoTb,
     BroFa2VisitPasgarTb,
+    BroFa2VisitMaTb,
+    BroFa2VisitMaImgTb,
+    BroFa2VisitWeightTb,
   ],
   daos: [
     CompanyDao,
@@ -89,6 +98,9 @@ LazyDatabase _openConnection() {
     BroFa2VisitPmImgDao,
     BroFa2VisitDoDao,
     BroFa2VisitPasgarDao,
+    BroFa2VisitMaDao,
+    BroFa2VisitMaImgDao,
+    BroFa2VisitWeightDao,
   ],
 )
 class Db extends _$Db {

@@ -13,6 +13,10 @@ import 'package:ep_fv2/pages/visits/_id/fo_id_images.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_id_images_id.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_index.dart';
 import 'package:ep_fv2/pages/visits/_id/index.dart';
+import 'package:ep_fv2/pages/visits/_id/ma_id.dart';
+import 'package:ep_fv2/pages/visits/_id/ma_id_images.dart';
+import 'package:ep_fv2/pages/visits/_id/ma_id_images_id.dart';
+import 'package:ep_fv2/pages/visits/_id/ma_index.dart';
 import 'package:ep_fv2/pages/visits/_id/pasgar_index.dart';
 import 'package:ep_fv2/pages/visits/_id/pasgar_order.dart';
 import 'package:ep_fv2/pages/visits/_id/pm_id.dart';
@@ -71,6 +75,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/visits/:id/do/:id2', page: () => VisitIdDoIdPage()),
         GetPage(name: '/visits/:id/pasgar', page: () => VisitIdPasgarIndexPage()),
         GetPage(name: '/visits/:id/pasgar/:order', page: () => VisitIdPasgarOrderPage()),
+        GetPage(name: '/visits/:id/ma', page: () => VisitIdMaIndexPage()),
+        GetPage(name: '/visits/:id/ma/:id2', page: () => VisitIdMaIdPage()),
+        GetPage(name: '/visits/:id/ma/:id2/images', page: () => VisitIdMaIdImagesPage()),
+        GetPage(name: '/visits/:id/ma/:id2/images/:id3', page: () => VisitIdMaIdImagesIdPage()),
       ],
     );
   }

@@ -139,11 +139,12 @@ class VisitCreatePage extends StatelessWidget {
               content: Column(
                 children: [
                   GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 160,
                       mainAxisExtent: 40,
                     ),
-                    shrinkWrap: true,
                     itemCount: ctrl.rxLocHouseList.value.length,
                     itemBuilder: (ctx, idx) {
                       final hse = ctrl.rxLocHouseList.value[idx];

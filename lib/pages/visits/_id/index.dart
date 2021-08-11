@@ -172,13 +172,20 @@ class ModuleBtnList extends StatelessWidget {
           ));
         });
 
-        return GridView.count(
-          crossAxisCount: 2,
+        return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          children: btnList,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            mainAxisExtent: 120,
+            mainAxisSpacing: 16,
+            crossAxisSpacing: 16,
+          ),
+
+          itemCount: btnList.length,
+          itemBuilder: (ctx, idx) {
+            return btnList[idx];
+          },
         );
       },
     );

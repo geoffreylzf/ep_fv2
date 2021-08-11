@@ -85,7 +85,7 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
 
     await db.broFa2VisitWeightDao.insert(visitWeight);
 
-    tecWeight.text = "";
+    tecWeight.clear();
     FocusScope.of(Get.context!).requestFocus(fnWeight);
   }
 

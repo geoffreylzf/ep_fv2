@@ -6,6 +6,7 @@ import 'package:ep_fv2/pages/login.dart';
 import 'package:ep_fv2/pages/setup.dart';
 import 'package:ep_fv2/pages/splash.dart';
 import 'package:ep_fv2/pages/update_app_ver.dart';
+import 'package:ep_fv2/pages/upload.dart';
 import 'package:ep_fv2/pages/visits/_id/do_id.dart';
 import 'package:ep_fv2/pages/visits/_id/do_index.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_id.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: () => HomePage()),
         GetPage(name: '/updateAppVer', page: () => UpdateAppVerPage()),
         GetPage(name: '/setup', page: () => SetupPage()),
+        GetPage(name: '/upload', page: () => UploadPage()),
         GetPage(name: '/visits/create/', page: () => VisitCreatePage()),
         GetPage(name: '/visits/:id', page: () => VisitIdIndexPage()),
         GetPage(name: '/visits/:id/fo', page: () => VisitIdFoIndexPage()),

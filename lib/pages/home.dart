@@ -20,9 +20,59 @@ class HomePage extends StatelessWidget {
       ),
       body: Row(
         children: [
-          Expanded(child: Text("asasas")),
+          Expanded(child: LeftPanel()),
           VerticalDivider(width: 0),
           Expanded(child: RightPanel()),
+        ],
+      ),
+    );
+  }
+}
+
+class LeftPanel extends StatelessWidget {
+  final ctrl = Get.find<HomeController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: FormItemTitle("Pending Upload"),
+          ),
+          Obx(() => Text(
+                ctrl.rxNotYetUploadCount.toString(),
+                style: TextStyle(
+                  fontSize: 100,
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(child: Text("UPLOAD"), onPressed: () => ctrl.openUpload()),
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    text: "Refresh Setup Location\n",
+                    style: TextStyle(fontSize: 11),
+                    children: [
+                      TextSpan(
+                          text: "(Press this when you cannot see location name)",
+                          style: TextStyle(fontSize: 9)),
+                    ]),
+              ),
+              onPressed: () => ctrl.refreshSetupLocation(),
+            ).paddingSymmetric(vertical: 8, horizontal: 4),
+          ),
         ],
       ),
     );
@@ -40,96 +90,92 @@ class RightPanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FormItemTitle("Recent Farm Visit"),
-          StreamBuilder<List<BroFa2VisitWithData>>(
-              stream: ctrl.faDocRecentStream,
-              initialData: [],
-              builder: (_, snapshot) {
-                final list = snapshot.data;
-                if (list == null || list.length == 0) {
-                  return Center(child: Text("No record"));
-                }
+          Obx(() {
+            final list = ctrl.rxBroFa2VisitWithDataList.value;
+            if (list.length == 0) {
+              return Center(child: Text("No record"));
+            }
 
-                return ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: list.length,
-                    separatorBuilder: (_, index) => Divider(height: 0),
-                    itemBuilder: (_, idx) {
-                      final visit = list[idx];
-                      return InkWell(
-                        onTap: () {
-                          ctrl.openVisit(visit);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          child: Stack(
-                            children: [
-                              if (visit.broFa2Visit.isDelete)
-                                Positioned.fill(
-                                  child: Opacity(
-                                    opacity: 0.1,
-                                    child: Icon(
-                                      Icons.delete,
-                                      color: Colors.red,
-                                      size: 48,
-                                    ),
-                                  ),
+            return ListView.separated(
+                shrinkWrap: true,
+                itemCount: list.length,
+                separatorBuilder: (_, index) => Divider(height: 0),
+                itemBuilder: (_, idx) {
+                  final visit = list[idx];
+                  return InkWell(
+                    onTap: () {
+                      ctrl.openVisit(visit);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Stack(
+                        children: [
+                          if (visit.broFa2Visit.isDelete)
+                            Positioned.fill(
+                              child: Opacity(
+                                opacity: 0.1,
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                  size: 48,
                                 ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                              ),
+                            ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
                                       children: [
-                                        Row(
-                                          children: [
-                                            Icon(Icons.location_on, size: 14),
-                                            Container(width: 4),
-                                            Flexible(
-                                                fit: FlexFit.loose,
-                                                child: Text(
-                                                  "${visit.locationName}",
-                                                  overflow: TextOverflow.clip,
-                                                )),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.home, size: 12),
-                                            Container(width: 4),
-                                            Text(
-                                              visit.houseNoList.join(", "),
-                                              style: TextStyle(fontSize: 11),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.today_outlined, size: 12),
-                                            Container(width: 4),
-                                            Text(
-                                              "Day " + visit.broFa2Visit.age.toString(),
-                                              style: TextStyle(fontSize: 11),
-                                            ),
-                                          ],
-                                        ),
+                                        Icon(Icons.location_on, size: 14),
+                                        Container(width: 4),
+                                        Flexible(
+                                            fit: FlexFit.loose,
+                                            child: Text(
+                                              "${visit.locationName}",
+                                              overflow: TextOverflow.clip,
+                                            )),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.home, size: 12),
+                                        Container(width: 4),
                                         Text(
-                                          visit.broFa2Visit.timestamp,
-                                          style: TextStyle(fontSize: 10, color: Colors.grey[500]),
+                                          visit.houseNoList.join(", "),
+                                          style: TextStyle(fontSize: 11),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  if (visit.broFa2Visit.isUpload)
-                                    Icon(Icons.cloud_upload, size: 14),
-                                ],
+                                    Row(
+                                      children: [
+                                        Icon(Icons.today_outlined, size: 12),
+                                        Container(width: 4),
+                                        Text(
+                                          "Day " + visit.broFa2Visit.age.toString(),
+                                          style: TextStyle(fontSize: 11),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      visit.broFa2Visit.timestamp,
+                                      style: TextStyle(fontSize: 10, color: Colors.grey[500]),
+                                    ),
+                                  ],
+                                ),
                               ),
+                              if (visit.broFa2Visit.isUpload) Icon(Icons.cloud_upload, size: 14),
                             ],
                           ),
-                        ),
-                      );
-                    });
-              }),
+                        ],
+                      ),
+                    ),
+                  );
+                });
+          }),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(

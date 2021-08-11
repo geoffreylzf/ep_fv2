@@ -6056,6 +6056,248 @@ class $BroFa2VisitWeightTbTable extends BroFa2VisitWeightTb
   }
 }
 
+class Log extends DataClass implements Insertable<Log> {
+  final int id;
+  final String type;
+  final String remark;
+  final String timestamp;
+  Log(
+      {required this.id,
+      required this.type,
+      required this.remark,
+      required this.timestamp});
+  factory Log.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return Log(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      type: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}type'])!,
+      remark: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}remark'])!,
+      timestamp: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}timestamp'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['type'] = Variable<String>(type);
+    map['remark'] = Variable<String>(remark);
+    map['timestamp'] = Variable<String>(timestamp);
+    return map;
+  }
+
+  LogTbCompanion toCompanion(bool nullToAbsent) {
+    return LogTbCompanion(
+      id: Value(id),
+      type: Value(type),
+      remark: Value(remark),
+      timestamp: Value(timestamp),
+    );
+  }
+
+  factory Log.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return Log(
+      id: serializer.fromJson<int>(json['id']),
+      type: serializer.fromJson<String>(json['type']),
+      remark: serializer.fromJson<String>(json['remark']),
+      timestamp: serializer.fromJson<String>(json['timestamp']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'type': serializer.toJson<String>(type),
+      'remark': serializer.toJson<String>(remark),
+      'timestamp': serializer.toJson<String>(timestamp),
+    };
+  }
+
+  Log copyWith({int? id, String? type, String? remark, String? timestamp}) =>
+      Log(
+        id: id ?? this.id,
+        type: type ?? this.type,
+        remark: remark ?? this.remark,
+        timestamp: timestamp ?? this.timestamp,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('Log(')
+          ..write('id: $id, ')
+          ..write('type: $type, ')
+          ..write('remark: $remark, ')
+          ..write('timestamp: $timestamp')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode,
+      $mrjc(type.hashCode, $mrjc(remark.hashCode, timestamp.hashCode))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Log &&
+          other.id == this.id &&
+          other.type == this.type &&
+          other.remark == this.remark &&
+          other.timestamp == this.timestamp);
+}
+
+class LogTbCompanion extends UpdateCompanion<Log> {
+  final Value<int> id;
+  final Value<String> type;
+  final Value<String> remark;
+  final Value<String> timestamp;
+  const LogTbCompanion({
+    this.id = const Value.absent(),
+    this.type = const Value.absent(),
+    this.remark = const Value.absent(),
+    this.timestamp = const Value.absent(),
+  });
+  LogTbCompanion.insert({
+    this.id = const Value.absent(),
+    required String type,
+    required String remark,
+    this.timestamp = const Value.absent(),
+  })  : type = Value(type),
+        remark = Value(remark);
+  static Insertable<Log> custom({
+    Expression<int>? id,
+    Expression<String>? type,
+    Expression<String>? remark,
+    Expression<String>? timestamp,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (type != null) 'type': type,
+      if (remark != null) 'remark': remark,
+      if (timestamp != null) 'timestamp': timestamp,
+    });
+  }
+
+  LogTbCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? type,
+      Value<String>? remark,
+      Value<String>? timestamp}) {
+    return LogTbCompanion(
+      id: id ?? this.id,
+      type: type ?? this.type,
+      remark: remark ?? this.remark,
+      timestamp: timestamp ?? this.timestamp,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<String>(type.value);
+    }
+    if (remark.present) {
+      map['remark'] = Variable<String>(remark.value);
+    }
+    if (timestamp.present) {
+      map['timestamp'] = Variable<String>(timestamp.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('LogTbCompanion(')
+          ..write('id: $id, ')
+          ..write('type: $type, ')
+          ..write('remark: $remark, ')
+          ..write('timestamp: $timestamp')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $LogTbTable extends LogTb with TableInfo<$LogTbTable, Log> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $LogTbTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _typeMeta = const VerificationMeta('type');
+  late final GeneratedColumn<String?> type = GeneratedColumn<String?>(
+      'type', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _remarkMeta = const VerificationMeta('remark');
+  late final GeneratedColumn<String?> remark = GeneratedColumn<String?>(
+      'remark', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _timestampMeta = const VerificationMeta('timestamp');
+  late final GeneratedColumn<String?> timestamp = GeneratedColumn<String?>(
+      'timestamp', aliasedName, false,
+      typeName: 'TEXT',
+      requiredDuringInsert: false,
+      clientDefault: () =>
+          DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+  @override
+  List<GeneratedColumn> get $columns => [id, type, remark, timestamp];
+  @override
+  String get aliasedName => _alias ?? 'log';
+  @override
+  String get actualTableName => 'log';
+  @override
+  VerificationContext validateIntegrity(Insertable<Log> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    if (data.containsKey('remark')) {
+      context.handle(_remarkMeta,
+          remark.isAcceptableOrUnknown(data['remark']!, _remarkMeta));
+    } else if (isInserting) {
+      context.missing(_remarkMeta);
+    }
+    if (data.containsKey('timestamp')) {
+      context.handle(_timestampMeta,
+          timestamp.isAcceptableOrUnknown(data['timestamp']!, _timestampMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Log map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return Log.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $LogTbTable createAlias(String alias) {
+    return $LogTbTable(_db, alias);
+  }
+}
+
 abstract class _$Db extends GeneratedDatabase {
   _$Db(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $CompanyTbTable companyTb = $CompanyTbTable(this);
@@ -6090,6 +6332,7 @@ abstract class _$Db extends GeneratedDatabase {
       $BroFa2VisitMaImgTbTable(this);
   late final $BroFa2VisitWeightTbTable broFa2VisitWeightTb =
       $BroFa2VisitWeightTbTable(this);
+  late final $LogTbTable logTb = $LogTbTable(this);
   late final CompanyDao companyDao = CompanyDao(this as Db);
   late final LocationDao locationDao = LocationDao(this as Db);
   late final LocHouseDao locHouseDao = LocHouseDao(this as Db);
@@ -6117,6 +6360,7 @@ abstract class _$Db extends GeneratedDatabase {
       BroFa2VisitMaImgDao(this as Db);
   late final BroFa2VisitWeightDao broFa2VisitWeightDao =
       BroFa2VisitWeightDao(this as Db);
+  late final LogDao logDao = LogDao(this as Db);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -6140,6 +6384,7 @@ abstract class _$Db extends GeneratedDatabase {
         broFa2VisitPasgarTb,
         broFa2VisitMaTb,
         broFa2VisitMaImgTb,
-        broFa2VisitWeightTb
+        broFa2VisitWeightTb,
+        logTb
       ];
 }

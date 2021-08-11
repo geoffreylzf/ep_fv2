@@ -11,6 +11,7 @@ import 'package:ep_fv2/db/dao/bro_fa2_visit_pasgar.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_pm.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_pm_img.dart';
 import 'package:ep_fv2/db/dao/bro_fa2_visit_weight.dart';
+import 'package:ep_fv2/db/dao/log.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_do.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_fo.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_fo_selection.dart';
@@ -31,6 +32,7 @@ import 'package:ep_fv2/db/table/bro_fa2_visit_house.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_pm.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_pm_img.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_weight.dart';
+import 'package:ep_fv2/db/table/log.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_do.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_fo.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_fo_selection.dart';
@@ -79,6 +81,7 @@ LazyDatabase _openConnection() {
     BroFa2VisitMaTb,
     BroFa2VisitMaImgTb,
     BroFa2VisitWeightTb,
+    LogTb,
   ],
   daos: [
     CompanyDao,
@@ -101,6 +104,7 @@ LazyDatabase _openConnection() {
     BroFa2VisitMaDao,
     BroFa2VisitMaImgDao,
     BroFa2VisitWeightDao,
+    LogDao,
   ],
 )
 class Db extends _$Db {

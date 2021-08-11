@@ -208,43 +208,37 @@ class WeightEntry extends StatelessWidget {
               return null;
             },
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: TextFormField(
-              controller: ctrl.tecWeight,
-              focusNode: ctrl.fnWeight,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Weight (Gram)",
-                  contentPadding: const EdgeInsets.all(8),
-                  prefixIcon: Icon(FontAwesomeIcons.weight)),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Cannot blank";
+          TextFormField(
+            controller: ctrl.tecWeight,
+            focusNode: ctrl.fnWeight,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Weight (Gram)",
+                contentPadding: const EdgeInsets.all(8),
+                prefixIcon: Icon(FontAwesomeIcons.weight)),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Cannot blank";
+              }
+              if (int.tryParse(value) == null) {
+                return "Number only";
+              }
+              return null;
+            },
+          ).paddingOnly(top: 8),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              icon: Icon(Icons.arrow_back),
+              label: Text("SAVE"),
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  ctrl.insertWeight();
                 }
-                if (int.tryParse(value) == null) {
-                  return "Number only";
-                }
-                return null;
               },
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                icon: Icon(Icons.arrow_back),
-                label: Text("SAVE"),
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    ctrl.insertWeight();
-                  }
-                },
-              ),
-            ),
-          ),
+          ).paddingOnly(top: 8),
         ],
       ),
     );

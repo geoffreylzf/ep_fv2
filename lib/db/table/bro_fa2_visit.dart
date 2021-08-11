@@ -17,7 +17,6 @@ class BroFa2VisitTb extends Table {
   @JsonKey('visit_date')
   TextColumn get visitDate => text()();
 
-  @JsonKey('age')
   IntColumn get age => integer()();
 
   @JsonKey('doc_observation_bird_qty')
@@ -26,12 +25,10 @@ class BroFa2VisitTb extends Table {
   @JsonKey('post_mortem_bird_qty')
   IntColumn get postMortemBirdQty => integer().nullable()();
 
-  @JsonKey('timestamp')
   TextColumn get timestamp => text().clientDefault(
         () => DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
       )();
 
-  @JsonKey('uuid')
   TextColumn get uuid => text().clientDefault(() => Uuid().v4().replaceAll('-', ''))();
 
   @JsonKey('is_delete')

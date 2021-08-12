@@ -6056,6 +6056,337 @@ class $BroFa2VisitWeightTbTable extends BroFa2VisitWeightTb
   }
 }
 
+class BroFa2VisitRoutine extends DataClass
+    implements Insertable<BroFa2VisitRoutine> {
+  final int id;
+  final int broFa2VisitId;
+  final int broFa2RoutineId;
+  final String comment;
+  final String action;
+  final String remark;
+  BroFa2VisitRoutine(
+      {required this.id,
+      required this.broFa2VisitId,
+      required this.broFa2RoutineId,
+      required this.comment,
+      required this.action,
+      required this.remark});
+  factory BroFa2VisitRoutine.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return BroFa2VisitRoutine(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      broFa2VisitId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bro_fa2_visit_id'])!,
+      broFa2RoutineId: const IntType().mapFromDatabaseResponse(
+          data['${effectivePrefix}bro_fa2_routine_id'])!,
+      comment: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}comment'])!,
+      action: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}action'])!,
+      remark: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}remark'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId);
+    map['bro_fa2_routine_id'] = Variable<int>(broFa2RoutineId);
+    map['comment'] = Variable<String>(comment);
+    map['action'] = Variable<String>(action);
+    map['remark'] = Variable<String>(remark);
+    return map;
+  }
+
+  BroFa2VisitRoutineTbCompanion toCompanion(bool nullToAbsent) {
+    return BroFa2VisitRoutineTbCompanion(
+      id: Value(id),
+      broFa2VisitId: Value(broFa2VisitId),
+      broFa2RoutineId: Value(broFa2RoutineId),
+      comment: Value(comment),
+      action: Value(action),
+      remark: Value(remark),
+    );
+  }
+
+  factory BroFa2VisitRoutine.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return BroFa2VisitRoutine(
+      id: serializer.fromJson<int>(json['id']),
+      broFa2VisitId: serializer.fromJson<int>(json['bro_fa2_visit']),
+      broFa2RoutineId: serializer.fromJson<int>(json['bro_fa2_routine']),
+      comment: serializer.fromJson<String>(json['comment']),
+      action: serializer.fromJson<String>(json['action']),
+      remark: serializer.fromJson<String>(json['remark']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'bro_fa2_visit': serializer.toJson<int>(broFa2VisitId),
+      'bro_fa2_routine': serializer.toJson<int>(broFa2RoutineId),
+      'comment': serializer.toJson<String>(comment),
+      'action': serializer.toJson<String>(action),
+      'remark': serializer.toJson<String>(remark),
+    };
+  }
+
+  BroFa2VisitRoutine copyWith(
+          {int? id,
+          int? broFa2VisitId,
+          int? broFa2RoutineId,
+          String? comment,
+          String? action,
+          String? remark}) =>
+      BroFa2VisitRoutine(
+        id: id ?? this.id,
+        broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+        broFa2RoutineId: broFa2RoutineId ?? this.broFa2RoutineId,
+        comment: comment ?? this.comment,
+        action: action ?? this.action,
+        remark: remark ?? this.remark,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitRoutine(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('broFa2RoutineId: $broFa2RoutineId, ')
+          ..write('comment: $comment, ')
+          ..write('action: $action, ')
+          ..write('remark: $remark')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      id.hashCode,
+      $mrjc(
+          broFa2VisitId.hashCode,
+          $mrjc(
+              broFa2RoutineId.hashCode,
+              $mrjc(comment.hashCode,
+                  $mrjc(action.hashCode, remark.hashCode))))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BroFa2VisitRoutine &&
+          other.id == this.id &&
+          other.broFa2VisitId == this.broFa2VisitId &&
+          other.broFa2RoutineId == this.broFa2RoutineId &&
+          other.comment == this.comment &&
+          other.action == this.action &&
+          other.remark == this.remark);
+}
+
+class BroFa2VisitRoutineTbCompanion
+    extends UpdateCompanion<BroFa2VisitRoutine> {
+  final Value<int> id;
+  final Value<int> broFa2VisitId;
+  final Value<int> broFa2RoutineId;
+  final Value<String> comment;
+  final Value<String> action;
+  final Value<String> remark;
+  const BroFa2VisitRoutineTbCompanion({
+    this.id = const Value.absent(),
+    this.broFa2VisitId = const Value.absent(),
+    this.broFa2RoutineId = const Value.absent(),
+    this.comment = const Value.absent(),
+    this.action = const Value.absent(),
+    this.remark = const Value.absent(),
+  });
+  BroFa2VisitRoutineTbCompanion.insert({
+    this.id = const Value.absent(),
+    required int broFa2VisitId,
+    required int broFa2RoutineId,
+    required String comment,
+    required String action,
+    required String remark,
+  })  : broFa2VisitId = Value(broFa2VisitId),
+        broFa2RoutineId = Value(broFa2RoutineId),
+        comment = Value(comment),
+        action = Value(action),
+        remark = Value(remark);
+  static Insertable<BroFa2VisitRoutine> custom({
+    Expression<int>? id,
+    Expression<int>? broFa2VisitId,
+    Expression<int>? broFa2RoutineId,
+    Expression<String>? comment,
+    Expression<String>? action,
+    Expression<String>? remark,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (broFa2VisitId != null) 'bro_fa2_visit_id': broFa2VisitId,
+      if (broFa2RoutineId != null) 'bro_fa2_routine_id': broFa2RoutineId,
+      if (comment != null) 'comment': comment,
+      if (action != null) 'action': action,
+      if (remark != null) 'remark': remark,
+    });
+  }
+
+  BroFa2VisitRoutineTbCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? broFa2VisitId,
+      Value<int>? broFa2RoutineId,
+      Value<String>? comment,
+      Value<String>? action,
+      Value<String>? remark}) {
+    return BroFa2VisitRoutineTbCompanion(
+      id: id ?? this.id,
+      broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+      broFa2RoutineId: broFa2RoutineId ?? this.broFa2RoutineId,
+      comment: comment ?? this.comment,
+      action: action ?? this.action,
+      remark: remark ?? this.remark,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (broFa2VisitId.present) {
+      map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId.value);
+    }
+    if (broFa2RoutineId.present) {
+      map['bro_fa2_routine_id'] = Variable<int>(broFa2RoutineId.value);
+    }
+    if (comment.present) {
+      map['comment'] = Variable<String>(comment.value);
+    }
+    if (action.present) {
+      map['action'] = Variable<String>(action.value);
+    }
+    if (remark.present) {
+      map['remark'] = Variable<String>(remark.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitRoutineTbCompanion(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('broFa2RoutineId: $broFa2RoutineId, ')
+          ..write('comment: $comment, ')
+          ..write('action: $action, ')
+          ..write('remark: $remark')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BroFa2VisitRoutineTbTable extends BroFa2VisitRoutineTb
+    with TableInfo<$BroFa2VisitRoutineTbTable, BroFa2VisitRoutine> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $BroFa2VisitRoutineTbTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _broFa2VisitIdMeta =
+      const VerificationMeta('broFa2VisitId');
+  late final GeneratedColumn<int?> broFa2VisitId = GeneratedColumn<int?>(
+      'bro_fa2_visit_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _broFa2RoutineIdMeta =
+      const VerificationMeta('broFa2RoutineId');
+  late final GeneratedColumn<int?> broFa2RoutineId = GeneratedColumn<int?>(
+      'bro_fa2_routine_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _commentMeta = const VerificationMeta('comment');
+  late final GeneratedColumn<String?> comment = GeneratedColumn<String?>(
+      'comment', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _actionMeta = const VerificationMeta('action');
+  late final GeneratedColumn<String?> action = GeneratedColumn<String?>(
+      'action', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _remarkMeta = const VerificationMeta('remark');
+  late final GeneratedColumn<String?> remark = GeneratedColumn<String?>(
+      'remark', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, broFa2VisitId, broFa2RoutineId, comment, action, remark];
+  @override
+  String get aliasedName => _alias ?? 'bro_fa2_visit_routine';
+  @override
+  String get actualTableName => 'bro_fa2_visit_routine';
+  @override
+  VerificationContext validateIntegrity(Insertable<BroFa2VisitRoutine> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('bro_fa2_visit_id')) {
+      context.handle(
+          _broFa2VisitIdMeta,
+          broFa2VisitId.isAcceptableOrUnknown(
+              data['bro_fa2_visit_id']!, _broFa2VisitIdMeta));
+    } else if (isInserting) {
+      context.missing(_broFa2VisitIdMeta);
+    }
+    if (data.containsKey('bro_fa2_routine_id')) {
+      context.handle(
+          _broFa2RoutineIdMeta,
+          broFa2RoutineId.isAcceptableOrUnknown(
+              data['bro_fa2_routine_id']!, _broFa2RoutineIdMeta));
+    } else if (isInserting) {
+      context.missing(_broFa2RoutineIdMeta);
+    }
+    if (data.containsKey('comment')) {
+      context.handle(_commentMeta,
+          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
+    } else if (isInserting) {
+      context.missing(_commentMeta);
+    }
+    if (data.containsKey('action')) {
+      context.handle(_actionMeta,
+          action.isAcceptableOrUnknown(data['action']!, _actionMeta));
+    } else if (isInserting) {
+      context.missing(_actionMeta);
+    }
+    if (data.containsKey('remark')) {
+      context.handle(_remarkMeta,
+          remark.isAcceptableOrUnknown(data['remark']!, _remarkMeta));
+    } else if (isInserting) {
+      context.missing(_remarkMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BroFa2VisitRoutine map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return BroFa2VisitRoutine.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $BroFa2VisitRoutineTbTable createAlias(String alias) {
+    return $BroFa2VisitRoutineTbTable(_db, alias);
+  }
+}
+
 class Log extends DataClass implements Insertable<Log> {
   final int id;
   final String type;
@@ -6332,6 +6663,8 @@ abstract class _$Db extends GeneratedDatabase {
       $BroFa2VisitMaImgTbTable(this);
   late final $BroFa2VisitWeightTbTable broFa2VisitWeightTb =
       $BroFa2VisitWeightTbTable(this);
+  late final $BroFa2VisitRoutineTbTable broFa2VisitRoutineTb =
+      $BroFa2VisitRoutineTbTable(this);
   late final $LogTbTable logTb = $LogTbTable(this);
   late final CompanyDao companyDao = CompanyDao(this as Db);
   late final LocationDao locationDao = LocationDao(this as Db);
@@ -6360,6 +6693,8 @@ abstract class _$Db extends GeneratedDatabase {
       BroFa2VisitMaImgDao(this as Db);
   late final BroFa2VisitWeightDao broFa2VisitWeightDao =
       BroFa2VisitWeightDao(this as Db);
+  late final BroFa2VisitRoutineDao broFa2VisitRoutineDao =
+      BroFa2VisitRoutineDao(this as Db);
   late final LogDao logDao = LogDao(this as Db);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
@@ -6385,6 +6720,7 @@ abstract class _$Db extends GeneratedDatabase {
         broFa2VisitMaTb,
         broFa2VisitMaImgTb,
         broFa2VisitWeightTb,
+        broFa2VisitRoutineTb,
         logTb
       ];
 }

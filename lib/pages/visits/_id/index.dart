@@ -154,6 +154,7 @@ class ModuleBtnList extends StatelessWidget {
         }
 
         Map<String, VoidCallback> moduleList = {
+          "Routine": () => ctrl.openRoutine(),
           "Flock Observation": () => ctrl.openFlockObservation(),
           "Post Mortem": () => ctrl.openPostMortem(),
           "DOC Objective": () => ctrl.openDocObservation(),

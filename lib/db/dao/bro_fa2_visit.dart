@@ -114,6 +114,8 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
 
   $BroFa2VisitDoTbTable get broFa2VisitDoTb => attachedDatabase.broFa2VisitDoTb;
 
+  $BroFa2VisitRoutineTbTable get broFa2VisitRoutineTb => attachedDatabase.broFa2VisitRoutineTb;
+
   $BroFa2VisitPasgarTbTable get broFa2VisitPasgarTb => attachedDatabase.broFa2VisitPasgarTb;
 
   $BroFa2VisitWeightTbTable get broFa2VisitWeightTb => attachedDatabase.broFa2VisitWeightTb;
@@ -141,16 +143,21 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
       visitJson.remove('is_upload');
 
       /// child houses listing
-      final routineList =
+      final houseList =
           await (select(broFa2VisitHouseTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
       visitJson['houses'] =
-          routineList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
+          houseList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
 
       /// child do listing
       final doList =
           await (select(broFa2VisitDoTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
       visitJson['doc_observations'] =
           doList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
+
+      /// child routine listing
+      final routineList = await (select(broFa2VisitRoutineTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
+      visitJson['routines'] =
+          routineList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
 
       /// child pasgar listing
       final pasgarList =

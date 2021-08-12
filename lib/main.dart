@@ -24,6 +24,8 @@ import 'package:ep_fv2/pages/visits/_id/pm_id.dart';
 import 'package:ep_fv2/pages/visits/_id/pm_id_images.dart';
 import 'package:ep_fv2/pages/visits/_id/pm_id_images_id.dart';
 import 'package:ep_fv2/pages/visits/_id/pm_index.dart';
+import 'package:ep_fv2/pages/visits/_id/routine_id.dart';
+import 'package:ep_fv2/pages/visits/_id/routine_index.dart';
 import 'package:ep_fv2/pages/visits/_id/weight_index.dart';
 import 'package:ep_fv2/pages/visits/create.dart';
 import 'package:flutter/material.dart';
@@ -83,6 +85,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/visits/:id/ma/:id2/images', page: () => VisitIdMaIdImagesPage()),
         GetPage(name: '/visits/:id/ma/:id2/images/:id3', page: () => VisitIdMaIdImagesIdPage()),
         GetPage(name: '/visits/:id/weight', page: () => VisitIdWeightIndexPage()),
+        GetPage(name: '/visits/:id/routine', page: () => VisitIdRoutineIndexPage()),
+        GetPage(name: '/visits/:id/routine/:id2', page: () => VisitIdRoutineIdPage()),
       ],
     );
   }

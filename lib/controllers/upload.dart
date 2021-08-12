@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:ep_fv2/db/db.dart';
 import 'package:ep_fv2/modules/api.dart';
 import 'package:ep_fv2/utils/xanx.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Value, FormData, MultipartFile;
 import 'package:moor/moor.dart';
 

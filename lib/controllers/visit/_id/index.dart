@@ -17,6 +17,10 @@ class VisitIdIndexController extends GetxController {
     );
   }
 
+  void openRoutine() {
+    Get.toNamed("/visits/$id/routine");
+  }
+
   void openFlockObservation() {
     Get.toNamed("/visits/$id/fo");
   }

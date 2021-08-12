@@ -1,5 +1,4 @@
 import 'package:ep_fv2/controllers/upload.dart';
-import 'package:ep_fv2/db/db.dart';
 import 'package:ep_fv2/widgets/local_cb.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

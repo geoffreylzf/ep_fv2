@@ -27,4 +27,8 @@ class BroFa2RoutineDao extends DatabaseAccessor<Db> implements DaoSetupBasic<Bro
   Future<List<BroFa2Routine>> getAll() {
     return select(broFa2RoutineTb).get();
   }
+
+  Future<BroFa2Routine> getById(int id) {
+    return (select(broFa2RoutineTb)..where((tbl) => tbl.id.equals(id))).getSingle();
+  }
 }

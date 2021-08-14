@@ -4735,6 +4735,7 @@ class BroFa2VisitPasgar extends DataClass
   final int id;
   final int broFa2VisitId;
   final int order;
+  final int weight;
   final bool isChkReflex;
   final bool isChkNavel;
   final bool isChkLegs;
@@ -4744,6 +4745,7 @@ class BroFa2VisitPasgar extends DataClass
       {required this.id,
       required this.broFa2VisitId,
       required this.order,
+      required this.weight,
       required this.isChkReflex,
       required this.isChkNavel,
       required this.isChkLegs,
@@ -4760,6 +4762,8 @@ class BroFa2VisitPasgar extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}bro_fa2_visit_id'])!,
       order: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}order'])!,
+      weight: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}weight'])!,
       isChkReflex: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_chk_reflex'])!,
       isChkNavel: const BoolType()
@@ -4778,6 +4782,7 @@ class BroFa2VisitPasgar extends DataClass
     map['id'] = Variable<int>(id);
     map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId);
     map['order'] = Variable<int>(order);
+    map['weight'] = Variable<int>(weight);
     map['is_chk_reflex'] = Variable<bool>(isChkReflex);
     map['is_chk_navel'] = Variable<bool>(isChkNavel);
     map['is_chk_legs'] = Variable<bool>(isChkLegs);
@@ -4791,6 +4796,7 @@ class BroFa2VisitPasgar extends DataClass
       id: Value(id),
       broFa2VisitId: Value(broFa2VisitId),
       order: Value(order),
+      weight: Value(weight),
       isChkReflex: Value(isChkReflex),
       isChkNavel: Value(isChkNavel),
       isChkLegs: Value(isChkLegs),
@@ -4806,6 +4812,7 @@ class BroFa2VisitPasgar extends DataClass
       id: serializer.fromJson<int>(json['id']),
       broFa2VisitId: serializer.fromJson<int>(json['bro_fa2_visit']),
       order: serializer.fromJson<int>(json['order']),
+      weight: serializer.fromJson<int>(json['weight']),
       isChkReflex: serializer.fromJson<bool>(json['is_chk_reflex']),
       isChkNavel: serializer.fromJson<bool>(json['is_chk_navel']),
       isChkLegs: serializer.fromJson<bool>(json['is_chk_legs']),
@@ -4820,6 +4827,7 @@ class BroFa2VisitPasgar extends DataClass
       'id': serializer.toJson<int>(id),
       'bro_fa2_visit': serializer.toJson<int>(broFa2VisitId),
       'order': serializer.toJson<int>(order),
+      'weight': serializer.toJson<int>(weight),
       'is_chk_reflex': serializer.toJson<bool>(isChkReflex),
       'is_chk_navel': serializer.toJson<bool>(isChkNavel),
       'is_chk_legs': serializer.toJson<bool>(isChkLegs),
@@ -4832,6 +4840,7 @@ class BroFa2VisitPasgar extends DataClass
           {int? id,
           int? broFa2VisitId,
           int? order,
+          int? weight,
           bool? isChkReflex,
           bool? isChkNavel,
           bool? isChkLegs,
@@ -4841,6 +4850,7 @@ class BroFa2VisitPasgar extends DataClass
         id: id ?? this.id,
         broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
         order: order ?? this.order,
+        weight: weight ?? this.weight,
         isChkReflex: isChkReflex ?? this.isChkReflex,
         isChkNavel: isChkNavel ?? this.isChkNavel,
         isChkLegs: isChkLegs ?? this.isChkLegs,
@@ -4853,6 +4863,7 @@ class BroFa2VisitPasgar extends DataClass
           ..write('id: $id, ')
           ..write('broFa2VisitId: $broFa2VisitId, ')
           ..write('order: $order, ')
+          ..write('weight: $weight, ')
           ..write('isChkReflex: $isChkReflex, ')
           ..write('isChkNavel: $isChkNavel, ')
           ..write('isChkLegs: $isChkLegs, ')
@@ -4870,11 +4881,15 @@ class BroFa2VisitPasgar extends DataClass
           $mrjc(
               order.hashCode,
               $mrjc(
-                  isChkReflex.hashCode,
+                  weight.hashCode,
                   $mrjc(
-                      isChkNavel.hashCode,
-                      $mrjc(isChkLegs.hashCode,
-                          $mrjc(isChkBeak.hashCode, isChkBelly.hashCode))))))));
+                      isChkReflex.hashCode,
+                      $mrjc(
+                          isChkNavel.hashCode,
+                          $mrjc(
+                              isChkLegs.hashCode,
+                              $mrjc(isChkBeak.hashCode,
+                                  isChkBelly.hashCode)))))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -4882,6 +4897,7 @@ class BroFa2VisitPasgar extends DataClass
           other.id == this.id &&
           other.broFa2VisitId == this.broFa2VisitId &&
           other.order == this.order &&
+          other.weight == this.weight &&
           other.isChkReflex == this.isChkReflex &&
           other.isChkNavel == this.isChkNavel &&
           other.isChkLegs == this.isChkLegs &&
@@ -4893,6 +4909,7 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
   final Value<int> id;
   final Value<int> broFa2VisitId;
   final Value<int> order;
+  final Value<int> weight;
   final Value<bool> isChkReflex;
   final Value<bool> isChkNavel;
   final Value<bool> isChkLegs;
@@ -4902,6 +4919,7 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
     this.id = const Value.absent(),
     this.broFa2VisitId = const Value.absent(),
     this.order = const Value.absent(),
+    this.weight = const Value.absent(),
     this.isChkReflex = const Value.absent(),
     this.isChkNavel = const Value.absent(),
     this.isChkLegs = const Value.absent(),
@@ -4912,17 +4930,20 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
     this.id = const Value.absent(),
     required int broFa2VisitId,
     required int order,
+    required int weight,
     this.isChkReflex = const Value.absent(),
     this.isChkNavel = const Value.absent(),
     this.isChkLegs = const Value.absent(),
     this.isChkBeak = const Value.absent(),
     this.isChkBelly = const Value.absent(),
   })  : broFa2VisitId = Value(broFa2VisitId),
-        order = Value(order);
+        order = Value(order),
+        weight = Value(weight);
   static Insertable<BroFa2VisitPasgar> custom({
     Expression<int>? id,
     Expression<int>? broFa2VisitId,
     Expression<int>? order,
+    Expression<int>? weight,
     Expression<bool>? isChkReflex,
     Expression<bool>? isChkNavel,
     Expression<bool>? isChkLegs,
@@ -4933,6 +4954,7 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
       if (id != null) 'id': id,
       if (broFa2VisitId != null) 'bro_fa2_visit_id': broFa2VisitId,
       if (order != null) 'order': order,
+      if (weight != null) 'weight': weight,
       if (isChkReflex != null) 'is_chk_reflex': isChkReflex,
       if (isChkNavel != null) 'is_chk_navel': isChkNavel,
       if (isChkLegs != null) 'is_chk_legs': isChkLegs,
@@ -4945,6 +4967,7 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
       {Value<int>? id,
       Value<int>? broFa2VisitId,
       Value<int>? order,
+      Value<int>? weight,
       Value<bool>? isChkReflex,
       Value<bool>? isChkNavel,
       Value<bool>? isChkLegs,
@@ -4954,6 +4977,7 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
       id: id ?? this.id,
       broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
       order: order ?? this.order,
+      weight: weight ?? this.weight,
       isChkReflex: isChkReflex ?? this.isChkReflex,
       isChkNavel: isChkNavel ?? this.isChkNavel,
       isChkLegs: isChkLegs ?? this.isChkLegs,
@@ -4973,6 +4997,9 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
     }
     if (order.present) {
       map['order'] = Variable<int>(order.value);
+    }
+    if (weight.present) {
+      map['weight'] = Variable<int>(weight.value);
     }
     if (isChkReflex.present) {
       map['is_chk_reflex'] = Variable<bool>(isChkReflex.value);
@@ -4998,6 +5025,7 @@ class BroFa2VisitPasgarTbCompanion extends UpdateCompanion<BroFa2VisitPasgar> {
           ..write('id: $id, ')
           ..write('broFa2VisitId: $broFa2VisitId, ')
           ..write('order: $order, ')
+          ..write('weight: $weight, ')
           ..write('isChkReflex: $isChkReflex, ')
           ..write('isChkNavel: $isChkNavel, ')
           ..write('isChkLegs: $isChkLegs, ')
@@ -5027,6 +5055,10 @@ class $BroFa2VisitPasgarTbTable extends BroFa2VisitPasgarTb
   final VerificationMeta _orderMeta = const VerificationMeta('order');
   late final GeneratedColumn<int?> order = GeneratedColumn<int?>(
       'order', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _weightMeta = const VerificationMeta('weight');
+  late final GeneratedColumn<int?> weight = GeneratedColumn<int?>(
+      'weight', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _isChkReflexMeta =
       const VerificationMeta('isChkReflex');
@@ -5069,6 +5101,7 @@ class $BroFa2VisitPasgarTbTable extends BroFa2VisitPasgarTb
         id,
         broFa2VisitId,
         order,
+        weight,
         isChkReflex,
         isChkNavel,
         isChkLegs,
@@ -5100,6 +5133,12 @@ class $BroFa2VisitPasgarTbTable extends BroFa2VisitPasgarTb
           _orderMeta, order.isAcceptableOrUnknown(data['order']!, _orderMeta));
     } else if (isInserting) {
       context.missing(_orderMeta);
+    }
+    if (data.containsKey('weight')) {
+      context.handle(_weightMeta,
+          weight.isAcceptableOrUnknown(data['weight']!, _weightMeta));
+    } else if (isInserting) {
+      context.missing(_weightMeta);
     }
     if (data.containsKey('is_chk_reflex')) {
       context.handle(

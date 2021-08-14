@@ -1,5 +1,6 @@
 import 'package:ep_fv2/db/db.dart';
 import 'package:ep_fv2/utils/xanx.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart' hide Value;
 import 'package:moor/moor.dart';
@@ -9,6 +10,7 @@ class VisitIdPasgarOrderController extends GetxController {
   final visitId = int.parse(Get.parameters['id']!);
   final order = int.parse(Get.parameters['order']!);
 
+  final tecWeight = TextEditingController();
   final rxIsChkReflex = false.obs;
   final rxIsChkNavel = false.obs;
   final rxIsChkLegs = false.obs;
@@ -20,11 +22,18 @@ class VisitIdPasgarOrderController extends GetxController {
   final rxIsInitEnd = false.obs;
 
   @override
+  void dispose() {
+    tecWeight.dispose();
+    super.dispose();
+  }
+
+  @override
   void onInit() async {
     super.onInit();
 
     final vpg = await db.broFa2VisitPasgarDao.getByVisitIdOrder(visitId, order);
     if (vpg != null) {
+      tecWeight.text = vpg.weight.toString();
       rxIsChkReflex.value = vpg.isChkReflex;
       rxIsChkNavel.value = vpg.isChkNavel;
       rxIsChkLegs.value = vpg.isChkLegs;
@@ -40,11 +49,19 @@ class VisitIdPasgarOrderController extends GetxController {
   }
 
   void onSaveClick() async {
+    final wgt = int.tryParse(tecWeight.text);
+
+    if (wgt == null) {
+      XanX.showErrorDialog(message: "Please enter weight");
+      return;
+    }
+
     final exist = await db.broFa2VisitPasgarDao.getByVisitIdOrder(visitId, order);
     if (exist == null) {
       await db.broFa2VisitPasgarDao.insert(BroFa2VisitPasgarTbCompanion(
         broFa2VisitId: Value(visitId),
         order: Value(order),
+        weight: Value(wgt),
         isChkReflex: Value(rxIsChkReflex.value),
         isChkNavel: Value(rxIsChkNavel.value),
         isChkLegs: Value(rxIsChkLegs.value),
@@ -56,6 +73,7 @@ class VisitIdPasgarOrderController extends GetxController {
     } else {
       final isUpdated = await db.broFa2VisitPasgarDao.updateByPk(
         exist.copyWith(
+          weight: wgt,
           isChkReflex: rxIsChkReflex.value,
           isChkNavel: rxIsChkNavel.value,
           isChkLegs: rxIsChkLegs.value,

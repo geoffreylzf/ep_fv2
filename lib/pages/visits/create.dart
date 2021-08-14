@@ -127,7 +127,7 @@ class VisitCreatePage extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Select house"),
+                  Text("Select house (Please select same age house)"),
                   if (ctrl.rxSelectedHouseNoList.value.length != 0)
                     Text(ctrl.rxSelectedHouseNoList.value.join(", "))
                 ],

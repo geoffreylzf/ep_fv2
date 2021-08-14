@@ -2,6 +2,7 @@ import 'package:ep_fv2/controllers/visit/_id/pasgar_order.dart';
 import 'package:ep_fv2/widgets/form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class VisitIdPasgarOrderPage extends StatelessWidget {
@@ -12,7 +13,7 @@ class VisitIdPasgarOrderPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Pasgar Score Bird #${ctrl.order}')),
       body: Obx(() {
-        if(!ctrl.rxIsInitEnd.value){
+        if (!ctrl.rxIsInitEnd.value) {
           return Center(child: Text("Loading..."));
         }
         Map<String, RxBool> pgList = {
@@ -73,6 +74,17 @@ class VisitIdPasgarOrderPage extends StatelessWidget {
                 return rbList[idx];
               },
             ),
+            Divider(height: 1),
+            TextFormField(
+              controller: ctrl.tecWeight,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Weight (Gram)",
+                contentPadding: const EdgeInsets.all(8),
+                prefixIcon: Icon(FontAwesomeIcons.weight),
+              ),
+            ).paddingAll(8),
             Divider(thickness: 12),
             Container(
               padding: const EdgeInsets.all(16),

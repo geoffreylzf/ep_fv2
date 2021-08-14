@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="my.com.engpeng.ep_fv2">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="ep_fv2"
         android:icon="@mipmap/ic_launcher">

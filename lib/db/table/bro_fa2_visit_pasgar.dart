@@ -11,6 +11,8 @@ class BroFa2VisitPasgarTb extends Table {
 
   IntColumn get order => integer()();
 
+  IntColumn get weight => integer()();
+
   @JsonKey('is_chk_reflex')
   BoolColumn get isChkReflex => boolean().withDefault(const Constant(false))();
 

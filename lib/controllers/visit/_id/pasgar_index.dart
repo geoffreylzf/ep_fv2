@@ -8,6 +8,8 @@ class VisitIdPasgarIndexController extends GetxController {
 
   final rxVisitPasgarList = Rx<List<BroFa2VisitPasgar>>([]);
   final rxPasgarAvgScore = 0.0.obs;
+  final rxAvgWeightScore = 0.0.obs;
+  final rxTtlCount = 0.obs;
 
   @override
   void onInit() async {
@@ -18,26 +20,30 @@ class VisitIdPasgarIndexController extends GetxController {
       if (vpgList.length == 0) {
         rxPasgarAvgScore.value = 0.0;
       } else {
-        double ttl = 0.0;
+        double ttlScore = 0.0;
+        double ttlWeight = 0.0;
         vpgList.forEach((vpg) {
-          ttl += 10;
+          ttlWeight += vpg.weight;
+          ttlScore += 10;
           if (vpg.isChkReflex) {
-            ttl -= 1;
+            ttlScore -= 1;
           }
           if (vpg.isChkNavel) {
-            ttl -= 1;
+            ttlScore -= 1;
           }
           if (vpg.isChkLegs) {
-            ttl -= 1;
+            ttlScore -= 1;
           }
           if (vpg.isChkBeak) {
-            ttl -= 1;
+            ttlScore -= 1;
           }
           if (vpg.isChkBelly) {
-            ttl -= 1;
+            ttlScore -= 1;
           }
         });
-        rxPasgarAvgScore.value = ttl / vpgList.length;
+        rxTtlCount.value = vpgList.length;
+        rxPasgarAvgScore.value = ttlScore / vpgList.length;
+        rxAvgWeightScore.value = ttlWeight / vpgList.length;
       }
     });
   }

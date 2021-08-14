@@ -73,17 +73,17 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
     """,
       readsFrom: {broFa2VisitTb, broFa2VisitHouseTb},
     ).watch().map((r) {
-      return r
-          .map((r2) => BroFa2VisitWithData(
-                broFa2Visit: BroFa2Visit.fromData(r2.data, this.attachedDatabase),
-                companyCode: r2.read("company_code"),
-                companyName: r2.read("company_name"),
-                locationCode: r2.read("location_code"),
-                locationName: r2.read("location_name"),
-                houseNoList:
-                    r2.read<String>("houseNoList").split(",").map((x) => int.parse(x)).toList(),
-              ))
-          .toList();
+      return r.map((r2) {
+        final hseListStr = r2.read<String?>("houseNoList");
+        return BroFa2VisitWithData(
+          broFa2Visit: BroFa2Visit.fromData(r2.data, this.attachedDatabase),
+          companyCode: r2.read("company_code"),
+          companyName: r2.read("company_name"),
+          locationCode: r2.read("location_code"),
+          locationName: r2.read("location_name"),
+          houseNoList: hseListStr?.split(",").map((x) => int.parse(x)).toList() ?? [],
+        );
+      }).toList();
     });
   }
 
@@ -155,7 +155,8 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
           doList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
 
       /// child routine listing
-      final routineList = await (select(broFa2VisitRoutineTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
+      final routineList =
+          await (select(broFa2VisitRoutineTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
       visitJson['routines'] =
           routineList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
 

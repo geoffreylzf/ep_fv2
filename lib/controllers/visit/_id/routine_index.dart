@@ -1,3 +1,4 @@
+import 'package:ep_fv2/db/dao/bro_fa2_visit_routine.dart';
 import 'package:ep_fv2/db/db.dart';
 import 'package:ep_fv2/utils/xanx.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,7 @@ class VisitIdRoutineIndexController extends GetxController {
   final visitId = int.parse(Get.parameters['id']!);
 
   final rxRoutineList = Rx<List<BroFa2Routine>>([]);
-  final rxVisitRoutineList = Rx<List<BroFa2VisitRoutine>>([]);
+  final rxVisitRoutineList = Rx<List<BroFa2VisitRoutineWithData>>([]);
 
   @override
   void onInit() async {

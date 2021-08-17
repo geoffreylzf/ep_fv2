@@ -11,6 +11,7 @@ class VisitIdRoutineIdController extends GetxController {
   final routineId = int.parse(Get.parameters['id2']!);
 
   final rxRoutine = Rxn<BroFa2Routine>();
+  final rxImgCount = 0.obs;
 
   final tecComment = TextEditingController();
   final tecAction = TextEditingController();
@@ -39,6 +40,10 @@ class VisitIdRoutineIdController extends GetxController {
       tecAction.text = vr.action;
       tecRemark.text = vr.remark;
     }
+
+    db.broFa2VisitRoutineImgDao.watchAllByVisitRoutineId(vrId).listen((imgList) {
+      rxImgCount.value = imgList.length;
+    });
   }
 
   @override
@@ -46,6 +51,10 @@ class VisitIdRoutineIdController extends GetxController {
     tecComment.dispose();
     tecAction.dispose();
     tecRemark.dispose();
+  }
+
+  Future<void> onImgButtonClick() async {
+    Get.toNamed("${Get.currentRoute}/images");
   }
 
   Future<void> onSaveButtonClick() async {

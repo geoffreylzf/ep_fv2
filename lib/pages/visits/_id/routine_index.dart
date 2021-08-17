@@ -35,17 +35,17 @@ class VisitIdRoutineIndexPage extends StatelessWidget {
 
                     final vdList = ctrl.rxVisitRoutineList.value;
                     final vd = vdList.firstWhereOrNull(
-                      (x) => x.broFa2RoutineId == dob.id,
+                      (x) => x.broFa2VisitRoutine.broFa2RoutineId == dob.id,
                     );
 
                     if (vd != null) {
-                      if (vd.comment.isNotEmpty) {
+                      if (vd.broFa2VisitRoutine.comment.isNotEmpty) {
                         widgetList.add(Row(
                           children: [
                             Icon(Icons.comment, size: 16, color: Colors.grey).paddingOnly(right: 4),
                             Flexible(
                               child: Text(
-                                vd.comment,
+                                vd.broFa2VisitRoutine.comment,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -53,13 +53,13 @@ class VisitIdRoutineIndexPage extends StatelessWidget {
                         ));
                       }
 
-                      if (vd.action.isNotEmpty) {
+                      if (vd.broFa2VisitRoutine.action.isNotEmpty) {
                         widgetList.add(Row(
                           children: [
                             Icon(Icons.task, size: 16, color: Colors.grey).paddingOnly(right: 4),
                             Flexible(
                               child: Text(
-                                vd.action,
+                                vd.broFa2VisitRoutine.action,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -67,14 +67,14 @@ class VisitIdRoutineIndexPage extends StatelessWidget {
                         ));
                       }
 
-                      if (vd.remark.isNotEmpty) {
+                      if (vd.broFa2VisitRoutine.remark.isNotEmpty) {
                         widgetList.add(Row(
                           children: [
                             Icon(Icons.feedback, size: 16, color: Colors.grey)
                                 .paddingOnly(right: 4),
                             Flexible(
                               child: Text(
-                                vd.remark,
+                                vd.broFa2VisitRoutine.remark,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -86,9 +86,20 @@ class VisitIdRoutineIndexPage extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          no.toString() + ". " + dob.name,
-                          style: TextStyle(fontSize: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              no.toString() + ". " + dob.name,
+                              style: TextStyle(fontSize: 16),
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.image_outlined).paddingOnly(right: 4),
+                                Text(vd?.imgCount.toString() ?? "0"),
+                              ],
+                            ),
+                          ],
                         ),
                         ...widgetList
                       ],

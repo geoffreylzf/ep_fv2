@@ -1,5 +1,6 @@
 import 'package:ep_fv2/controllers/visit/_id/weight_index.dart';
 import 'package:ep_fv2/utils/enum.dart';
+import 'package:ep_fv2/widgets/form.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -28,10 +29,10 @@ class VisitIdWeightIndexPage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(flex: 4, child: WeightShortList()),
+              Expanded(flex: 5, child: WeightShortList()),
               VerticalDivider(width: 0),
               Expanded(
-                  flex: 6,
+                  flex: 5,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: WeightEntry(),
@@ -58,9 +59,10 @@ class WeightShortList extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Expanded(flex: 2, child: ListHeader("#")),
-                Expanded(flex: 1, child: ListHeader("G#")),
-                Expanded(flex: 4, child: ListHeader("Wgt"))
+                Expanded(flex: 1, child: ListHeader("#")),
+                Expanded(flex: 2, child: ListHeader("H#")),
+                Expanded(flex: 2, child: ListHeader("G#")),
+                Expanded(flex: 3, child: ListHeader("Wgt(g)"))
               ],
             ),
           ),
@@ -89,7 +91,7 @@ class WeightShortList extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: Text(
                             no.toString(),
                             textAlign: TextAlign.center,
@@ -97,14 +99,21 @@ class WeightShortList extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                            flex: 1,
+                            flex: 2,
+                            child: Text(
+                              temp.houseNo.toString(),
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 12),
+                            )),
+                        Expanded(
+                            flex: 2,
                             child: Text(
                               temp.gender.toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 12),
                             )),
                         Expanded(
-                            flex: 4,
+                            flex: 3,
                             child: Text(
                               temp.weight.toString(),
                               textAlign: TextAlign.center,
@@ -134,6 +143,30 @@ class WeightEntry extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          FormItemTitle("House No"),
+          Obx(
+            () => DropdownButton<int>(
+              hint: Text("House No"),
+              isExpanded: true,
+              elevation: 16,
+              value: ctrl.rxSelectedHouseNo.value,
+              onChanged: (v) {
+                ctrl.rxSelectedHouseNo.value = v;
+              },
+              underline: Container(
+                height: 2,
+                color: Theme.of(context).primaryColorLight,
+              ),
+              items: ctrl.rxHouseNoList.value.map(
+                (r) {
+                  return DropdownMenuItem(
+                    value: r,
+                    child: Text(r.toString()),
+                  );
+                },
+              ).toList(),
+            ),
+          ),
           TextFormField(
             controller: ctrl.tecSection,
             keyboardType: TextInputType.number,
@@ -259,6 +292,7 @@ class WeightSummary extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(flex: 1, child: ListHeader("#")),
+                Expanded(flex: 2, child: ListHeader("House")),
                 Expanded(flex: 2, child: ListHeader("Section")),
                 Expanded(flex: 2, child: ListHeader("Gender")),
                 Expanded(flex: 2, child: ListHeader("Quantity")),
@@ -268,7 +302,7 @@ class WeightSummary extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Obx((){
+          child: Obx(() {
             final list = ctrl.rxVisitWeightList.value;
             if (list.length == 0) {
               return Text("No Data");
@@ -331,9 +365,11 @@ class WeightSummary extends StatelessWidget {
                               flex: 1, child: Text(no.toString(), textAlign: TextAlign.center)),
                           Expanded(
                               flex: 2,
-                              child: Text(temp.section.toString(), textAlign: TextAlign.center)),
+                              child: Text(temp.houseNo.toString(), textAlign: TextAlign.center)),
                           Expanded(
-                              flex: 2, child: Text(temp.gender, textAlign: TextAlign.center)),
+                              flex: 2,
+                              child: Text(temp.section.toString(), textAlign: TextAlign.center)),
+                          Expanded(flex: 2, child: Text(temp.gender, textAlign: TextAlign.center)),
                           Expanded(
                               flex: 2,
                               child: Text(temp.qty.toString(), textAlign: TextAlign.center)),

@@ -15,14 +15,27 @@ class VisitIdRoutineIdPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                icon: Icon(Icons.save),
-                label: Text("SAVE"),
-                onPressed: () => ctrl.onSaveButtonClick(),
-              ),
-            ).paddingOnly(top: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton.icon(
+                    icon: Icon(Icons.image_outlined),
+                    label: Obx(() => Text("IMAGE (" + ctrl.rxImgCount.value.toString() + ")")),
+                    onPressed: () => ctrl.onImgButtonClick(),
+                  ),
+                ),
+                Container(
+                  width: 8,
+                ),
+                Expanded(
+                  child: ElevatedButton.icon(
+                    icon: Icon(Icons.save),
+                    label: Text("SAVE"),
+                    onPressed: () => ctrl.onSaveButtonClick(),
+                  ),
+                ),
+              ],
+            ),
             Container(height: 8),
             TextField(
               controller: ctrl.tecComment,

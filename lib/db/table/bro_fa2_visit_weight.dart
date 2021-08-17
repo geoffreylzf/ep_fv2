@@ -9,6 +9,9 @@ class BroFa2VisitWeightTb extends Table {
   @JsonKey('bro_fa2_visit')
   IntColumn get broFa2VisitId => integer()();
 
+  @JsonKey('house_no')
+  IntColumn get houseNo => integer()();
+
   IntColumn get section => integer()();
 
   IntColumn get weight => integer()();

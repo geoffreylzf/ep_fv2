@@ -5774,6 +5774,7 @@ class BroFa2VisitWeight extends DataClass
     implements Insertable<BroFa2VisitWeight> {
   final int id;
   final int broFa2VisitId;
+  final int houseNo;
   final int section;
   final int weight;
   final int qty;
@@ -5781,6 +5782,7 @@ class BroFa2VisitWeight extends DataClass
   BroFa2VisitWeight(
       {required this.id,
       required this.broFa2VisitId,
+      required this.houseNo,
       required this.section,
       required this.weight,
       required this.qty,
@@ -5794,6 +5796,8 @@ class BroFa2VisitWeight extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
       broFa2VisitId: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}bro_fa2_visit_id'])!,
+      houseNo: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}house_no'])!,
       section: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}section'])!,
       weight: const IntType()
@@ -5809,6 +5813,7 @@ class BroFa2VisitWeight extends DataClass
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId);
+    map['house_no'] = Variable<int>(houseNo);
     map['section'] = Variable<int>(section);
     map['weight'] = Variable<int>(weight);
     map['qty'] = Variable<int>(qty);
@@ -5820,6 +5825,7 @@ class BroFa2VisitWeight extends DataClass
     return BroFa2VisitWeightTbCompanion(
       id: Value(id),
       broFa2VisitId: Value(broFa2VisitId),
+      houseNo: Value(houseNo),
       section: Value(section),
       weight: Value(weight),
       qty: Value(qty),
@@ -5833,6 +5839,7 @@ class BroFa2VisitWeight extends DataClass
     return BroFa2VisitWeight(
       id: serializer.fromJson<int>(json['id']),
       broFa2VisitId: serializer.fromJson<int>(json['bro_fa2_visit']),
+      houseNo: serializer.fromJson<int>(json['house_no']),
       section: serializer.fromJson<int>(json['section']),
       weight: serializer.fromJson<int>(json['weight']),
       qty: serializer.fromJson<int>(json['qty']),
@@ -5845,6 +5852,7 @@ class BroFa2VisitWeight extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'bro_fa2_visit': serializer.toJson<int>(broFa2VisitId),
+      'house_no': serializer.toJson<int>(houseNo),
       'section': serializer.toJson<int>(section),
       'weight': serializer.toJson<int>(weight),
       'qty': serializer.toJson<int>(qty),
@@ -5855,6 +5863,7 @@ class BroFa2VisitWeight extends DataClass
   BroFa2VisitWeight copyWith(
           {int? id,
           int? broFa2VisitId,
+          int? houseNo,
           int? section,
           int? weight,
           int? qty,
@@ -5862,6 +5871,7 @@ class BroFa2VisitWeight extends DataClass
       BroFa2VisitWeight(
         id: id ?? this.id,
         broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+        houseNo: houseNo ?? this.houseNo,
         section: section ?? this.section,
         weight: weight ?? this.weight,
         qty: qty ?? this.qty,
@@ -5872,6 +5882,7 @@ class BroFa2VisitWeight extends DataClass
     return (StringBuffer('BroFa2VisitWeight(')
           ..write('id: $id, ')
           ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('houseNo: $houseNo, ')
           ..write('section: $section, ')
           ..write('weight: $weight, ')
           ..write('qty: $qty, ')
@@ -5885,14 +5896,19 @@ class BroFa2VisitWeight extends DataClass
       id.hashCode,
       $mrjc(
           broFa2VisitId.hashCode,
-          $mrjc(section.hashCode,
-              $mrjc(weight.hashCode, $mrjc(qty.hashCode, gender.hashCode))))));
+          $mrjc(
+              houseNo.hashCode,
+              $mrjc(
+                  section.hashCode,
+                  $mrjc(weight.hashCode,
+                      $mrjc(qty.hashCode, gender.hashCode)))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is BroFa2VisitWeight &&
           other.id == this.id &&
           other.broFa2VisitId == this.broFa2VisitId &&
+          other.houseNo == this.houseNo &&
           other.section == this.section &&
           other.weight == this.weight &&
           other.qty == this.qty &&
@@ -5902,6 +5918,7 @@ class BroFa2VisitWeight extends DataClass
 class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
   final Value<int> id;
   final Value<int> broFa2VisitId;
+  final Value<int> houseNo;
   final Value<int> section;
   final Value<int> weight;
   final Value<int> qty;
@@ -5909,6 +5926,7 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
   const BroFa2VisitWeightTbCompanion({
     this.id = const Value.absent(),
     this.broFa2VisitId = const Value.absent(),
+    this.houseNo = const Value.absent(),
     this.section = const Value.absent(),
     this.weight = const Value.absent(),
     this.qty = const Value.absent(),
@@ -5917,11 +5935,13 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
   BroFa2VisitWeightTbCompanion.insert({
     this.id = const Value.absent(),
     required int broFa2VisitId,
+    required int houseNo,
     required int section,
     required int weight,
     required int qty,
     required String gender,
   })  : broFa2VisitId = Value(broFa2VisitId),
+        houseNo = Value(houseNo),
         section = Value(section),
         weight = Value(weight),
         qty = Value(qty),
@@ -5929,6 +5949,7 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
   static Insertable<BroFa2VisitWeight> custom({
     Expression<int>? id,
     Expression<int>? broFa2VisitId,
+    Expression<int>? houseNo,
     Expression<int>? section,
     Expression<int>? weight,
     Expression<int>? qty,
@@ -5937,6 +5958,7 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (broFa2VisitId != null) 'bro_fa2_visit_id': broFa2VisitId,
+      if (houseNo != null) 'house_no': houseNo,
       if (section != null) 'section': section,
       if (weight != null) 'weight': weight,
       if (qty != null) 'qty': qty,
@@ -5947,6 +5969,7 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
   BroFa2VisitWeightTbCompanion copyWith(
       {Value<int>? id,
       Value<int>? broFa2VisitId,
+      Value<int>? houseNo,
       Value<int>? section,
       Value<int>? weight,
       Value<int>? qty,
@@ -5954,6 +5977,7 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
     return BroFa2VisitWeightTbCompanion(
       id: id ?? this.id,
       broFa2VisitId: broFa2VisitId ?? this.broFa2VisitId,
+      houseNo: houseNo ?? this.houseNo,
       section: section ?? this.section,
       weight: weight ?? this.weight,
       qty: qty ?? this.qty,
@@ -5969,6 +5993,9 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
     }
     if (broFa2VisitId.present) {
       map['bro_fa2_visit_id'] = Variable<int>(broFa2VisitId.value);
+    }
+    if (houseNo.present) {
+      map['house_no'] = Variable<int>(houseNo.value);
     }
     if (section.present) {
       map['section'] = Variable<int>(section.value);
@@ -5990,6 +6017,7 @@ class BroFa2VisitWeightTbCompanion extends UpdateCompanion<BroFa2VisitWeight> {
     return (StringBuffer('BroFa2VisitWeightTbCompanion(')
           ..write('id: $id, ')
           ..write('broFa2VisitId: $broFa2VisitId, ')
+          ..write('houseNo: $houseNo, ')
           ..write('section: $section, ')
           ..write('weight: $weight, ')
           ..write('qty: $qty, ')
@@ -6015,6 +6043,10 @@ class $BroFa2VisitWeightTbTable extends BroFa2VisitWeightTb
   late final GeneratedColumn<int?> broFa2VisitId = GeneratedColumn<int?>(
       'bro_fa2_visit_id', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _houseNoMeta = const VerificationMeta('houseNo');
+  late final GeneratedColumn<int?> houseNo = GeneratedColumn<int?>(
+      'house_no', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
   final VerificationMeta _sectionMeta = const VerificationMeta('section');
   late final GeneratedColumn<int?> section = GeneratedColumn<int?>(
       'section', aliasedName, false,
@@ -6033,7 +6065,7 @@ class $BroFa2VisitWeightTbTable extends BroFa2VisitWeightTb
       typeName: 'TEXT', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, broFa2VisitId, section, weight, qty, gender];
+      [id, broFa2VisitId, houseNo, section, weight, qty, gender];
   @override
   String get aliasedName => _alias ?? 'bro_fa2_visit_weight';
   @override
@@ -6053,6 +6085,12 @@ class $BroFa2VisitWeightTbTable extends BroFa2VisitWeightTb
               data['bro_fa2_visit_id']!, _broFa2VisitIdMeta));
     } else if (isInserting) {
       context.missing(_broFa2VisitIdMeta);
+    }
+    if (data.containsKey('house_no')) {
+      context.handle(_houseNoMeta,
+          houseNo.isAcceptableOrUnknown(data['house_no']!, _houseNoMeta));
+    } else if (isInserting) {
+      context.missing(_houseNoMeta);
     }
     if (data.containsKey('section')) {
       context.handle(_sectionMeta,
@@ -6426,6 +6464,267 @@ class $BroFa2VisitRoutineTbTable extends BroFa2VisitRoutineTb
   }
 }
 
+class BroFa2VisitRoutineImg extends DataClass
+    implements Insertable<BroFa2VisitRoutineImg> {
+  final int id;
+  final int broFa2VisitRoutineId;
+  final String path;
+
+  /// This field is use to store the id of picture upload,
+  /// after that upload to server by using this id
+  final int? serverId;
+  BroFa2VisitRoutineImg(
+      {required this.id,
+      required this.broFa2VisitRoutineId,
+      required this.path,
+      this.serverId});
+  factory BroFa2VisitRoutineImg.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return BroFa2VisitRoutineImg(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      broFa2VisitRoutineId: const IntType().mapFromDatabaseResponse(
+          data['${effectivePrefix}bro_fa2_visit_routine_id'])!,
+      path: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}path'])!,
+      serverId: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}server_id']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['bro_fa2_visit_routine_id'] = Variable<int>(broFa2VisitRoutineId);
+    map['path'] = Variable<String>(path);
+    if (!nullToAbsent || serverId != null) {
+      map['server_id'] = Variable<int?>(serverId);
+    }
+    return map;
+  }
+
+  BroFa2VisitRoutineImgTbCompanion toCompanion(bool nullToAbsent) {
+    return BroFa2VisitRoutineImgTbCompanion(
+      id: Value(id),
+      broFa2VisitRoutineId: Value(broFa2VisitRoutineId),
+      path: Value(path),
+      serverId: serverId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(serverId),
+    );
+  }
+
+  factory BroFa2VisitRoutineImg.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return BroFa2VisitRoutineImg(
+      id: serializer.fromJson<int>(json['id']),
+      broFa2VisitRoutineId:
+          serializer.fromJson<int>(json['bro_fa2_visit_routine']),
+      path: serializer.fromJson<String>(json['path']),
+      serverId: serializer.fromJson<int?>(json['bro_fa2_visit_img_path']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'bro_fa2_visit_routine': serializer.toJson<int>(broFa2VisitRoutineId),
+      'path': serializer.toJson<String>(path),
+      'bro_fa2_visit_img_path': serializer.toJson<int?>(serverId),
+    };
+  }
+
+  BroFa2VisitRoutineImg copyWith(
+          {int? id, int? broFa2VisitRoutineId, String? path, int? serverId}) =>
+      BroFa2VisitRoutineImg(
+        id: id ?? this.id,
+        broFa2VisitRoutineId: broFa2VisitRoutineId ?? this.broFa2VisitRoutineId,
+        path: path ?? this.path,
+        serverId: serverId ?? this.serverId,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitRoutineImg(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitRoutineId: $broFa2VisitRoutineId, ')
+          ..write('path: $path, ')
+          ..write('serverId: $serverId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      id.hashCode,
+      $mrjc(broFa2VisitRoutineId.hashCode,
+          $mrjc(path.hashCode, serverId.hashCode))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BroFa2VisitRoutineImg &&
+          other.id == this.id &&
+          other.broFa2VisitRoutineId == this.broFa2VisitRoutineId &&
+          other.path == this.path &&
+          other.serverId == this.serverId);
+}
+
+class BroFa2VisitRoutineImgTbCompanion
+    extends UpdateCompanion<BroFa2VisitRoutineImg> {
+  final Value<int> id;
+  final Value<int> broFa2VisitRoutineId;
+  final Value<String> path;
+  final Value<int?> serverId;
+  const BroFa2VisitRoutineImgTbCompanion({
+    this.id = const Value.absent(),
+    this.broFa2VisitRoutineId = const Value.absent(),
+    this.path = const Value.absent(),
+    this.serverId = const Value.absent(),
+  });
+  BroFa2VisitRoutineImgTbCompanion.insert({
+    this.id = const Value.absent(),
+    required int broFa2VisitRoutineId,
+    required String path,
+    this.serverId = const Value.absent(),
+  })  : broFa2VisitRoutineId = Value(broFa2VisitRoutineId),
+        path = Value(path);
+  static Insertable<BroFa2VisitRoutineImg> custom({
+    Expression<int>? id,
+    Expression<int>? broFa2VisitRoutineId,
+    Expression<String>? path,
+    Expression<int?>? serverId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (broFa2VisitRoutineId != null)
+        'bro_fa2_visit_routine_id': broFa2VisitRoutineId,
+      if (path != null) 'path': path,
+      if (serverId != null) 'server_id': serverId,
+    });
+  }
+
+  BroFa2VisitRoutineImgTbCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? broFa2VisitRoutineId,
+      Value<String>? path,
+      Value<int?>? serverId}) {
+    return BroFa2VisitRoutineImgTbCompanion(
+      id: id ?? this.id,
+      broFa2VisitRoutineId: broFa2VisitRoutineId ?? this.broFa2VisitRoutineId,
+      path: path ?? this.path,
+      serverId: serverId ?? this.serverId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (broFa2VisitRoutineId.present) {
+      map['bro_fa2_visit_routine_id'] =
+          Variable<int>(broFa2VisitRoutineId.value);
+    }
+    if (path.present) {
+      map['path'] = Variable<String>(path.value);
+    }
+    if (serverId.present) {
+      map['server_id'] = Variable<int?>(serverId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BroFa2VisitRoutineImgTbCompanion(')
+          ..write('id: $id, ')
+          ..write('broFa2VisitRoutineId: $broFa2VisitRoutineId, ')
+          ..write('path: $path, ')
+          ..write('serverId: $serverId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BroFa2VisitRoutineImgTbTable extends BroFa2VisitRoutineImgTb
+    with TableInfo<$BroFa2VisitRoutineImgTbTable, BroFa2VisitRoutineImg> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $BroFa2VisitRoutineImgTbTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _broFa2VisitRoutineIdMeta =
+      const VerificationMeta('broFa2VisitRoutineId');
+  late final GeneratedColumn<int?> broFa2VisitRoutineId = GeneratedColumn<int?>(
+      'bro_fa2_visit_routine_id', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _pathMeta = const VerificationMeta('path');
+  late final GeneratedColumn<String?> path = GeneratedColumn<String?>(
+      'path', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _serverIdMeta = const VerificationMeta('serverId');
+  late final GeneratedColumn<int?> serverId = GeneratedColumn<int?>(
+      'server_id', aliasedName, true,
+      typeName: 'INTEGER', requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, broFa2VisitRoutineId, path, serverId];
+  @override
+  String get aliasedName => _alias ?? 'bro_fa2_visit_routine_img';
+  @override
+  String get actualTableName => 'bro_fa2_visit_routine_img';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<BroFa2VisitRoutineImg> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('bro_fa2_visit_routine_id')) {
+      context.handle(
+          _broFa2VisitRoutineIdMeta,
+          broFa2VisitRoutineId.isAcceptableOrUnknown(
+              data['bro_fa2_visit_routine_id']!, _broFa2VisitRoutineIdMeta));
+    } else if (isInserting) {
+      context.missing(_broFa2VisitRoutineIdMeta);
+    }
+    if (data.containsKey('path')) {
+      context.handle(
+          _pathMeta, path.isAcceptableOrUnknown(data['path']!, _pathMeta));
+    } else if (isInserting) {
+      context.missing(_pathMeta);
+    }
+    if (data.containsKey('server_id')) {
+      context.handle(_serverIdMeta,
+          serverId.isAcceptableOrUnknown(data['server_id']!, _serverIdMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BroFa2VisitRoutineImg map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return BroFa2VisitRoutineImg.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $BroFa2VisitRoutineImgTbTable createAlias(String alias) {
+    return $BroFa2VisitRoutineImgTbTable(_db, alias);
+  }
+}
+
 class Log extends DataClass implements Insertable<Log> {
   final int id;
   final String type;
@@ -6704,6 +7003,8 @@ abstract class _$Db extends GeneratedDatabase {
       $BroFa2VisitWeightTbTable(this);
   late final $BroFa2VisitRoutineTbTable broFa2VisitRoutineTb =
       $BroFa2VisitRoutineTbTable(this);
+  late final $BroFa2VisitRoutineImgTbTable broFa2VisitRoutineImgTb =
+      $BroFa2VisitRoutineImgTbTable(this);
   late final $LogTbTable logTb = $LogTbTable(this);
   late final CompanyDao companyDao = CompanyDao(this as Db);
   late final LocationDao locationDao = LocationDao(this as Db);
@@ -6734,6 +7035,8 @@ abstract class _$Db extends GeneratedDatabase {
       BroFa2VisitWeightDao(this as Db);
   late final BroFa2VisitRoutineDao broFa2VisitRoutineDao =
       BroFa2VisitRoutineDao(this as Db);
+  late final BroFa2VisitRoutineImgDao broFa2VisitRoutineImgDao =
+      BroFa2VisitRoutineImgDao(this as Db);
   late final LogDao logDao = LogDao(this as Db);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
@@ -6760,6 +7063,7 @@ abstract class _$Db extends GeneratedDatabase {
         broFa2VisitMaImgTb,
         broFa2VisitWeightTb,
         broFa2VisitRoutineTb,
+        broFa2VisitRoutineImgTb,
         logTb
       ];
 }

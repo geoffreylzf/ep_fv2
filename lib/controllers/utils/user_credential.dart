@@ -91,6 +91,9 @@ class UserCredentialController extends GetxController {
       print("Exceed $exceed minutes, token is refreshing");
       print("-----------------------------");
       await retrieveToken();
+      print("-----------------------------");
+      print("New token is retrieved");
+      print("-----------------------------");
       return _token!;
     } else {
       return _token!;

@@ -23,6 +23,7 @@ import 'package:ep_fv2/db/dao/setup/bro_fa2_routine.dart';
 import 'package:ep_fv2/db/dao/setup/company.dart';
 import 'package:ep_fv2/db/dao/setup/loc_house.dart';
 import 'package:ep_fv2/db/dao/setup/location.dart';
+import 'package:ep_fv2/db/dao/util.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_do.dart';
 import 'package:ep_fv2/db/table/bro_fa2_visit_ma.dart';
@@ -113,6 +114,7 @@ LazyDatabase _openConnection() {
     BroFa2VisitRoutineDao,
     BroFa2VisitRoutineImgDao,
     LogDao,
+    UtilDao,
   ],
 )
 class Db extends _$Db {

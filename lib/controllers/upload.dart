@@ -11,7 +11,8 @@ class UploadController extends GetxController {
   final db = XanX.db();
 
   final rxLogList = Rx<List<Log>>([]);
-  final rxNotYetUploadCount = 0.obs;
+  final rxVisitNotYetUploadCount = 0.obs;
+  final rxImgNotYetUploadCount = 0.obs;
 
   @override
   void onInit() async {
@@ -21,8 +22,12 @@ class UploadController extends GetxController {
       rxLogList.value = logList;
     });
     db.broFa2VisitDao.watchCountByUpload().listen((cnt) {
-      rxNotYetUploadCount.value = cnt;
+      rxVisitNotYetUploadCount.value = cnt;
     });
+    db.utilDao.watchImgNotYetUploadCount().listen((x) {
+      rxImgNotYetUploadCount.value = x;
+    });
+
   }
 
   Future<void> upload() async {

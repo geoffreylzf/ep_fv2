@@ -53,9 +53,20 @@ class UploadStatus extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text("Not yet upload image").paddingOnly(bottom: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Obx(() => Text(
+              ctrl.rxImgNotYetUploadCount.toString(),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            )),
+            Icon(Icons.image_outlined),
+          ],
+        ).paddingOnly(bottom: 36),
         Text("Pending not yet upload data"),
         Obx(() => Text(
-              ctrl.rxNotYetUploadCount.toString(),
+              ctrl.rxVisitNotYetUploadCount.toString(),
               style: TextStyle(fontSize: 200),
             )),
         ElevatedButton.icon(

@@ -157,7 +157,7 @@ class ModuleBtnList extends StatelessWidget {
           "Routine": () => ctrl.openRoutine(),
           "Flock Observation": () => ctrl.openFlockObservation(),
           "Post Mortem": () => ctrl.openPostMortem(),
-          "DOC Objective": () => ctrl.openDocObservation(),
+          "DOC Observation": () => ctrl.openDocObservation(),
           "Pasgar Score": () => ctrl.openPasgar(),
           "Management Audit": () => ctrl.openManagementAudit(),
           "Weight": () => ctrl.openWeight(),

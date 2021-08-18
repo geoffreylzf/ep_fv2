@@ -116,6 +116,9 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
 
   $BroFa2VisitRoutineTbTable get broFa2VisitRoutineTb => attachedDatabase.broFa2VisitRoutineTb;
 
+  $BroFa2VisitRoutineImgTbTable get broFa2VisitRoutineImgTb =>
+      attachedDatabase.broFa2VisitRoutineImgTb;
+
   $BroFa2VisitPasgarTbTable get broFa2VisitPasgarTb => attachedDatabase.broFa2VisitPasgarTb;
 
   $BroFa2VisitWeightTbTable get broFa2VisitWeightTb => attachedDatabase.broFa2VisitWeightTb;
@@ -154,12 +157,6 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
       visitJson['doc_observations'] =
           doList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
 
-      /// child routine listing
-      final routineList =
-          await (select(broFa2VisitRoutineTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
-      visitJson['routines'] =
-          routineList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
-
       /// child pasgar listing
       final pasgarList =
           await (select(broFa2VisitPasgarTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
@@ -171,6 +168,29 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
           await (select(broFa2VisitWeightTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
       visitJson['weights'] =
           weightList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
+
+      /// child routine listing
+      final routineList =
+          await (select(broFa2VisitRoutineTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
+      final routineJsonList = <Map<String, dynamic>>[];
+
+      await Future.forEach<BroFa2VisitRoutine>(routineList, (rt) async {
+        final rtId = rt.id;
+        final rtJson = rt.toJson();
+        rtJson.remove('id');
+        rtJson.remove('bro_fa2_visit');
+
+        /// Filter those image without server_id
+        final imageList = await (select(broFa2VisitRoutineImgTb)
+              ..where((tbl) => tbl.broFa2VisitRoutineId.equals(rtId) & tbl.serverId.isNotNull()))
+            .get();
+        rtJson['images'] = imageList.map((r) {
+          return {'bro_fa2_visit_img_path': r.serverId};
+        }).toList();
+
+        routineJsonList.add(rtJson);
+      });
+      visitJson['routines'] = routineJsonList;
 
       /// child fo listing
       final foList =

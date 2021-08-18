@@ -38,6 +38,26 @@ class UploadController extends GetxController {
     try {
       XanX.showLoadingDialog();
 
+      final routineImageList =
+          await db.broFa2VisitRoutineImgDao.getAllWithoutServerIdByVisit(visitIdList);
+      await Future.forEach<BroFa2VisitRoutineImg>(routineImageList, (img) async {
+        /// Upload the image one by one, as each success, set the server_id from the received res
+        final res = await Api().dio.post(
+              '/api/broiler/fa2/visit-img-paths/',
+              data: FormData.fromMap({
+                'path': await MultipartFile.fromFile(
+                  img.path,
+                  filename: 'img.png',
+                ),
+              }),
+            );
+        final serverId = res.data['id'];
+        final isOk = await db.broFa2VisitRoutineImgDao.updateByPk(img.copyWith(serverId: serverId));
+        if (!isOk) {
+          throw Exception("Unable to set server_id of Routine img");
+        }
+      });
+
       final foImageList = await db.broFa2VisitFoImgDao.getAllWithoutServerIdByVisit(visitIdList);
       await Future.forEach<BroFa2VisitFoImg>(foImageList, (img) async {
         /// Upload the image one by one, as each success, set the server_id from the received res

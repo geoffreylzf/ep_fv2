@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 
 const BASE_LOCAL_URL = "http://192.168.8.6";
 //TODO AUTO change url when in development mode
-const BASE_GLOBAL_URL = "http://192.168.9.30:8000";
-// const BASE_GLOBAL_URL = "http://epgroup.dyndns.org:5031";
+// const BASE_GLOBAL_URL = "http://192.168.9.30:8000";
+const BASE_GLOBAL_URL = "http://epgroup.dyndns.org:5031";
 const CONNECT_TIMEOUT = 5000;
 const RECEIVE_TIMEOUT = 3000;
 

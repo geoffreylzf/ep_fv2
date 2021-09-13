@@ -60,7 +60,7 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
     final section = int.tryParse(tecSection.text);
     final qty = int.tryParse(tecQty.text);
     final weight = int.tryParse(tecWeight.text);
-    final gender = rxGender.value.toString();
+    final gender = rxGender.value;
 
     if (houseNo == null) {
       XanX.showErrorDialog(message: "Please select house");
@@ -82,7 +82,7 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
       return;
     }
 
-    if (gender.isEmpty) {
+    if (gender == null) {
       XanX.showErrorDialog(message: "Please select gender");
       return;
     }
@@ -93,7 +93,7 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
       section: Value(section),
       weight: Value(weight),
       qty: Value(qty),
-      gender: Value(gender.split(".").last),
+      gender: Value(gender.toString().split(".").last),
     );
 
     await db.broFa2VisitWeightDao.insert(visitWeight);

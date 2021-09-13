@@ -79,8 +79,8 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
           broFa2Visit: BroFa2Visit.fromData(r2.data, this.attachedDatabase),
           companyCode: r2.read("company_code"),
           companyName: r2.read("company_name"),
-          locationCode: r2.read("location_code"),
-          locationName: r2.read("location_name"),
+          locationCode: r2.read("location_code") ?? "Inactive",
+          locationName: r2.read("location_name") ?? "Inactive Location",
           houseNoList: hseListStr?.split(",").map((x) => int.parse(x)).toList() ?? [],
         );
       }).toList();

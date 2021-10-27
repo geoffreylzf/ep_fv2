@@ -120,15 +120,17 @@ LazyDatabase _openConnection() {
 class Db extends _$Db {
   Db() : super(_openConnection());
 
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (Migrator m) {
           return m.createAll();
         },
         onUpgrade: (Migrator m, int from, int to) async {
-          if (to <= 1) {}
-          if (to <= 2) {}
+          if (from <= 1) {
+            await m.addColumn(broFa2VisitTb, broFa2VisitTb.scheduleDay);
+            await m.addColumn(broFa2DoTb, broFa2DoTb.isNumber);
+          }
         },
       );
 }

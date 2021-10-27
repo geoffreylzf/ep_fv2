@@ -6,7 +6,7 @@ class VisitIdDoIdPage extends StatelessWidget {
   final ctrl = Get.put(VisitIdDoIdController());
 
   @override
-  Widget build(BuildContext ctx) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Obx(() => Text('${ctrl.rxDo.value?.name}')),
@@ -19,33 +19,73 @@ class VisitIdDoIdPage extends StatelessWidget {
             final dob = ctrl.rxDo.value;
             if (dob != null) {
               final isFormula = dob.isFormula;
-              if (!isFormula) {
-                wgAnswer = [
-                  TextField(
-                    controller: ctrl.tecAnswer,
-                    autofocus: true,
-                    maxLength: 100,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Answer",
-                      contentPadding: EdgeInsets.all(16),
-                    ),
-                  ),
-                ];
-              } else {
-                if (dob.formula == "weight") {
+              if (isFormula) {
+                if (dob.formula == FORMULA_DO_WEIGHT) {
                   wgAnswer = [
                     Text(
                       "Please refer body weight module",
                       style: TextStyle(fontStyle: FontStyle.italic),
                     ),
                   ];
-                } else if (dob.formula == "pasgar") {
+                } else if (dob.formula == FORMULA_DO_PASGAR_SCORE) {
                   wgAnswer = [
                     Text(
                       "Please refer pasgar module",
                       style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ];
+                }
+              } else {
+                if (dob.formula == FORMULA_DO_PASGAR_CRITERIA) {
+                  final selList = ctrl.rxSelectedPasgarCriteriaList.value;
+                  wgAnswer = [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: ctrl.pasgarCriteriaList.length,
+                      itemBuilder: (ctx, idx) {
+                        final pc = ctrl.pasgarCriteriaList[idx];
+
+                        var bgColor = Theme.of(context).scaffoldBackgroundColor;
+                        var isSelected = false;
+
+                        if (selList.contains(pc)) {
+                          bgColor = Theme.of(context).primaryColorLight;
+                          isSelected = true;
+                        }
+                        return InkWell(
+                          onTap: () => ctrl.selectPasgarCriteria(pc),
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 16),
+                            color: bgColor,
+                            child: Row(
+                              children: [
+                                Expanded(child: Text(pc.toUpperCase())),
+                                Checkbox(
+                                  value: isSelected,
+                                  onChanged: (_) => ctrl.selectPasgarCriteria(pc),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ];
+                } else {
+                  final isNumber = dob.isNumber;
+                  wgAnswer = [
+                    TextField(
+                      controller: ctrl.tecAnswer,
+                      autofocus: true,
+                      maxLength: 100,
+                      keyboardType: isNumber
+                          ? TextInputType.numberWithOptions(decimal: true)
+                          : TextInputType.text,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Answer",
+                        contentPadding: EdgeInsets.all(16),
+                      ),
                     ),
                   ];
                 }

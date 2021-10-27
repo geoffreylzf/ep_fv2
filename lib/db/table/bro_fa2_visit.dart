@@ -19,6 +19,9 @@ class BroFa2VisitTb extends Table {
 
   IntColumn get age => integer()();
 
+  @JsonKey('schedule_day')
+  IntColumn get scheduleDay => integer().nullable()();
+
   @JsonKey('doc_observation_bird_qty')
   IntColumn get docObservationBirdQty => integer().nullable()();
 

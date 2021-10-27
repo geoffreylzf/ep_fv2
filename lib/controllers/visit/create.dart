@@ -27,6 +27,7 @@ class VisitCreateController extends GetxController {
   final rxSelectedCompany = Rxn<Company>();
   final rxSelectedLocation = Rxn<Location>();
   final rxSelectedHouseNoList = Rx<List<int>>([]);
+  final rxSelectedScheduleDay = Rxn<int>();
   final rxSelectedVisitDate = Rxn<String>();
   final rxSelectedAge = Rxn<String>();
 
@@ -131,8 +132,14 @@ class VisitCreateController extends GetxController {
     FocusScope.of(Get.context!).requestFocus(new FocusNode());
   }
 
-  void onVisitDateContinue() {
+  void selectScheduleDay(int day) {
+    rxSelectedScheduleDay.value = day;
     rxCurrentStep.value = 4;
+    FocusScope.of(Get.context!).requestFocus(new FocusNode());
+  }
+
+  void onVisitDateContinue() {
+    rxCurrentStep.value = 5;
     FocusScope.of(Get.context!).requestFocus(fnAge);
   }
 
@@ -149,6 +156,11 @@ class VisitCreateController extends GetxController {
 
     if (rxSelectedHouseNoList.value.length == 0) {
       XanX.showErrorDialog(message: "Please select at least 1 house");
+      return;
+    }
+
+    if (rxSelectedScheduleDay.value == null) {
+      XanX.showErrorDialog(message: "Please select schedule day");
       return;
     }
 
@@ -173,6 +185,7 @@ class VisitCreateController extends GetxController {
           locationId: Value(rxSelectedLocation.value!.id),
           visitDate: Value(rxSelectedVisitDate.value!),
           age: Value(age),
+          scheduleDay: Value(rxSelectedScheduleDay.value!)
         );
 
         try {

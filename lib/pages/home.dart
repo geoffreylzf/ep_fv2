@@ -154,7 +154,10 @@ class RightPanel extends StatelessWidget {
                                         Icon(Icons.today_outlined, size: 12),
                                         Container(width: 4),
                                         Text(
-                                          "Day " + visit.broFa2Visit.age.toString(),
+                                          "Schedule Day " +
+                                              (visit.broFa2Visit.scheduleDay ?? '-').toString() +
+                                              " Age " +
+                                              visit.broFa2Visit.age.toString(),
                                           style: TextStyle(fontSize: 11),
                                         ),
                                       ],

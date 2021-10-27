@@ -5,12 +5,20 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart' hide Value;
 import 'package:moor/moor.dart';
 
+const FORMULA_DO_WEIGHT = 'weight';
+const FORMULA_DO_PASGAR_SCORE = "pasgar_score";
+const FORMULA_DO_PASGAR_CRITERIA = "pasgar_criteria";
+
 class VisitIdDoIdController extends GetxController {
   final db = XanX.db();
   final visitId = int.parse(Get.parameters['id']!);
   final doId = int.parse(Get.parameters['id2']!);
 
+  final pasgarCriteriaList = ['reflex', 'navel', 'legs', 'beak', 'belly'];
+
   final rxDo = Rxn<BroFa2Do>();
+
+  final rxSelectedPasgarCriteriaList = Rx<List<String>>([]);
 
   final tecAnswer = TextEditingController();
   final tecComment = TextEditingController();
@@ -41,6 +49,15 @@ class VisitIdDoIdController extends GetxController {
       tecComment.text = vd.comment;
       tecAction.text = vd.action;
       tecRemark.text = vd.remark;
+
+      if (dob.formula == FORMULA_DO_PASGAR_CRITERIA) {
+        final existPcList = vd.answer.removeAllWhitespace.split(",");
+        pasgarCriteriaList.forEach((pc) {
+          if (existPcList.contains(pc)) {
+            rxSelectedPasgarCriteriaList.value.add(pc);
+          }
+        });
+      }
     }
   }
 
@@ -52,17 +69,37 @@ class VisitIdDoIdController extends GetxController {
     tecRemark.dispose();
   }
 
+  void selectPasgarCriteria(String pc) {
+    if (rxSelectedPasgarCriteriaList.value.contains(pc)) {
+      rxSelectedPasgarCriteriaList.value.remove(pc);
+    } else {
+      rxSelectedPasgarCriteriaList.value.add(pc);
+    }
+    rxSelectedPasgarCriteriaList.refresh();
+  }
+
   Future<void> onSaveButtonClick() async {
-    final pm = rxDo.value;
-    if (pm == null) {
+    final dob = rxDo.value;
+    if (dob == null) {
       return;
+    }
+
+    var answer = tecAnswer.text;
+    if (dob.formula == FORMULA_DO_PASGAR_CRITERIA) {
+      final tempList = [];
+      pasgarCriteriaList.forEach((pc) {
+        if (rxSelectedPasgarCriteriaList.value.contains(pc)) {
+          tempList.add(pc);
+        }
+      });
+      answer = tempList.join(", ");
     }
 
     final exist = await db.broFa2VisitDoDao.getByVisitIdDoId(visitId, doId);
     if (exist != null) {
       final isUpdated = await db.broFa2VisitDoDao.updateByPk(
         exist.copyWith(
-          answer: tecAnswer.text,
+          answer: answer,
           comment: tecComment.text,
           action: tecAction.text,
           remark: tecRemark.text,

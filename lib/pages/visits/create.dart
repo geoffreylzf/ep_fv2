@@ -207,12 +207,64 @@ class VisitCreatePage extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Select visit date"),
-                  if (ctrl.rxSelectedVisitDate.value != null) Text(ctrl.rxSelectedVisitDate.value!)
+                  Text("Select schedule day"),
+                  if (ctrl.rxSelectedScheduleDay.value != null)
+                    Text(ctrl.rxSelectedScheduleDay.value!.toString())
                 ],
               ),
               isActive: ctrl.rxCurrentStep.value >= 3,
               state: ctrl.rxCurrentStep.value >= 3 ? StepState.complete : StepState.disabled,
+              content: Column(
+                children: [
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 160,
+                      mainAxisExtent: 40,
+                    ),
+                    itemCount: 7,
+                    itemBuilder: (ctx, idx) {
+                      final dayNo = idx * 7;
+                      var bgColor = Theme.of(context).scaffoldBackgroundColor;
+                      var isSelected = false;
+
+                      if (ctrl.rxSelectedScheduleDay.value == dayNo) {
+                        bgColor = Theme.of(context).primaryColorLight;
+                        isSelected = true;
+                      }
+
+                      return InkWell(
+                        onTap: () => ctrl.selectScheduleDay(dayNo),
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 16),
+                          color: bgColor,
+                          child: Row(
+                            children: [
+                              Expanded(child: Text(dayNo.toString())),
+                              Checkbox(
+                                value: isSelected,
+                                onChanged: (_) => ctrl.selectScheduleDay(dayNo),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Step(
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Select visit date"),
+                  if (ctrl.rxSelectedVisitDate.value != null) Text(ctrl.rxSelectedVisitDate.value!)
+                ],
+              ),
+              isActive: ctrl.rxCurrentStep.value >= 4,
+              state: ctrl.rxCurrentStep.value >= 4 ? StepState.complete : StepState.disabled,
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -254,8 +306,8 @@ class VisitCreatePage extends StatelessWidget {
             ),
             Step(
               title: Text("Enter age"),
-              isActive: ctrl.rxCurrentStep.value >= 4,
-              state: ctrl.rxCurrentStep.value >= 4 ? StepState.complete : StepState.disabled,
+              isActive: ctrl.rxCurrentStep.value >= 5,
+              state: ctrl.rxCurrentStep.value >= 5 ? StepState.complete : StepState.disabled,
               content: Column(
                 children: [
                   TextFormField(

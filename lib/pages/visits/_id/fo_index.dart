@@ -41,7 +41,7 @@ class VisitIdFoIndexPage extends StatelessWidget {
                       );
                       if (vf != null) {
                         if (fo.isFormula) {
-                          //  TODO calculate formula
+                          //  do nothing
                         } else {
                           if (fo.isSelection) {
                             widgetList.add(Text(

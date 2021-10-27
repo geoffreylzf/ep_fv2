@@ -687,6 +687,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
   final int id;
   final String name;
   final String stdValue;
+  final bool isNumber;
   final bool isFormula;
   final String? formula;
   final int order;
@@ -694,6 +695,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       {required this.id,
       required this.name,
       required this.stdValue,
+      required this.isNumber,
       required this.isFormula,
       this.formula,
       required this.order});
@@ -707,6 +709,8 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
       stdValue: const StringType()
           .mapFromDatabaseResponse(data['${effectivePrefix}std_value'])!,
+      isNumber: const BoolType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_number'])!,
       isFormula: const BoolType()
           .mapFromDatabaseResponse(data['${effectivePrefix}is_formula'])!,
       formula: const StringType()
@@ -721,6 +725,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     map['std_value'] = Variable<String>(stdValue);
+    map['is_number'] = Variable<bool>(isNumber);
     map['is_formula'] = Variable<bool>(isFormula);
     if (!nullToAbsent || formula != null) {
       map['formula'] = Variable<String?>(formula);
@@ -734,6 +739,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       id: Value(id),
       name: Value(name),
       stdValue: Value(stdValue),
+      isNumber: Value(isNumber),
       isFormula: Value(isFormula),
       formula: formula == null && nullToAbsent
           ? const Value.absent()
@@ -749,6 +755,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       stdValue: serializer.fromJson<String>(json['std_value']),
+      isNumber: serializer.fromJson<bool>(json['is_number']),
       isFormula: serializer.fromJson<bool>(json['is_formula']),
       formula: serializer.fromJson<String?>(json['formula']),
       order: serializer.fromJson<int>(json['order']),
@@ -761,6 +768,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'std_value': serializer.toJson<String>(stdValue),
+      'is_number': serializer.toJson<bool>(isNumber),
       'is_formula': serializer.toJson<bool>(isFormula),
       'formula': serializer.toJson<String?>(formula),
       'order': serializer.toJson<int>(order),
@@ -771,6 +779,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           {int? id,
           String? name,
           String? stdValue,
+          bool? isNumber,
           bool? isFormula,
           String? formula,
           int? order}) =>
@@ -778,6 +787,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
         id: id ?? this.id,
         name: name ?? this.name,
         stdValue: stdValue ?? this.stdValue,
+        isNumber: isNumber ?? this.isNumber,
         isFormula: isFormula ?? this.isFormula,
         formula: formula ?? this.formula,
         order: order ?? this.order,
@@ -788,6 +798,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('stdValue: $stdValue, ')
+          ..write('isNumber: $isNumber, ')
           ..write('isFormula: $isFormula, ')
           ..write('formula: $formula, ')
           ..write('order: $order')
@@ -802,8 +813,10 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           name.hashCode,
           $mrjc(
               stdValue.hashCode,
-              $mrjc(isFormula.hashCode,
-                  $mrjc(formula.hashCode, order.hashCode))))));
+              $mrjc(
+                  isNumber.hashCode,
+                  $mrjc(isFormula.hashCode,
+                      $mrjc(formula.hashCode, order.hashCode)))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -811,6 +824,7 @@ class BroFa2Do extends DataClass implements Insertable<BroFa2Do> {
           other.id == this.id &&
           other.name == this.name &&
           other.stdValue == this.stdValue &&
+          other.isNumber == this.isNumber &&
           other.isFormula == this.isFormula &&
           other.formula == this.formula &&
           other.order == this.order);
@@ -820,6 +834,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
   final Value<int> id;
   final Value<String> name;
   final Value<String> stdValue;
+  final Value<bool> isNumber;
   final Value<bool> isFormula;
   final Value<String?> formula;
   final Value<int> order;
@@ -827,6 +842,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.stdValue = const Value.absent(),
+    this.isNumber = const Value.absent(),
     this.isFormula = const Value.absent(),
     this.formula = const Value.absent(),
     this.order = const Value.absent(),
@@ -835,6 +851,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     this.id = const Value.absent(),
     required String name,
     required String stdValue,
+    this.isNumber = const Value.absent(),
     required bool isFormula,
     this.formula = const Value.absent(),
     required int order,
@@ -846,6 +863,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     Expression<int>? id,
     Expression<String>? name,
     Expression<String>? stdValue,
+    Expression<bool>? isNumber,
     Expression<bool>? isFormula,
     Expression<String?>? formula,
     Expression<int>? order,
@@ -854,6 +872,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (stdValue != null) 'std_value': stdValue,
+      if (isNumber != null) 'is_number': isNumber,
       if (isFormula != null) 'is_formula': isFormula,
       if (formula != null) 'formula': formula,
       if (order != null) 'order': order,
@@ -864,6 +883,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
       {Value<int>? id,
       Value<String>? name,
       Value<String>? stdValue,
+      Value<bool>? isNumber,
       Value<bool>? isFormula,
       Value<String?>? formula,
       Value<int>? order}) {
@@ -871,6 +891,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
       id: id ?? this.id,
       name: name ?? this.name,
       stdValue: stdValue ?? this.stdValue,
+      isNumber: isNumber ?? this.isNumber,
       isFormula: isFormula ?? this.isFormula,
       formula: formula ?? this.formula,
       order: order ?? this.order,
@@ -888,6 +909,9 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
     }
     if (stdValue.present) {
       map['std_value'] = Variable<String>(stdValue.value);
+    }
+    if (isNumber.present) {
+      map['is_number'] = Variable<bool>(isNumber.value);
     }
     if (isFormula.present) {
       map['is_formula'] = Variable<bool>(isFormula.value);
@@ -907,6 +931,7 @@ class BroFa2DoTbCompanion extends UpdateCompanion<BroFa2Do> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('stdValue: $stdValue, ')
+          ..write('isNumber: $isNumber, ')
           ..write('isFormula: $isFormula, ')
           ..write('formula: $formula, ')
           ..write('order: $order')
@@ -934,6 +959,13 @@ class $BroFa2DoTbTable extends BroFa2DoTb
   late final GeneratedColumn<String?> stdValue = GeneratedColumn<String?>(
       'std_value', aliasedName, false,
       typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _isNumberMeta = const VerificationMeta('isNumber');
+  late final GeneratedColumn<bool?> isNumber = GeneratedColumn<bool?>(
+      'is_number', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'CHECK (is_number IN (0, 1))',
+      defaultValue: const Constant(false));
   final VerificationMeta _isFormulaMeta = const VerificationMeta('isFormula');
   late final GeneratedColumn<bool?> isFormula = GeneratedColumn<bool?>(
       'is_formula', aliasedName, false,
@@ -950,7 +982,7 @@ class $BroFa2DoTbTable extends BroFa2DoTb
       typeName: 'INTEGER', requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, name, stdValue, isFormula, formula, order];
+      [id, name, stdValue, isNumber, isFormula, formula, order];
   @override
   String get aliasedName => _alias ?? 'bro_fa2_do';
   @override
@@ -974,6 +1006,10 @@ class $BroFa2DoTbTable extends BroFa2DoTb
           stdValue.isAcceptableOrUnknown(data['std_value']!, _stdValueMeta));
     } else if (isInserting) {
       context.missing(_stdValueMeta);
+    }
+    if (data.containsKey('is_number')) {
+      context.handle(_isNumberMeta,
+          isNumber.isAcceptableOrUnknown(data['is_number']!, _isNumberMeta));
     }
     if (data.containsKey('is_formula')) {
       context.handle(_isFormulaMeta,
@@ -2377,6 +2413,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
   final int locationId;
   final String visitDate;
   final int age;
+  final int? scheduleDay;
   final int? docObservationBirdQty;
   final int? postMortemBirdQty;
   final String timestamp;
@@ -2389,6 +2426,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
       required this.locationId,
       required this.visitDate,
       required this.age,
+      this.scheduleDay,
       this.docObservationBirdQty,
       this.postMortemBirdQty,
       required this.timestamp,
@@ -2409,6 +2447,8 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
           .mapFromDatabaseResponse(data['${effectivePrefix}visit_date'])!,
       age: const IntType()
           .mapFromDatabaseResponse(data['${effectivePrefix}age'])!,
+      scheduleDay: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}schedule_day']),
       docObservationBirdQty: const IntType().mapFromDatabaseResponse(
           data['${effectivePrefix}doc_observation_bird_qty']),
       postMortemBirdQty: const IntType().mapFromDatabaseResponse(
@@ -2431,6 +2471,9 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
     map['location_id'] = Variable<int>(locationId);
     map['visit_date'] = Variable<String>(visitDate);
     map['age'] = Variable<int>(age);
+    if (!nullToAbsent || scheduleDay != null) {
+      map['schedule_day'] = Variable<int?>(scheduleDay);
+    }
     if (!nullToAbsent || docObservationBirdQty != null) {
       map['doc_observation_bird_qty'] = Variable<int?>(docObservationBirdQty);
     }
@@ -2451,6 +2494,9 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
       locationId: Value(locationId),
       visitDate: Value(visitDate),
       age: Value(age),
+      scheduleDay: scheduleDay == null && nullToAbsent
+          ? const Value.absent()
+          : Value(scheduleDay),
       docObservationBirdQty: docObservationBirdQty == null && nullToAbsent
           ? const Value.absent()
           : Value(docObservationBirdQty),
@@ -2473,6 +2519,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
       locationId: serializer.fromJson<int>(json['location']),
       visitDate: serializer.fromJson<String>(json['visit_date']),
       age: serializer.fromJson<int>(json['age']),
+      scheduleDay: serializer.fromJson<int?>(json['schedule_day']),
       docObservationBirdQty:
           serializer.fromJson<int?>(json['doc_observation_bird_qty']),
       postMortemBirdQty:
@@ -2492,6 +2539,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
       'location': serializer.toJson<int>(locationId),
       'visit_date': serializer.toJson<String>(visitDate),
       'age': serializer.toJson<int>(age),
+      'schedule_day': serializer.toJson<int?>(scheduleDay),
       'doc_observation_bird_qty':
           serializer.toJson<int?>(docObservationBirdQty),
       'post_mortem_bird_qty': serializer.toJson<int?>(postMortemBirdQty),
@@ -2508,6 +2556,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
           int? locationId,
           String? visitDate,
           int? age,
+          int? scheduleDay,
           int? docObservationBirdQty,
           int? postMortemBirdQty,
           String? timestamp,
@@ -2520,6 +2569,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
         locationId: locationId ?? this.locationId,
         visitDate: visitDate ?? this.visitDate,
         age: age ?? this.age,
+        scheduleDay: scheduleDay ?? this.scheduleDay,
         docObservationBirdQty:
             docObservationBirdQty ?? this.docObservationBirdQty,
         postMortemBirdQty: postMortemBirdQty ?? this.postMortemBirdQty,
@@ -2536,6 +2586,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
           ..write('locationId: $locationId, ')
           ..write('visitDate: $visitDate, ')
           ..write('age: $age, ')
+          ..write('scheduleDay: $scheduleDay, ')
           ..write('docObservationBirdQty: $docObservationBirdQty, ')
           ..write('postMortemBirdQty: $postMortemBirdQty, ')
           ..write('timestamp: $timestamp, ')
@@ -2558,15 +2609,17 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
                   $mrjc(
                       age.hashCode,
                       $mrjc(
-                          docObservationBirdQty.hashCode,
+                          scheduleDay.hashCode,
                           $mrjc(
-                              postMortemBirdQty.hashCode,
+                              docObservationBirdQty.hashCode,
                               $mrjc(
-                                  timestamp.hashCode,
+                                  postMortemBirdQty.hashCode,
                                   $mrjc(
-                                      uuid.hashCode,
-                                      $mrjc(isDelete.hashCode,
-                                          isUpload.hashCode)))))))))));
+                                      timestamp.hashCode,
+                                      $mrjc(
+                                          uuid.hashCode,
+                                          $mrjc(isDelete.hashCode,
+                                              isUpload.hashCode))))))))))));
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2576,6 +2629,7 @@ class BroFa2Visit extends DataClass implements Insertable<BroFa2Visit> {
           other.locationId == this.locationId &&
           other.visitDate == this.visitDate &&
           other.age == this.age &&
+          other.scheduleDay == this.scheduleDay &&
           other.docObservationBirdQty == this.docObservationBirdQty &&
           other.postMortemBirdQty == this.postMortemBirdQty &&
           other.timestamp == this.timestamp &&
@@ -2590,6 +2644,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
   final Value<int> locationId;
   final Value<String> visitDate;
   final Value<int> age;
+  final Value<int?> scheduleDay;
   final Value<int?> docObservationBirdQty;
   final Value<int?> postMortemBirdQty;
   final Value<String> timestamp;
@@ -2602,6 +2657,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
     this.locationId = const Value.absent(),
     this.visitDate = const Value.absent(),
     this.age = const Value.absent(),
+    this.scheduleDay = const Value.absent(),
     this.docObservationBirdQty = const Value.absent(),
     this.postMortemBirdQty = const Value.absent(),
     this.timestamp = const Value.absent(),
@@ -2615,6 +2671,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
     required int locationId,
     required String visitDate,
     required int age,
+    this.scheduleDay = const Value.absent(),
     this.docObservationBirdQty = const Value.absent(),
     this.postMortemBirdQty = const Value.absent(),
     this.timestamp = const Value.absent(),
@@ -2631,6 +2688,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
     Expression<int>? locationId,
     Expression<String>? visitDate,
     Expression<int>? age,
+    Expression<int?>? scheduleDay,
     Expression<int?>? docObservationBirdQty,
     Expression<int?>? postMortemBirdQty,
     Expression<String>? timestamp,
@@ -2644,6 +2702,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
       if (locationId != null) 'location_id': locationId,
       if (visitDate != null) 'visit_date': visitDate,
       if (age != null) 'age': age,
+      if (scheduleDay != null) 'schedule_day': scheduleDay,
       if (docObservationBirdQty != null)
         'doc_observation_bird_qty': docObservationBirdQty,
       if (postMortemBirdQty != null) 'post_mortem_bird_qty': postMortemBirdQty,
@@ -2660,6 +2719,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
       Value<int>? locationId,
       Value<String>? visitDate,
       Value<int>? age,
+      Value<int?>? scheduleDay,
       Value<int?>? docObservationBirdQty,
       Value<int?>? postMortemBirdQty,
       Value<String>? timestamp,
@@ -2672,6 +2732,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
       locationId: locationId ?? this.locationId,
       visitDate: visitDate ?? this.visitDate,
       age: age ?? this.age,
+      scheduleDay: scheduleDay ?? this.scheduleDay,
       docObservationBirdQty:
           docObservationBirdQty ?? this.docObservationBirdQty,
       postMortemBirdQty: postMortemBirdQty ?? this.postMortemBirdQty,
@@ -2699,6 +2760,9 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
     }
     if (age.present) {
       map['age'] = Variable<int>(age.value);
+    }
+    if (scheduleDay.present) {
+      map['schedule_day'] = Variable<int?>(scheduleDay.value);
     }
     if (docObservationBirdQty.present) {
       map['doc_observation_bird_qty'] =
@@ -2730,6 +2794,7 @@ class BroFa2VisitTbCompanion extends UpdateCompanion<BroFa2Visit> {
           ..write('locationId: $locationId, ')
           ..write('visitDate: $visitDate, ')
           ..write('age: $age, ')
+          ..write('scheduleDay: $scheduleDay, ')
           ..write('docObservationBirdQty: $docObservationBirdQty, ')
           ..write('postMortemBirdQty: $postMortemBirdQty, ')
           ..write('timestamp: $timestamp, ')
@@ -2768,6 +2833,11 @@ class $BroFa2VisitTbTable extends BroFa2VisitTb
   late final GeneratedColumn<int?> age = GeneratedColumn<int?>(
       'age', aliasedName, false,
       typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _scheduleDayMeta =
+      const VerificationMeta('scheduleDay');
+  late final GeneratedColumn<int?> scheduleDay = GeneratedColumn<int?>(
+      'schedule_day', aliasedName, true,
+      typeName: 'INTEGER', requiredDuringInsert: false);
   final VerificationMeta _docObservationBirdQtyMeta =
       const VerificationMeta('docObservationBirdQty');
   late final GeneratedColumn<int?> docObservationBirdQty =
@@ -2812,6 +2882,7 @@ class $BroFa2VisitTbTable extends BroFa2VisitTb
         locationId,
         visitDate,
         age,
+        scheduleDay,
         docObservationBirdQty,
         postMortemBirdQty,
         timestamp,
@@ -2856,6 +2927,12 @@ class $BroFa2VisitTbTable extends BroFa2VisitTb
           _ageMeta, age.isAcceptableOrUnknown(data['age']!, _ageMeta));
     } else if (isInserting) {
       context.missing(_ageMeta);
+    }
+    if (data.containsKey('schedule_day')) {
+      context.handle(
+          _scheduleDayMeta,
+          scheduleDay.isAcceptableOrUnknown(
+              data['schedule_day']!, _scheduleDayMeta));
     }
     if (data.containsKey('doc_observation_bird_qty')) {
       context.handle(

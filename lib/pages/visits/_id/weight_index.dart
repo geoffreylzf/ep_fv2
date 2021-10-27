@@ -193,9 +193,20 @@ class WeightEntry extends StatelessWidget {
             ),
           ),
           Obx(
-            () => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            () => Column(
               children: [
+                Row(
+                  children: [
+                    Radio<Gender>(
+                      value: Gender.A,
+                      groupValue: ctrl.rxGender.value,
+                      onChanged: (value) {
+                        ctrl.selectGender(value!);
+                      },
+                    ),
+                    Text("A.H."),
+                  ],
+                ),
                 Row(
                   children: [
                     Radio<Gender>(

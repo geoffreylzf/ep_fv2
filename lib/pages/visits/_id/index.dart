@@ -117,7 +117,10 @@ class Header extends StatelessWidget {
                     Icon(Icons.today_outlined),
                     Container(width: 8),
                     Text(
-                      "Day " + visit.broFa2Visit.age.toString(),
+                      "Schedule Day " +
+                          (visit.broFa2Visit.scheduleDay ?? '-').toString() +
+                          " Age " +
+                          visit.broFa2Visit.age.toString(),
                     ),
                   ],
                 ),
@@ -182,7 +185,6 @@ class ModuleBtnList extends StatelessWidget {
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
           ),
-
           itemCount: btnList.length,
           itemBuilder: (ctx, idx) {
             return btnList[idx];

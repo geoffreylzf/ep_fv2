@@ -11,6 +11,9 @@ class BroFa2DoTb extends Table {
   @JsonKey('std_value')
   TextColumn get stdValue => text()();
 
+  @JsonKey('is_number')
+  BoolColumn get isNumber => boolean().withDefault(const Constant(false))();
+
   @JsonKey('is_formula')
   BoolColumn get isFormula => boolean()();
 

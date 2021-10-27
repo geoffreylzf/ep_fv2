@@ -63,6 +63,18 @@ class VisitIdDoIndexPage extends StatelessWidget {
                           );
 
                           if (vd != null) {
+                            if (dob.isFormula) {
+                              //  do nothing
+                            } else if (vd.answer.isNotEmpty) {
+                              widgetList.add(Text(
+                                vd.answer,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(ctx).primaryColor,
+                                ),
+                              ));
+                            }
+
                             if (vd.comment.isNotEmpty) {
                               widgetList.add(Row(
                                 children: [
@@ -81,7 +93,8 @@ class VisitIdDoIndexPage extends StatelessWidget {
                             if (vd.action.isNotEmpty) {
                               widgetList.add(Row(
                                 children: [
-                                  Icon(Icons.task, size: 16, color: Colors.grey).paddingOnly(right: 4),
+                                  Icon(Icons.task, size: 16, color: Colors.grey)
+                                      .paddingOnly(right: 4),
                                   Flexible(
                                     child: Text(
                                       vd.action,

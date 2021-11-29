@@ -403,20 +403,45 @@ class WeightSummary extends StatelessWidget {
             style: TextStyle(fontSize: 10),
           ),
         ),
-        Container(
-          color: Theme.of(Get.context!).primaryColorDark,
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Obx(
-              () => Text(
-                "Average Weight : " + ctrl.rxAvgWeight.value.toStringAsFixed(3),
-                textAlign: TextAlign.end,
-                style: TextStyle(color: Colors.white),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Obx(
+            () => Container(
+              decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+              child: Table(
+                children: [
+                  TableRow(decoration: BoxDecoration(color: Colors.black), children: [
+                    Text(" "),
+                    Text("Ttl Qty",
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                    Text("Ttl Weight",
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                    Text("Avg Weight",
+                        textAlign: TextAlign.center, style: TextStyle(color: Colors.white)),
+                  ]),
+                  TableRow(children: [
+                    Text("As-Hatched", textAlign: TextAlign.center),
+                    Text(ctrl.rxSumQtyAh.toString(), textAlign: TextAlign.right),
+                    Text(ctrl.rxSumWgtAh.toString(), textAlign: TextAlign.right),
+                    Text((ctrl.rxSumWgtAh.value / ctrl.rxSumQtyAh.value).toStringAsFixed(3), textAlign: TextAlign.right),
+                  ]),
+                  TableRow(children: [
+                    Text("Male", textAlign: TextAlign.center),
+                    Text(ctrl.rxSumQtyMale.toString(), textAlign: TextAlign.right),
+                    Text(ctrl.rxSumWgtMale.toString(), textAlign: TextAlign.right),
+                    Text((ctrl.rxSumWgtMale.value / ctrl.rxSumQtyMale.value).toStringAsFixed(3), textAlign: TextAlign.right),
+                  ]),
+                  TableRow(children: [
+                    Text("Male", textAlign: TextAlign.center),
+                    Text(ctrl.rxSumQtyFemale.toString(), textAlign: TextAlign.right),
+                    Text(ctrl.rxSumWgtFemale.toString(), textAlign: TextAlign.right),
+                    Text((ctrl.rxSumWgtFemale.value / ctrl.rxSumQtyFemale.value).toStringAsFixed(3), textAlign: TextAlign.right),
+                  ]),
+                ],
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }

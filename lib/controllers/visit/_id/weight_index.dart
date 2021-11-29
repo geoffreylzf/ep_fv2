@@ -21,7 +21,14 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
 
   final rxGender = Rxn<Gender>();
   final rxVisitWeightList = Rx<List<BroFa2VisitWeight>>([]);
-  final rxAvgWeight = Rx<double>(0);
+
+  final rxSumQtyAh = Rx<int>(0);
+  final rxSumQtyFemale = Rx<int>(0);
+  final rxSumQtyMale = Rx<int>(0);
+
+  final rxSumWgtAh = Rx<int>(0);
+  final rxSumWgtFemale = Rx<int>(0);
+  final rxSumWgtMale = Rx<int>(0);
 
   @override
   void onInit() async {
@@ -30,15 +37,35 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
     db.broFa2VisitWeightDao.watchAllByVisitId(visitId, orderBy: OrderingMode.desc).listen((vwList) {
       rxVisitWeightList.value = vwList;
 
-      var wgt = 0.0;
-      var cnt = 0;
+      var qtyAh = 0;
+      var qtyFemale = 0;
+      var qtyMale = 0;
+
+      var wgtAh = 0;
+      var wgtFemale = 0;
+      var wgtMale = 0;
 
       vwList.forEach((vw) {
-        wgt += vw.weight;
-        cnt += vw.qty;
+        if (vw.gender == 'A') {
+          qtyAh += vw.qty;
+          wgtAh += vw.weight;
+        }else if (vw.gender == 'F') {
+          qtyFemale += vw.qty;
+          wgtFemale += vw.weight;
+        }
+        else if (vw.gender == 'M') {
+          qtyMale += vw.qty;
+          wgtMale += vw.weight;
+        }
       });
 
-      rxAvgWeight.value = wgt / cnt;
+      rxSumQtyAh.value = qtyAh;
+      rxSumQtyFemale.value = qtyFemale;
+      rxSumQtyMale.value =qtyMale;
+
+      rxSumWgtAh.value = wgtAh;
+      rxSumWgtFemale.value = wgtFemale;
+      rxSumWgtMale.value =wgtMale;
     });
 
     tabController = TabController(vsync: this, length: 2);

@@ -403,6 +403,20 @@ class WeightSummary extends StatelessWidget {
             style: TextStyle(fontSize: 10),
           ),
         ),
+        Container(
+          color: Theme.of(Get.context!).primaryColorDark,
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Obx(
+              () => Text(
+                "Average Weight : " + ctrl.rxAvgWeight.value.toStringAsFixed(3),
+                textAlign: TextAlign.end,
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

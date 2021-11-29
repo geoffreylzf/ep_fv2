@@ -21,6 +21,7 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
 
   final rxGender = Rxn<Gender>();
   final rxVisitWeightList = Rx<List<BroFa2VisitWeight>>([]);
+  final rxAvgWeight = Rx<double>(0);
 
   @override
   void onInit() async {
@@ -28,6 +29,16 @@ class VisitIdWeightIndexController extends GetxController with SingleGetTickerPr
 
     db.broFa2VisitWeightDao.watchAllByVisitId(visitId, orderBy: OrderingMode.desc).listen((vwList) {
       rxVisitWeightList.value = vwList;
+
+      var wgt = 0.0;
+      var cnt = 0;
+
+      vwList.forEach((vw) {
+        wgt += vw.weight;
+        cnt += vw.qty;
+      });
+
+      rxAvgWeight.value = wgt / cnt;
     });
 
     tabController = TabController(vsync: this, length: 2);

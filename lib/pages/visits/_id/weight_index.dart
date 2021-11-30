@@ -432,7 +432,7 @@ class WeightSummary extends StatelessWidget {
                     Text((ctrl.rxSumWgtMale.value / ctrl.rxSumQtyMale.value).toStringAsFixed(3), textAlign: TextAlign.right),
                   ]),
                   TableRow(children: [
-                    Text("Male", textAlign: TextAlign.center),
+                    Text("Female", textAlign: TextAlign.center),
                     Text(ctrl.rxSumQtyFemale.toString(), textAlign: TextAlign.right),
                     Text(ctrl.rxSumWgtFemale.toString(), textAlign: TextAlign.right),
                     Text((ctrl.rxSumWgtFemale.value / ctrl.rxSumQtyFemale.value).toStringAsFixed(3), textAlign: TextAlign.right),

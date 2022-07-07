@@ -6,6 +6,21 @@ class VisitIdIndexController extends GetxController {
   final id = int.parse(Get.parameters['id']!);
   final streamVisit = XanX.db().broFa2VisitDao.watchById(int.parse(Get.parameters['id']!));
 
+  final rxIsVisitUpdatable = Rx<bool>(false);
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    XanX.db().broFa2VisitDao.watchById(int.parse(Get.parameters['id']!)).listen((doc) {
+      rxIsVisitUpdatable.value = !doc.broFa2Visit.isDelete && !doc.broFa2Visit.isUpload;
+    });
+  }
+
+  void openUpdate() {
+    Get.toNamed("/visits/$id/update");
+  }
+
   void softDelete() {
     XanX.showConfirmDialog(
       title: "Delete this visit?",

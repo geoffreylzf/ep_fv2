@@ -12,18 +12,32 @@ class VisitIdIndexPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('View Visit'),
         actions: [
-          StreamBuilder<BroFa2VisitWithData>(
-              stream: ctrl.streamVisit,
-              builder: (context, snapshot) {
-                final doc = snapshot.data;
-                if (doc == null || doc.broFa2Visit.isDelete || doc.broFa2Visit.isUpload) {
-                  return Container();
+          Obx(
+            () => ctrl.rxIsVisitUpdatable.value ? IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () => ctrl.openUpdate(),
+            ) : Container(),
+          ),
+          Obx(
+            () => ctrl.rxIsVisitUpdatable.value ? PopupMenuButton(
+              itemBuilder: (_) {
+                return [
+                  PopupMenuItem<int>(
+                    value: 0,
+                    child: ListTile(
+                      leading: Icon(Icons.delete),
+                      title: Text('DELETE'),
+                    ),
+                  ),
+                ];
+              },
+              onSelected: (value) {
+                if (value == 0) {
+                  ctrl.softDelete();
                 }
-                return IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () => ctrl.softDelete(),
-                );
-              })
+              },
+            ) : Container(),
+          )
         ],
       ),
       body: Padding(

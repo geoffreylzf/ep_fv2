@@ -28,6 +28,7 @@ import 'package:ep_fv2/pages/visits/_id/routine_id.dart';
 import 'package:ep_fv2/pages/visits/_id/routine_id_images.dart';
 import 'package:ep_fv2/pages/visits/_id/routine_id_images_id.dart';
 import 'package:ep_fv2/pages/visits/_id/routine_index.dart';
+import 'package:ep_fv2/pages/visits/_id/update.dart';
 import 'package:ep_fv2/pages/visits/_id/weight_index.dart';
 import 'package:ep_fv2/pages/visits/create.dart';
 import 'package:ep_fv2/pages/visits/index.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/visits', page: () => VisitIndexPage()),
         GetPage(name: '/visits/create/', page: () => VisitCreatePage()),
         GetPage(name: '/visits/:id', page: () => VisitIdIndexPage()),
+        GetPage(name: '/visits/:id/update', page: () => VisitIdUpdatePage()),
         GetPage(name: '/visits/:id/fo', page: () => VisitIdFoIndexPage()),
         GetPage(name: '/visits/:id/fo/:id2', page: () => VisitIdFoIdPage()),
         GetPage(name: '/visits/:id/fo/:id2/images', page: () => VisitIdFoIdImagesPage()),

@@ -15,15 +15,17 @@ class BroFa2VisitHouseDao extends DatabaseAccessor<Db> {
   }
 
   Future<int> deleteByPk(int id) {
-    return (delete(broFa2VisitHouseTb)
-      ..where((tbl) => tbl.id.equals(id))).go();
+    return (delete(broFa2VisitHouseTb)..where((tbl) => tbl.id.equals(id))).go();
+  }
+
+  Future<int> deleteAllByBroFa2VisitId(int broFa2VisitId) async {
+    return await (delete(broFa2VisitHouseTb)
+          ..where((tbl) => tbl.broFa2VisitId.equals(broFa2VisitId)))
+        .go();
   }
 
   Future<List<BroFa2VisitHouse>> getAllByBroFa2VisitId(int broFa2VisitId) {
-    return (select(broFa2VisitHouseTb)
-      ..where((tbl) => tbl.broFa2VisitId.equals(broFa2VisitId))).get();
+    return (select(broFa2VisitHouseTb)..where((tbl) => tbl.broFa2VisitId.equals(broFa2VisitId)))
+        .get();
   }
-
-
 }
-

@@ -39,14 +39,18 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
     ORDER BY bro_fa2_visit.timestamp DESC
     """,
       readsFrom: {broFa2VisitTb, broFa2VisitHouseTb},
-    ).watchSingle().map((r) => BroFa2VisitWithData(
-          broFa2Visit: BroFa2Visit.fromData(r.data, this.attachedDatabase),
-          companyCode: r.read("company_code"),
-          companyName: r.read("company_name"),
-          locationCode: r.read("location_code"),
-          locationName: r.read("location_name"),
-          houseNoList: r.read<String>("houseNoList").split(",").map((x) => int.parse(x)).toList(),
-        ));
+    ).watchSingle().map((r) {
+      final hseNoStr = r.read<String?>("houseNoList") ?? "";
+
+      return BroFa2VisitWithData(
+        broFa2Visit: BroFa2Visit.fromData(r.data, this.attachedDatabase),
+        companyCode: r.read("company_code"),
+        companyName: r.read("company_name"),
+        locationCode: r.read("location_code"),
+        locationName: r.read("location_name"),
+        houseNoList: hseNoStr.isNotEmpty ? hseNoStr.split(",").map((x) => int.parse(x)).toList() : [],
+      );
+    });
   }
 
   Stream<List<BroFa2VisitWithData>> watchRecent({int? limit}) {
@@ -148,26 +152,38 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
       /// child houses listing
       final houseList =
           await (select(broFa2VisitHouseTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
-      visitJson['houses'] =
-          houseList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
+      visitJson['houses'] = houseList
+          .map((r) => r.toJson()
+            ..remove('id')
+            ..remove('bro_fa2_visit'))
+          .toList();
 
       /// child do listing
       final doList =
           await (select(broFa2VisitDoTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
-      visitJson['doc_observations'] =
-          doList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
+      visitJson['doc_observations'] = doList
+          .map((r) => r.toJson()
+            ..remove('id')
+            ..remove('bro_fa2_visit'))
+          .toList();
 
       /// child pasgar listing
       final pasgarList =
           await (select(broFa2VisitPasgarTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
-      visitJson['pasgars'] =
-          pasgarList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
+      visitJson['pasgars'] = pasgarList
+          .map((r) => r.toJson()
+            ..remove('id')
+            ..remove('bro_fa2_visit'))
+          .toList();
 
       /// child weight listing
       final weightList =
           await (select(broFa2VisitWeightTb)..where((tbl) => tbl.broFa2VisitId.equals(id))).get();
-      visitJson['weights'] =
-          weightList.map((r) => r.toJson()..remove('id')..remove('bro_fa2_visit')).toList();
+      visitJson['weights'] = weightList
+          .map((r) => r.toJson()
+            ..remove('id')
+            ..remove('bro_fa2_visit'))
+          .toList();
 
       /// child routine listing
       final routineList =

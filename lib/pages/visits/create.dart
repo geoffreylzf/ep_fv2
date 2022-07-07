@@ -1,6 +1,5 @@
 import 'package:ep_fv2/controllers/visit/create.dart';
 import 'package:ep_fv2/utils/node_util.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,12 +14,7 @@ class VisitCreatePage extends StatelessWidget {
         () => Stepper(
           currentStep: ctrl.rxCurrentStep.value,
           onStepTapped: (step) => ctrl.selectStep(step),
-          controlsBuilder: (
-            BuildContext context, {
-            VoidCallback? onStepContinue,
-            VoidCallback? onStepCancel,
-          }) =>
-              Container(),
+          controlsBuilder: (BuildContext context, ControlsDetails details) => Container(),
           steps: [
             Step(
               title: Column(

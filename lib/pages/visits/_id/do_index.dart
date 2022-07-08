@@ -2,7 +2,6 @@ import 'package:ep_fv2/controllers/visit/_id/do_index.dart';
 import 'package:ep_fv2/widgets/form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:collection/collection.dart';
 
 class VisitIdDoIndexPage extends StatelessWidget {
   final ctrl = Get.put(VisitIdDoIndexController());

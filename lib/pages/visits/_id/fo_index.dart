@@ -1,7 +1,6 @@
 import 'package:ep_fv2/controllers/visit/_id/fo_index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:collection/collection.dart';
 
 class VisitIdFoIndexPage extends StatelessWidget {
   final ctrl = Get.put(VisitIdFoIndexController());

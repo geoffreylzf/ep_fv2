@@ -2,7 +2,6 @@ import 'package:ep_fv2/controllers/visit/_id/pm_index.dart';
 import 'package:ep_fv2/widgets/form.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:collection/collection.dart';
 
 class VisitIdPmIndexPage extends StatelessWidget {
   final ctrl = Get.put(VisitIdPmIndexController());

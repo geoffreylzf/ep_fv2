@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart' hide Value;
 import 'package:moor/moor.dart';
-import 'package:collection/collection.dart';
 
 class VisitIdFoIdController extends GetxController {
   final db = XanX.db();

@@ -20,6 +20,8 @@ import 'package:ep_fv2/db/dao/setup/bro_fa2_fo_selection.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_ma.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_pm.dart';
 import 'package:ep_fv2/db/dao/setup/bro_fa2_routine.dart';
+import 'package:ep_fv2/db/dao/setup/bro_prod_schedule.dart';
+import 'package:ep_fv2/db/dao/setup/bro_prod_schedule_detail.dart';
 import 'package:ep_fv2/db/dao/setup/company.dart';
 import 'package:ep_fv2/db/dao/setup/loc_house.dart';
 import 'package:ep_fv2/db/dao/setup/location.dart';
@@ -44,6 +46,8 @@ import 'package:ep_fv2/db/table/setup/bro_fa2_fo_selection.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_ma.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_pm.dart';
 import 'package:ep_fv2/db/table/setup/bro_fa2_routine.dart';
+import 'package:ep_fv2/db/table/setup/bro_prod_schedule.dart';
+import 'package:ep_fv2/db/table/setup/bro_prod_schedule_detail.dart';
 import 'package:ep_fv2/db/table/setup/company.dart';
 import 'package:ep_fv2/db/table/setup/loc_house.dart';
 import 'package:ep_fv2/db/table/setup/location.dart';
@@ -88,6 +92,8 @@ LazyDatabase _openConnection() {
     BroFa2VisitWeightTb,
     BroFa2VisitRoutineTb,
     BroFa2VisitRoutineImgTb,
+    BroProdScheduleTb,
+    BroProdScheduleDetailTb,
     LogTb,
   ],
   daos: [
@@ -113,6 +119,8 @@ LazyDatabase _openConnection() {
     BroFa2VisitWeightDao,
     BroFa2VisitRoutineDao,
     BroFa2VisitRoutineImgDao,
+    BroProdScheduleDao,
+    BroProdScheduleDetailDao,
     LogDao,
     UtilDao,
   ],
@@ -120,7 +128,7 @@ LazyDatabase _openConnection() {
 class Db extends _$Db {
   Db() : super(_openConnection());
 
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (Migrator m) {
@@ -130,6 +138,10 @@ class Db extends _$Db {
           if (from <= 1) {
             await m.addColumn(broFa2VisitTb, broFa2VisitTb.scheduleDay);
             await m.addColumn(broFa2DoTb, broFa2DoTb.isNumber);
+          }
+          if (from <= 2){
+            await m.createTable(broProdScheduleTb);
+            await m.createTable(broProdScheduleDetailTb);
           }
         },
       );

@@ -20,6 +20,38 @@ class BroFa2VisitDao extends DatabaseAccessor<Db> {
     return (select(broFa2VisitTb)..where((tbl) => tbl.id.equals(id))).getSingleOrNull();
   }
 
+  Future<BroFa2VisitWithData> getDataById(int id) async {
+    final r =  (await customSelect(
+      """
+    SELECT 
+      bro_fa2_visit.*,
+      company.company_code,
+      company.company_name,
+      location.location_code,
+      location.location_name,
+      GROUP_CONCAT(bro_fa2_visit_house.house_no) AS houseNoList
+    FROM bro_fa2_visit
+    LEFT JOIN company ON company.id = bro_fa2_visit.company_id
+    LEFT JOIN location ON location.id = bro_fa2_visit.location_id
+    LEFT JOIN bro_fa2_visit_house ON  bro_fa2_visit_house.bro_fa2_visit_id = bro_fa2_visit.id
+    WHERE bro_fa2_visit.id = $id
+    GROUP BY bro_fa2_visit.id
+    ORDER BY bro_fa2_visit.timestamp DESC
+    """,
+    ).getSingle());
+
+    final hseNoStr = r.read<String?>("houseNoList") ?? "";
+
+    return BroFa2VisitWithData(
+      broFa2Visit: BroFa2Visit.fromData(r.data, this.attachedDatabase),
+      companyCode: r.read("company_code"),
+      companyName: r.read("company_name"),
+      locationCode: r.read("location_code"),
+      locationName: r.read("location_name"),
+      houseNoList: hseNoStr.isNotEmpty ? hseNoStr.split(",").map((x) => int.parse(x)).toList() : [],
+    );
+  }
+
   Stream<BroFa2VisitWithData> watchById(int id) {
     return customSelect(
       """

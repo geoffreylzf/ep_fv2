@@ -13,30 +13,34 @@ class VisitIdIndexPage extends StatelessWidget {
         title: Text('View Visit'),
         actions: [
           Obx(
-            () => ctrl.rxIsVisitUpdatable.value ? IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () => ctrl.openUpdate(),
-            ) : Container(),
+            () => ctrl.rxIsVisitUpdatable.value
+                ? IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: () => ctrl.openUpdate(),
+                  )
+                : Container(),
           ),
           Obx(
-            () => ctrl.rxIsVisitUpdatable.value ? PopupMenuButton(
-              itemBuilder: (_) {
-                return [
-                  PopupMenuItem<int>(
-                    value: 0,
-                    child: ListTile(
-                      leading: Icon(Icons.delete),
-                      title: Text('DELETE'),
-                    ),
-                  ),
-                ];
-              },
-              onSelected: (value) {
-                if (value == 0) {
-                  ctrl.softDelete();
-                }
-              },
-            ) : Container(),
+            () => ctrl.rxIsVisitUpdatable.value
+                ? PopupMenuButton(
+                    itemBuilder: (_) {
+                      return [
+                        PopupMenuItem<int>(
+                          value: 0,
+                          child: ListTile(
+                            leading: Icon(Icons.delete),
+                            title: Text('DELETE'),
+                          ),
+                        ),
+                      ];
+                    },
+                    onSelected: (value) {
+                      if (value == 0) {
+                        ctrl.softDelete();
+                      }
+                    },
+                  )
+                : Container(),
           )
         ],
       ),
@@ -178,6 +182,7 @@ class ModuleBtnList extends StatelessWidget {
           "Pasgar Score": () => ctrl.openPasgar(),
           "Management Audit": () => ctrl.openManagementAudit(),
           "Weight": () => ctrl.openWeight(),
+          "Farmer Report": () => ctrl.openFarmerReport(),
         };
         final btnList = <Widget>[];
         moduleList.forEach((key, value) {

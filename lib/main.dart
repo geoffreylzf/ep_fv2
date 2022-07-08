@@ -9,6 +9,7 @@ import 'package:ep_fv2/pages/update_app_ver.dart';
 import 'package:ep_fv2/pages/upload.dart';
 import 'package:ep_fv2/pages/visits/_id/do_id.dart';
 import 'package:ep_fv2/pages/visits/_id/do_index.dart';
+import 'package:ep_fv2/pages/visits/_id/farmer_report.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_id.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_id_images.dart';
 import 'package:ep_fv2/pages/visits/_id/fo_id_images_id.dart';
@@ -94,6 +95,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/visits/:id/routine', page: () => VisitIdRoutineIndexPage()),
         GetPage(name: '/visits/:id/routine/:id2', page: () => VisitIdRoutineIdPage()),
         GetPage(name: '/visits/:id/routine/:id2/images', page: () => VisitIdRoutineIdImagesPage()),
+        GetPage(name: '/visits/:id/farmer-report', page: () => VisitIdFarmerReportPage()),
         GetPage(
             name: '/visits/:id/routine/:id2/images/:id3',
             page: () => VisitIdRoutineIdImagesIdPage()),

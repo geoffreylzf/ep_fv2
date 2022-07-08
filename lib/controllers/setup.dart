@@ -30,6 +30,9 @@ class SetupController extends GetxController {
       "bro_fa2_ma": SetupMapping("/api/broiler/fa2/management-audits/", db.broFa2MaDao),
       "bro_fa2_pm": SetupMapping("/api/broiler/fa2/post-mortems/", db.broFa2PmDao),
       "bro_fa2_routine": SetupMapping("/api/broiler/fa2/routines/", db.broFa2RoutineDao),
+      "bro_prod_schedule": SetupMapping("/api/broiler/prod-schedules/", db.broProdScheduleDao),
+      "bro_prod_schedule_detail":
+          SetupMapping("/api/broiler/prod-schedule-details/", db.broProdScheduleDetailDao),
     };
   }
 

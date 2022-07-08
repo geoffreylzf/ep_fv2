@@ -28,4 +28,39 @@ class BroFa2VisitWeightDao extends DatabaseAccessor<Db> {
           ..orderBy([(t) => OrderingTerm(expression: t.id, mode: orderBy)]))
         .watch();
   }
+
+  Future<List<BodyWgtSummary>> getSummaryByVisitId(int visitId) async {
+    return (await customSelect("""
+    SELECT 
+      gender,
+      SUM(qty) AS ttl_qty,
+      SUM(weight) AS ttl_wgt,
+      SUM(weight) / SUM(qty) AS avg_wgt
+    FROM bro_fa2_visit_weight
+    WHERE bro_fa2_visit_id = $visitId
+    GROUP BY gender
+    ORDER BY gender
+        """).get()).map((r) {
+      return BodyWgtSummary(
+        gender: r.read("gender"),
+        ttlQty: r.read("ttl_qty"),
+        ttlWgt: r.read("ttl_wgt"),
+        avgWgt: r.read("avg_wgt"),
+      );
+    }).toList();
+  }
+}
+
+class BodyWgtSummary {
+  String gender;
+  int ttlQty;
+  double ttlWgt, avgWgt;
+  double stdWgt = 0;
+
+  BodyWgtSummary({
+    required this.gender,
+    required this.ttlQty,
+    required this.ttlWgt,
+    required this.avgWgt,
+  });
 }

@@ -59,4 +59,8 @@ class VisitIdIndexController extends GetxController {
   void openWeight() {
     Get.toNamed("/visits/$id/weight");
   }
+
+  void openFarmerReport() {
+    Get.toNamed("/visits/$id/farmer-report");
+  }
 }

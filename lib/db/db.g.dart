@@ -6802,6 +6802,596 @@ class $BroFa2VisitRoutineImgTbTable extends BroFa2VisitRoutineImgTb
   }
 }
 
+class BroProdSchedule extends DataClass implements Insertable<BroProdSchedule> {
+  final int id;
+  final int breType;
+  final String breTypeCode;
+  final String breTypeName;
+  BroProdSchedule(
+      {required this.id,
+      required this.breType,
+      required this.breTypeCode,
+      required this.breTypeName});
+  factory BroProdSchedule.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return BroProdSchedule(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      breType: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bre_type'])!,
+      breTypeCode: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bre_type_code'])!,
+      breTypeName: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}bre_type_name'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['bre_type'] = Variable<int>(breType);
+    map['bre_type_code'] = Variable<String>(breTypeCode);
+    map['bre_type_name'] = Variable<String>(breTypeName);
+    return map;
+  }
+
+  BroProdScheduleTbCompanion toCompanion(bool nullToAbsent) {
+    return BroProdScheduleTbCompanion(
+      id: Value(id),
+      breType: Value(breType),
+      breTypeCode: Value(breTypeCode),
+      breTypeName: Value(breTypeName),
+    );
+  }
+
+  factory BroProdSchedule.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return BroProdSchedule(
+      id: serializer.fromJson<int>(json['id']),
+      breType: serializer.fromJson<int>(json['bre_type']),
+      breTypeCode: serializer.fromJson<String>(json['bre_type_code']),
+      breTypeName: serializer.fromJson<String>(json['bre_type_name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'bre_type': serializer.toJson<int>(breType),
+      'bre_type_code': serializer.toJson<String>(breTypeCode),
+      'bre_type_name': serializer.toJson<String>(breTypeName),
+    };
+  }
+
+  BroProdSchedule copyWith(
+          {int? id, int? breType, String? breTypeCode, String? breTypeName}) =>
+      BroProdSchedule(
+        id: id ?? this.id,
+        breType: breType ?? this.breType,
+        breTypeCode: breTypeCode ?? this.breTypeCode,
+        breTypeName: breTypeName ?? this.breTypeName,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('BroProdSchedule(')
+          ..write('id: $id, ')
+          ..write('breType: $breType, ')
+          ..write('breTypeCode: $breTypeCode, ')
+          ..write('breTypeName: $breTypeName')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      id.hashCode,
+      $mrjc(breType.hashCode,
+          $mrjc(breTypeCode.hashCode, breTypeName.hashCode))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BroProdSchedule &&
+          other.id == this.id &&
+          other.breType == this.breType &&
+          other.breTypeCode == this.breTypeCode &&
+          other.breTypeName == this.breTypeName);
+}
+
+class BroProdScheduleTbCompanion extends UpdateCompanion<BroProdSchedule> {
+  final Value<int> id;
+  final Value<int> breType;
+  final Value<String> breTypeCode;
+  final Value<String> breTypeName;
+  const BroProdScheduleTbCompanion({
+    this.id = const Value.absent(),
+    this.breType = const Value.absent(),
+    this.breTypeCode = const Value.absent(),
+    this.breTypeName = const Value.absent(),
+  });
+  BroProdScheduleTbCompanion.insert({
+    this.id = const Value.absent(),
+    required int breType,
+    required String breTypeCode,
+    required String breTypeName,
+  })  : breType = Value(breType),
+        breTypeCode = Value(breTypeCode),
+        breTypeName = Value(breTypeName);
+  static Insertable<BroProdSchedule> custom({
+    Expression<int>? id,
+    Expression<int>? breType,
+    Expression<String>? breTypeCode,
+    Expression<String>? breTypeName,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (breType != null) 'bre_type': breType,
+      if (breTypeCode != null) 'bre_type_code': breTypeCode,
+      if (breTypeName != null) 'bre_type_name': breTypeName,
+    });
+  }
+
+  BroProdScheduleTbCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? breType,
+      Value<String>? breTypeCode,
+      Value<String>? breTypeName}) {
+    return BroProdScheduleTbCompanion(
+      id: id ?? this.id,
+      breType: breType ?? this.breType,
+      breTypeCode: breTypeCode ?? this.breTypeCode,
+      breTypeName: breTypeName ?? this.breTypeName,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (breType.present) {
+      map['bre_type'] = Variable<int>(breType.value);
+    }
+    if (breTypeCode.present) {
+      map['bre_type_code'] = Variable<String>(breTypeCode.value);
+    }
+    if (breTypeName.present) {
+      map['bre_type_name'] = Variable<String>(breTypeName.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BroProdScheduleTbCompanion(')
+          ..write('id: $id, ')
+          ..write('breType: $breType, ')
+          ..write('breTypeCode: $breTypeCode, ')
+          ..write('breTypeName: $breTypeName')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BroProdScheduleTbTable extends BroProdScheduleTb
+    with TableInfo<$BroProdScheduleTbTable, BroProdSchedule> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $BroProdScheduleTbTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _breTypeMeta = const VerificationMeta('breType');
+  late final GeneratedColumn<int?> breType = GeneratedColumn<int?>(
+      'bre_type', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _breTypeCodeMeta =
+      const VerificationMeta('breTypeCode');
+  late final GeneratedColumn<String?> breTypeCode = GeneratedColumn<String?>(
+      'bre_type_code', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  final VerificationMeta _breTypeNameMeta =
+      const VerificationMeta('breTypeName');
+  late final GeneratedColumn<String?> breTypeName = GeneratedColumn<String?>(
+      'bre_type_name', aliasedName, false,
+      typeName: 'TEXT', requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, breType, breTypeCode, breTypeName];
+  @override
+  String get aliasedName => _alias ?? 'bro_prod_schedule';
+  @override
+  String get actualTableName => 'bro_prod_schedule';
+  @override
+  VerificationContext validateIntegrity(Insertable<BroProdSchedule> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('bre_type')) {
+      context.handle(_breTypeMeta,
+          breType.isAcceptableOrUnknown(data['bre_type']!, _breTypeMeta));
+    } else if (isInserting) {
+      context.missing(_breTypeMeta);
+    }
+    if (data.containsKey('bre_type_code')) {
+      context.handle(
+          _breTypeCodeMeta,
+          breTypeCode.isAcceptableOrUnknown(
+              data['bre_type_code']!, _breTypeCodeMeta));
+    } else if (isInserting) {
+      context.missing(_breTypeCodeMeta);
+    }
+    if (data.containsKey('bre_type_name')) {
+      context.handle(
+          _breTypeNameMeta,
+          breTypeName.isAcceptableOrUnknown(
+              data['bre_type_name']!, _breTypeNameMeta));
+    } else if (isInserting) {
+      context.missing(_breTypeNameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BroProdSchedule map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return BroProdSchedule.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $BroProdScheduleTbTable createAlias(String alias) {
+    return $BroProdScheduleTbTable(_db, alias);
+  }
+}
+
+class BroProdScheduleDetail extends DataClass
+    implements Insertable<BroProdScheduleDetail> {
+  final int id;
+  final int broProdSchedule;
+  final int dayNo;
+  final double ahBodyWgt;
+  final double femaleBodyWgt;
+  final double maleBodyWgt;
+  BroProdScheduleDetail(
+      {required this.id,
+      required this.broProdSchedule,
+      required this.dayNo,
+      required this.ahBodyWgt,
+      required this.femaleBodyWgt,
+      required this.maleBodyWgt});
+  factory BroProdScheduleDetail.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return BroProdScheduleDetail(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      broProdSchedule: const IntType().mapFromDatabaseResponse(
+          data['${effectivePrefix}bro_prod_schedule'])!,
+      dayNo: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}day_no'])!,
+      ahBodyWgt: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}ah_body_wgt'])!,
+      femaleBodyWgt: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}female_body_wgt'])!,
+      maleBodyWgt: const RealType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}male_body_wgt'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['bro_prod_schedule'] = Variable<int>(broProdSchedule);
+    map['day_no'] = Variable<int>(dayNo);
+    map['ah_body_wgt'] = Variable<double>(ahBodyWgt);
+    map['female_body_wgt'] = Variable<double>(femaleBodyWgt);
+    map['male_body_wgt'] = Variable<double>(maleBodyWgt);
+    return map;
+  }
+
+  BroProdScheduleDetailTbCompanion toCompanion(bool nullToAbsent) {
+    return BroProdScheduleDetailTbCompanion(
+      id: Value(id),
+      broProdSchedule: Value(broProdSchedule),
+      dayNo: Value(dayNo),
+      ahBodyWgt: Value(ahBodyWgt),
+      femaleBodyWgt: Value(femaleBodyWgt),
+      maleBodyWgt: Value(maleBodyWgt),
+    );
+  }
+
+  factory BroProdScheduleDetail.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return BroProdScheduleDetail(
+      id: serializer.fromJson<int>(json['id']),
+      broProdSchedule: serializer.fromJson<int>(json['bro_prod_schedule']),
+      dayNo: serializer.fromJson<int>(json['day_no']),
+      ahBodyWgt: serializer.fromJson<double>(json['ah_body_wgt']),
+      femaleBodyWgt: serializer.fromJson<double>(json['female_body_wgt']),
+      maleBodyWgt: serializer.fromJson<double>(json['male_body_wgt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'bro_prod_schedule': serializer.toJson<int>(broProdSchedule),
+      'day_no': serializer.toJson<int>(dayNo),
+      'ah_body_wgt': serializer.toJson<double>(ahBodyWgt),
+      'female_body_wgt': serializer.toJson<double>(femaleBodyWgt),
+      'male_body_wgt': serializer.toJson<double>(maleBodyWgt),
+    };
+  }
+
+  BroProdScheduleDetail copyWith(
+          {int? id,
+          int? broProdSchedule,
+          int? dayNo,
+          double? ahBodyWgt,
+          double? femaleBodyWgt,
+          double? maleBodyWgt}) =>
+      BroProdScheduleDetail(
+        id: id ?? this.id,
+        broProdSchedule: broProdSchedule ?? this.broProdSchedule,
+        dayNo: dayNo ?? this.dayNo,
+        ahBodyWgt: ahBodyWgt ?? this.ahBodyWgt,
+        femaleBodyWgt: femaleBodyWgt ?? this.femaleBodyWgt,
+        maleBodyWgt: maleBodyWgt ?? this.maleBodyWgt,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('BroProdScheduleDetail(')
+          ..write('id: $id, ')
+          ..write('broProdSchedule: $broProdSchedule, ')
+          ..write('dayNo: $dayNo, ')
+          ..write('ahBodyWgt: $ahBodyWgt, ')
+          ..write('femaleBodyWgt: $femaleBodyWgt, ')
+          ..write('maleBodyWgt: $maleBodyWgt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(
+      id.hashCode,
+      $mrjc(
+          broProdSchedule.hashCode,
+          $mrjc(
+              dayNo.hashCode,
+              $mrjc(ahBodyWgt.hashCode,
+                  $mrjc(femaleBodyWgt.hashCode, maleBodyWgt.hashCode))))));
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is BroProdScheduleDetail &&
+          other.id == this.id &&
+          other.broProdSchedule == this.broProdSchedule &&
+          other.dayNo == this.dayNo &&
+          other.ahBodyWgt == this.ahBodyWgt &&
+          other.femaleBodyWgt == this.femaleBodyWgt &&
+          other.maleBodyWgt == this.maleBodyWgt);
+}
+
+class BroProdScheduleDetailTbCompanion
+    extends UpdateCompanion<BroProdScheduleDetail> {
+  final Value<int> id;
+  final Value<int> broProdSchedule;
+  final Value<int> dayNo;
+  final Value<double> ahBodyWgt;
+  final Value<double> femaleBodyWgt;
+  final Value<double> maleBodyWgt;
+  const BroProdScheduleDetailTbCompanion({
+    this.id = const Value.absent(),
+    this.broProdSchedule = const Value.absent(),
+    this.dayNo = const Value.absent(),
+    this.ahBodyWgt = const Value.absent(),
+    this.femaleBodyWgt = const Value.absent(),
+    this.maleBodyWgt = const Value.absent(),
+  });
+  BroProdScheduleDetailTbCompanion.insert({
+    this.id = const Value.absent(),
+    required int broProdSchedule,
+    required int dayNo,
+    required double ahBodyWgt,
+    required double femaleBodyWgt,
+    required double maleBodyWgt,
+  })  : broProdSchedule = Value(broProdSchedule),
+        dayNo = Value(dayNo),
+        ahBodyWgt = Value(ahBodyWgt),
+        femaleBodyWgt = Value(femaleBodyWgt),
+        maleBodyWgt = Value(maleBodyWgt);
+  static Insertable<BroProdScheduleDetail> custom({
+    Expression<int>? id,
+    Expression<int>? broProdSchedule,
+    Expression<int>? dayNo,
+    Expression<double>? ahBodyWgt,
+    Expression<double>? femaleBodyWgt,
+    Expression<double>? maleBodyWgt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (broProdSchedule != null) 'bro_prod_schedule': broProdSchedule,
+      if (dayNo != null) 'day_no': dayNo,
+      if (ahBodyWgt != null) 'ah_body_wgt': ahBodyWgt,
+      if (femaleBodyWgt != null) 'female_body_wgt': femaleBodyWgt,
+      if (maleBodyWgt != null) 'male_body_wgt': maleBodyWgt,
+    });
+  }
+
+  BroProdScheduleDetailTbCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? broProdSchedule,
+      Value<int>? dayNo,
+      Value<double>? ahBodyWgt,
+      Value<double>? femaleBodyWgt,
+      Value<double>? maleBodyWgt}) {
+    return BroProdScheduleDetailTbCompanion(
+      id: id ?? this.id,
+      broProdSchedule: broProdSchedule ?? this.broProdSchedule,
+      dayNo: dayNo ?? this.dayNo,
+      ahBodyWgt: ahBodyWgt ?? this.ahBodyWgt,
+      femaleBodyWgt: femaleBodyWgt ?? this.femaleBodyWgt,
+      maleBodyWgt: maleBodyWgt ?? this.maleBodyWgt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (broProdSchedule.present) {
+      map['bro_prod_schedule'] = Variable<int>(broProdSchedule.value);
+    }
+    if (dayNo.present) {
+      map['day_no'] = Variable<int>(dayNo.value);
+    }
+    if (ahBodyWgt.present) {
+      map['ah_body_wgt'] = Variable<double>(ahBodyWgt.value);
+    }
+    if (femaleBodyWgt.present) {
+      map['female_body_wgt'] = Variable<double>(femaleBodyWgt.value);
+    }
+    if (maleBodyWgt.present) {
+      map['male_body_wgt'] = Variable<double>(maleBodyWgt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BroProdScheduleDetailTbCompanion(')
+          ..write('id: $id, ')
+          ..write('broProdSchedule: $broProdSchedule, ')
+          ..write('dayNo: $dayNo, ')
+          ..write('ahBodyWgt: $ahBodyWgt, ')
+          ..write('femaleBodyWgt: $femaleBodyWgt, ')
+          ..write('maleBodyWgt: $maleBodyWgt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BroProdScheduleDetailTbTable extends BroProdScheduleDetailTb
+    with TableInfo<$BroProdScheduleDetailTbTable, BroProdScheduleDetail> {
+  final GeneratedDatabase _db;
+  final String? _alias;
+  $BroProdScheduleDetailTbTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      typeName: 'INTEGER',
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _broProdScheduleMeta =
+      const VerificationMeta('broProdSchedule');
+  late final GeneratedColumn<int?> broProdSchedule = GeneratedColumn<int?>(
+      'bro_prod_schedule', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _dayNoMeta = const VerificationMeta('dayNo');
+  late final GeneratedColumn<int?> dayNo = GeneratedColumn<int?>(
+      'day_no', aliasedName, false,
+      typeName: 'INTEGER', requiredDuringInsert: true);
+  final VerificationMeta _ahBodyWgtMeta = const VerificationMeta('ahBodyWgt');
+  late final GeneratedColumn<double?> ahBodyWgt = GeneratedColumn<double?>(
+      'ah_body_wgt', aliasedName, false,
+      typeName: 'REAL', requiredDuringInsert: true);
+  final VerificationMeta _femaleBodyWgtMeta =
+      const VerificationMeta('femaleBodyWgt');
+  late final GeneratedColumn<double?> femaleBodyWgt = GeneratedColumn<double?>(
+      'female_body_wgt', aliasedName, false,
+      typeName: 'REAL', requiredDuringInsert: true);
+  final VerificationMeta _maleBodyWgtMeta =
+      const VerificationMeta('maleBodyWgt');
+  late final GeneratedColumn<double?> maleBodyWgt = GeneratedColumn<double?>(
+      'male_body_wgt', aliasedName, false,
+      typeName: 'REAL', requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, broProdSchedule, dayNo, ahBodyWgt, femaleBodyWgt, maleBodyWgt];
+  @override
+  String get aliasedName => _alias ?? 'bro_prod_schedule_detail';
+  @override
+  String get actualTableName => 'bro_prod_schedule_detail';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<BroProdScheduleDetail> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('bro_prod_schedule')) {
+      context.handle(
+          _broProdScheduleMeta,
+          broProdSchedule.isAcceptableOrUnknown(
+              data['bro_prod_schedule']!, _broProdScheduleMeta));
+    } else if (isInserting) {
+      context.missing(_broProdScheduleMeta);
+    }
+    if (data.containsKey('day_no')) {
+      context.handle(
+          _dayNoMeta, dayNo.isAcceptableOrUnknown(data['day_no']!, _dayNoMeta));
+    } else if (isInserting) {
+      context.missing(_dayNoMeta);
+    }
+    if (data.containsKey('ah_body_wgt')) {
+      context.handle(
+          _ahBodyWgtMeta,
+          ahBodyWgt.isAcceptableOrUnknown(
+              data['ah_body_wgt']!, _ahBodyWgtMeta));
+    } else if (isInserting) {
+      context.missing(_ahBodyWgtMeta);
+    }
+    if (data.containsKey('female_body_wgt')) {
+      context.handle(
+          _femaleBodyWgtMeta,
+          femaleBodyWgt.isAcceptableOrUnknown(
+              data['female_body_wgt']!, _femaleBodyWgtMeta));
+    } else if (isInserting) {
+      context.missing(_femaleBodyWgtMeta);
+    }
+    if (data.containsKey('male_body_wgt')) {
+      context.handle(
+          _maleBodyWgtMeta,
+          maleBodyWgt.isAcceptableOrUnknown(
+              data['male_body_wgt']!, _maleBodyWgtMeta));
+    } else if (isInserting) {
+      context.missing(_maleBodyWgtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  BroProdScheduleDetail map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return BroProdScheduleDetail.fromData(data, _db,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $BroProdScheduleDetailTbTable createAlias(String alias) {
+    return $BroProdScheduleDetailTbTable(_db, alias);
+  }
+}
+
 class Log extends DataClass implements Insertable<Log> {
   final int id;
   final String type;
@@ -7082,6 +7672,10 @@ abstract class _$Db extends GeneratedDatabase {
       $BroFa2VisitRoutineTbTable(this);
   late final $BroFa2VisitRoutineImgTbTable broFa2VisitRoutineImgTb =
       $BroFa2VisitRoutineImgTbTable(this);
+  late final $BroProdScheduleTbTable broProdScheduleTb =
+      $BroProdScheduleTbTable(this);
+  late final $BroProdScheduleDetailTbTable broProdScheduleDetailTb =
+      $BroProdScheduleDetailTbTable(this);
   late final $LogTbTable logTb = $LogTbTable(this);
   late final CompanyDao companyDao = CompanyDao(this as Db);
   late final LocationDao locationDao = LocationDao(this as Db);
@@ -7114,6 +7708,10 @@ abstract class _$Db extends GeneratedDatabase {
       BroFa2VisitRoutineDao(this as Db);
   late final BroFa2VisitRoutineImgDao broFa2VisitRoutineImgDao =
       BroFa2VisitRoutineImgDao(this as Db);
+  late final BroProdScheduleDao broProdScheduleDao =
+      BroProdScheduleDao(this as Db);
+  late final BroProdScheduleDetailDao broProdScheduleDetailDao =
+      BroProdScheduleDetailDao(this as Db);
   late final LogDao logDao = LogDao(this as Db);
   late final UtilDao utilDao = UtilDao(this as Db);
   @override
@@ -7142,6 +7740,8 @@ abstract class _$Db extends GeneratedDatabase {
         broFa2VisitWeightTb,
         broFa2VisitRoutineTb,
         broFa2VisitRoutineImgTb,
+        broProdScheduleTb,
+        broProdScheduleDetailTb,
         logTb
       ];
 }

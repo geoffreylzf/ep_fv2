@@ -18,7 +18,7 @@ class BroFa2VisitMaDao extends DatabaseAccessor<Db> {
 
   Future<BroFa2VisitMa?> getByVisitIdMaId(int visitId, int maId) {
     return (select(broFa2VisitMaTb)
-      ..where((tbl) => tbl.broFa2VisitId.equals(visitId) & tbl.broFa2MaId.equals(maId)))
+          ..where((tbl) => tbl.broFa2VisitId.equals(visitId) & tbl.broFa2MaId.equals(maId)))
         .getSingleOrNull();
   }
 
@@ -38,9 +38,9 @@ class BroFa2VisitMaDao extends DatabaseAccessor<Db> {
     ).watch().map((r) {
       return r
           .map((r2) => BroFa2VisitMaWithData(
-        broFa2VisitMa: BroFa2VisitMa.fromData(r2.data, this.attachedDatabase),
-        imgCount: r2.read("imgCount"),
-      ))
+                broFa2VisitMa: BroFa2VisitMa.fromData(r2.data, this.attachedDatabase),
+                imgCount: r2.read("imgCount"),
+              ))
           .toList();
     });
   }
